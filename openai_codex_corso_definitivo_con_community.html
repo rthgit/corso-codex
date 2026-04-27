@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenAI Codex — Corso Definitivo</title>
+  <style>
+    :root{
+      --primary:#10A37F;
+      --dark:#1A1A2E;
+      --accent:#0D7377;
+      --light:#F0FAF7;
+      --header-bg:#10A37F;
+      --code-bg:#1E1E2E;
+      --code-text:#A8FF78;
+      --white:#FFFFFF;
+      --gray:#6B7280;
+      --light-gray:#F3F4F6;
+      --border:#D1FAE5;
+      --info:#E8F8F5;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#eef2f7;
+      color:var(--dark);
+      font-family:Arial, Helvetica, sans-serif;
+      font-size:16px;
+      line-height:1.55;
+    }
+
+    .page{
+      width:min(980px, calc(100% - 32px));
+      margin:32px auto;
+      background:var(--white);
+      padding:64px;
+      box-shadow:0 20px 60px rgba(0,0,0,.08);
+      border-radius:18px;
+    }
+
+    .cover{
+      min-height:900px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .logo{
+      font-size:96px;
+      line-height:1;
+      color:var(--primary);
+      margin-bottom:24px;
+    }
+
+    h1{
+      margin:48px 0 24px;
+      padding:18px 22px;
+      background:var(--primary);
+      color:var(--white);
+      font-size:30px;
+      line-height:1.2;
+      border-radius:12px;
+    }
+
+    h2{
+      margin:40px 0 18px;
+      padding-bottom:10px;
+      border-bottom:4px solid var(--primary);
+      font-size:24px;
+      line-height:1.25;
+      color:var(--dark);
+    }
+
+    h3{
+      margin:28px 0 12px;
+      font-size:20px;
+      color:var(--accent);
+    }
+
+    p{margin:12px 0}
+    em{color:var(--gray)}
+    .subtitle{
+      color:var(--gray);
+      font-size:22px;
+      font-style:italic;
+    }
+
+    .title{
+      font-size:58px;
+      line-height:1.03;
+      margin:0;
+      font-weight:800;
+      letter-spacing:-1.5px;
+    }
+    .title .green{color:var(--primary)}
+
+    .tagline{
+      color:var(--accent);
+      font-size:17px;
+      margin-top:28px;
+    }
+
+    .divider{
+      height:1px;
+      background:var(--border);
+      margin:32px 0;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+      margin-top:36px;
+    }
+
+    .stat{
+      background:var(--light);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:22px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      color:var(--primary);
+      font-size:24px;
+    }
+
+    .stat span{
+      color:var(--gray);
+      font-size:15px;
+    }
+
+    .module-header{
+      display:grid;
+      grid-template-columns:170px 1fr;
+      overflow:hidden;
+      border:1px solid var(--border);
+      border-radius:16px;
+      margin:56px 0 28px;
+    }
+
+    .module-number{
+      background:var(--dark);
+      color:var(--light);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:28px 16px;
+      text-align:center;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:14px;
+    }
+
+    .module-number strong{
+      color:var(--primary);
+      font-size:56px;
+      line-height:1;
+      letter-spacing:0;
+    }
+
+    .module-copy{
+      background:var(--light);
+      padding:28px 32px;
+    }
+
+    .module-copy h2{
+      margin:0 0 8px;
+      border:0;
+      padding:0;
+      font-size:28px;
+    }
+
+    .module-copy p{
+      margin:0;
+      color:var(--gray);
+      font-style:italic;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      margin:20px 0 28px;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid var(--border);
+    }
+
+    th,td{
+      border:1px solid var(--border);
+      padding:12px 14px;
+      vertical-align:top;
+    }
+
+    th{
+      background:var(--primary);
+      color:var(--white);
+      text-align:left;
+      font-weight:700;
+    }
+
+    td:first-child{
+      background:var(--light);
+      font-weight:700;
+    }
+
+    code, pre{
+      font-family:"Courier New", Courier, monospace;
+    }
+
+    pre{
+      background:var(--code-bg);
+      color:var(--code-text);
+      padding:18px 20px;
+      border-radius:12px;
+      overflow:auto;
+      border:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+      line-height:1.55;
+      margin:16px 0 24px;
+    }
+
+    .prompt-box{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      margin:22px 0 30px;
+    }
+
+    .prompt-title{
+      background:var(--primary);
+      color:var(--white);
+      padding:12px 18px;
+      font-weight:700;
+    }
+
+    .prompt-body{
+      background:var(--light);
+      padding:18px 22px;
+      white-space:pre-wrap;
+      font-family:"Courier New", Courier, monospace;
+      font-size:15px;
+    }
+
+    .info-box{
+      display:grid;
+      grid-template-columns:56px 1fr;
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      margin:22px 0;
+    }
+
+    .info-icon{
+      background:var(--accent);
+      color:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:24px;
+    }
+
+    .info-body{
+      background:var(--info);
+      padding:16px 18px;
+    }
+
+    ul{
+      padding-left:0;
+      list-style:none;
+    }
+
+    li{
+      margin:10px 0;
+      padding-left:28px;
+      position:relative;
+    }
+
+    li::before{
+      content:"▸";
+      position:absolute;
+      left:0;
+      color:var(--primary);
+      font-weight:800;
+    }
+
+    .footer{
+      margin-top:56px;
+      padding-top:24px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--gray);
+      font-size:14px;
+      font-style:italic;
+    }
+
+    .page-break{break-before:page}
+
+    @media print{
+      body{background:#fff}
+      .page{
+        width:auto;
+        margin:0;
+        box-shadow:none;
+        border-radius:0;
+        padding:36pt;
+      }
+      .page-break{break-before:page}
+      pre, table, .prompt-box, .info-box, .module-header{break-inside:avoid}
+    }
+
+    @media (max-width:760px){
+      .page{padding:28px}
+      .title{font-size:40px}
+      .stats{grid-template-columns:1fr}
+      .module-header{grid-template-columns:1fr}
+      .module-number{padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="cover">
+      <div class="logo">⧡</div>
+      <h1 class="title">OPENAI CODEX<br><span class="green">CORSO DEFINITIVO</span></h1>
+      <p class="subtitle">da Zero a Master — Aprile 2026</p>
+      <div class="divider"></div>
+      <p class="tagline">CLI · codex-action · Desktop App · GitHub Copilot · Skills · MCP · Subagents · Worktrees · Computer Use · Enterprise</p>
+      <div class="stats">
+        <div class="stat"><strong>12 Moduli</strong><span>Teoria + Pratica</span></div>
+        <div class="stat"><strong>25+ Prompt</strong><span>Pronti all'uso</span></div>
+        <div class="stat"><strong>3 YAML CI/CD</strong><span>Aggiornato Apr 2026</span></div>
+      </div>
+    </section>
+
+    <section class="page-break">
+      <h1>Introduzione: Cos'è OpenAI Codex nel 2026</h1>
+      <p>OpenAI Codex è la piattaforma agentica di coding di OpenAI. Non è un semplice completamento di codice: è un sistema multi-superficie che può leggere, scrivere, eseguire ed effettuare il debug del codice in modo autonomo, in parallelo, su cloud e in locale. Il repository ufficiale è <strong>github.com/openai/codex</strong>.</p>
+      <p>Lanciato in preview ad aprile 2025 e ora disponibile su tutti i piani ChatGPT paid (Plus, Pro, Team, Enterprise), Codex è alimentato dalla famiglia di modelli <strong>codex-1</strong> (ottimizzata per SWE-tasks) e dai modelli GPT-5.x general-purpose.</p>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>Cos'è cambiato nel 2026:</strong> OpenAI ha progressivamente unificato il branding "Codex". I modelli dedicati (es. <code>code-davinci-002</code>) sono stati deprecati. Oggi Codex CLI usa per default <code>codex-mini-latest</code> (alias di <code>o4-mini</code>) che eccelle nel ragionamento su codice a costo contenuto. Per task architetturali si usa <code>gpt-5.5</code>.</div></div>
+
+      <h2>Superfici Disponibili</h2>
+      <table>
+        <thead><tr><th>Superficie</th><th>Uso Principale</th><th>Modello Consigliato</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Codex App Desktop</strong> (macOS/Win)</td><td>Gestione agenti paralleli, worktrees, automazioni, Computer Use</td><td><code>codex-1</code> / <code>gpt-5.5</code></td></tr>
+          <tr><td><strong>Codex CLI</strong> (terminale)</td><td>Workflow locali, scripting, exec non-interattivo, CI/CD</td><td><code>codex-mini-latest</code></td></tr>
+          <tr><td><strong>IDE Extension</strong> (VS Code, JetBrains, Xcode)</td><td>Pairing inline nell'editor, agent mode, inline review</td><td><code>codex-1</code></td></tr>
+          <tr><td><strong>Web</strong> (chatgpt.com/codex)</td><td>Cloud tasks, GitHub PR review, accesso da browser</td><td><code>codex-1</code></td></tr>
+          <tr><td><strong>GitHub Copilot</strong> (Enterprise)</td><td>Agent integrato nel flusso GitHub, review e fix automatici PR</td><td><code>codex-1</code></td></tr>
+          <tr><td><strong>API / codex-action</strong></td><td>Orchestrazione multi-agente, GitHub Actions CI/CD</td><td>Qualsiasi modello</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Scelta del Modello: la Guida Pratica</h2>
+      <table>
+        <thead><tr><th>Task</th><th>Modello Consigliato</th><th>Perché</th></tr></thead>
+        <tbody>
+          <tr><td>Bug fix, unit test, boilerplate</td><td><code>codex-mini-latest</code></td><td>Rapido, economico, ottimizzato per codice</td></tr>
+          <tr><td>Refactoring, feature complesse</td><td><code>codex-1</code></td><td>Comprende contesti grandi e dipendenze multi-file</td></tr>
+          <tr><td>Pianificazione architetturale</td><td><code>gpt-5.5</code></td><td>Ragionamento profondo, analisi multi-variabile</td></tr>
+          <tr><td>Subagenti meccanici (linting, fmt)</td><td><code>codex-mini-latest</code></td><td>Costo -60% rispetto a modelli flagship</td></tr>
+          <tr><td>Computer Use (GUI automation)</td><td><code>gpt-5.5</code></td><td>Visione + reasoning necessari per interazione UI</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>01</strong></div><div class="module-copy"><h2>Codex CLI — Il Terminale Potenziato</h2><p>Installazione, configurazione, comandi avanzati, exec non-interattivo, scripting e context management</p></div></div>
+      <h2>1.1 Installazione e Setup</h2>
+      <p>Il Codex CLI è open source, scritto in Rust per garantire latenze sub-millisecondo nella gestione del file system, ed è disponibile su macOS, Windows e Linux. Integra un tokenizer locale per il calcolo esatto del contesto in tempo reale.</p>
+      <pre># Installazione via npm (richiede Node 18+)
+npm install -g @openai/codex
+
+# Primo avvio e autenticazione interattiva
+codex
+
+# Autenticazione headless (per CI/CD)
+export OPENAI_API_KEY="sk-..."
+codex login --headless
+
+# Verifica stato, modello attivo e token rimanenti
+codex status</pre>
+
+      <h2>1.2 I 3 Approval Mode Ufficiali — La Scelta Più Importante</h2>
+      <p>OpenAI documenta ufficialmente tre livelli di autonomia per il Codex CLI. La scelta errata causa sia blocchi continui (suggest mode su pipeline CI) sia rischi di sicurezza (full-auto su repository di produzione).</p>
+      <table>
+        <thead><tr><th>Mode</th><th>Sandbox</th><th>Approval Policy</th><th>Quando Usarlo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Suggest</strong> (default)</td><td><code>read-only</code></td><td>Codex mostra le modifiche proposte, tu approvi ogni singola azione</td><td>Esplorazione, code review, primo utilizzo su un repository sconosciuto</td></tr>
+          <tr><td><strong>Auto Edit</strong></td><td><code>workspace-write</code></td><td>Modifica file autonomamente, ma chiede conferma per comandi shell</td><td>Sviluppo attivo quotidiano. Il compromesso ottimale per la maggior parte dei dev</td></tr>
+          <tr><td><strong>Full Auto</strong></td><td><code>workspace-write</code></td><td>Esegue tutto in autonomia (<code>on-request</code>): codice + shell + comandi</td><td>CI/CD, container Docker isolati, pipeline notturne. MAI su repository di produzione senza git checkpoint</td></tr>
+        </tbody>
+      </table>
+      <pre># Avvio con approval mode esplicito
+codex --approval-policy suggest        # Modalità sicura (default)
+codex --approval-policy auto-edit      # Modifica file, chiede per shell
+codex --full-auto                      # Alias per full auto (su CI/CD)
+
+# Equivalente configurato permanentemente in config.toml
+[core]
+approval_policy = "auto-edit"</pre>
+
+      <h2>1.3 Modalità Non-Interattiva — exec</h2>
+      <p>Trasforma Codex in uno strumento CLI automatizzato, ideale per pre-commit hooks, pipeline CI/CD o cron jobs. Il flag <code>--max-budget-usd</code> è l'unico guardrail contro loop infiniti o consumi anomali.</p>
+      <pre># Esecuzione con budget cap (previene billing a sorpresa)
+codex exec --max-budget-usd 0.50 "Genera test unitari per src/auth.ts"
+
+# Output JSON per parsing strutturato in bash
+codex exec --json "Analizza il codice e restituisci bug" | jq '.bugs[]'
+
+# Full auto su cloud container (sicuro perché isolato)
+codex cloud exec --env ENV_ID --full-auto --attempts 3 "Risolvi il bug #123"
+
+# Pipeline pre-commit hook (esempio .husky/pre-commit)
+codex exec --approval-policy auto-edit --max-budget-usd 0.10 "Fixa i lint errors"</pre>
+
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — CLI — Analisi Codebase Completa</div><div class="prompt-body">Analizza l'intera codebase in questa directory, considerando il file AGENTS.md. Identifica:
+1. Pattern architetturali usati
+2. Dipendenze deprecate o non aggiornate
+3. Potenziali memory leak (es. event listeners non rimossi)
+4. Funzioni duplicate candidate a refactoring
+5. Mancanza di error handling
+Crea un file ANALYSIS.md con i tuoi findings ordinati per gravità. 
+Includi un piano d'azione per ogni criticità.</div></div>
+
+      <h2>1.3 Gestione del Contesto (Context Management)</h2>
+      <p>La "Context Window" di Codex non è infinita. Un contesto "inquinato" porta a codice difettoso. I developer senior usano questi comandi per mantenere il contesto "fresco".</p>
+      <table>
+        <thead><tr><th>Comando</th><th>Descrizione e Quando Usarlo</th></tr></thead>
+        <tbody>
+          <tr><td><code>/compact [focus]</code></td><td>Comprime la sessione corrente preservando le decisioni tecniche. Usa es. <code>/compact focus on auth rules</code> quando superi il 70% del contesto.</td></tr>
+          <tr><td><code>/clear</code></td><td>Azzera il contesto. Da usare sempre prima di iniziare un nuovo task completamente scollegato per prevenire inquinamento.</td></tr>
+          <tr><td><code>/rewind</code> (o Esc+Esc)</td><td>Annulla le ultime N azioni e torna a un checkpoint pulito se Codex ha preso una direzione sbagliata.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1.4 Navigazione e Shortcuts</h2>
+      <table>
+        <thead><tr><th>Comando</th><th>Descrizione</th></tr></thead>
+        <tbody>
+          <tr><td><code>/model</code></td><td>Cambia modello durante una sessione (es. da 5.5 per pianificare a 5.4-mini per scrivere boilerplate)</td></tr>
+          <tr><td><code>/review</code></td><td>Avvia la revisione automatica delle modifiche non ancora committate</td></tr>
+          <tr><td><code>@</code></td><td>Fuzzy search per forzare l'inclusione di un file specifico nel contesto (molto più token-efficient di una query verbale)</td></tr>
+          <tr><td><code>!</code></td><td>Esegue comandi shell e ne inietta l'output nel contesto (es. <code>!npm run test</code>)</td></tr>
+          <tr><td><code>/cost</code></td><td>Mostra la spesa corrente in USD e token della sessione</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1.5 Configurazione config.toml</h2>
+      <p>La configurazione globale di Codex, che definisce i vincoli di sicurezza (sandbox) e le policy di approvazione dei comandi distruttivi.</p>
+      <pre># ~/.codex/config.toml
+
+[core]
+model = "gpt-5.4"
+# Policy rigorosa: Codex chiede permesso per tutto tranne i comandi permessi
+approval_policy = "unless-allow-listed" 
+
+[sandbox]
+# "workspace-write" permette modifiche solo dentro la cartella git corrente
+mode = "workspace-write"
+
+[[mcp_servers]]
+name = "github"
+url = "https://api.githubcopilot.com/mcp/"
+
+[[rules.allow]]
+command = "git"
+args = ["status", "diff"] # Codex può eseguire questi senza conferma
+
+[agents]
+max_concurrent = 4
+budget_cap_session_usd = 2.0</pre>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>02</strong></div><div class="module-copy"><h2>AGENTS.md — Istruzioni Persistenti per il Progetto</h2><p>Governance, convenzioni, comandi di test e "Gotchas"</p></div></div>
+      <p>AGENTS.md (noto anche come CLAUDE.md o regole di sistema) è un file testuale, simile a README.md, che Codex legge automaticamente all'inizio di ogni sessione nel tuo repository.</p>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>Best Practice 2026:</strong> Mantieni AGENTS.md sotto le 200 righe. Usa percorsi espliciti e regole di "Context Freshness" per evitare che l'agente allucini pattern non esistenti.</div></div>
+      <h2>2.1 Come Codex Scopre AGENTS.md — Il Sistema Gerarchico Ufficiale</h2>
+      <p>Codex non legge un solo AGENTS.md: costruisce una <strong>catena di istruzioni gerarchica</strong> concatenando più file, dalla root del repo fino alla tua directory corrente. Le regole più vicine alla CWD hanno priorità sulle regole globali.</p>
+      <table>
+        <thead><tr><th>Ordine di Scoperta</th><th>File Controllato</th><th>Comportamento</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Globale</strong></td><td><code>$CODEX_HOME/AGENTS.override.md</code></td><td>Se esiste, sovrascrive tutto. File di policy aziendale non modificabile dai dev.</td></tr>
+          <tr><td><strong>2. Globale fallback</strong></td><td><code>$CODEX_HOME/AGENTS.md</code></td><td>Regole globali personali (es. stile preferito, tool di default).</td></tr>
+          <tr><td><strong>3. Root progetto</strong></td><td><code>[git-root]/AGENTS.md</code></td><td>Regole standard del progetto, lette da tutto il team.</td></tr>
+          <tr><td><strong>4. Subdirectory</strong></td><td>Ogni <code>AGENTS.md</code> nei path intermedi</td><td>Regole per sotto-moduli. Concatenati in ordine root&rarr;CWD.</td></tr>
+          <tr><td><strong>5. CWD</strong></td><td><code>[cwd]/AGENTS.md</code> o <code>AGENTS.override.md</code></td><td>Massima priorità. Override locale per test o sviluppo isolato.</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>Limite totale:</strong> Il processo si ferma quando la somma dei file raggiunge <code>project_doc_max_bytes</code> (default 32 KiB, configurabile in config.toml). File non inclusi vengono ignorati silenziosamente.</div></div>
+
+      <h2>2.2 Configurazione Avanzata di AGENTS.md in config.toml</h2>
+      <pre># ~/.codex/config.toml
+
+# Aumenta il limite se AGENTS.md viene troncato (verificare con `codex status`)
+project_doc_max_bytes = 65536  # Default: 32768 (32 KiB)
+
+# Nomi file alternativi se AGENTS.md non esiste (monorepo con naming custom)
+project_doc_fallback_filenames = ["TEAM_GUIDE.md", ".agents.md", "CODEX.md"]</pre>
+
+      <h2>2.3 AGENTS.md Completo per Progetto Node.js/TypeScript</h2>
+      <pre># AGENTS.md
+
+## Progetto
+Questa è una API REST in Node.js + TypeScript (Express).
+
+## Architettura e Naming
+- src/routes/ → endpoint Express. Usa sempre `kebab-case` per i file di route.
+- src/services/ → business logic. Usa classi con dependency injection.
+- src/models/ → Prisma schemas.
+
+## Comandi Essenziali
+- Build: `npm run build`
+- Test: `npm test` (NON modificare i file di configurazione Jest)
+- Lint: `npm run lint -- --fix`
+
+## Regole di Sicurezza
+- NON salvare mai le chiavi API nel codice. Usa dotenv e `process.env`.
+- Verifica sempre il permesso dell'utente nei controller, non nei service.
+
+## "Gotchas" (Diario delle Decisioni)
+- [Bug Frequente]: Quando aggiungi un nuovo modello Prisma, ricordati di aggiornare il seed file `prisma/seed.ts`.
+- [Tip]: L'autenticazione è gestita dal middleware `authMw`, non applicarlo manualmente alle rotte pubbliche.
+
+## Context Freshness
+Prima di iniziare modifiche, esegui sempre `git status` e rileggi l'ultimo PRD.</pre>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>03</strong></div><div class="module-copy"><h2>Skills e Plugins — Capacità Custom Riutilizzabili</h2><p>Creare, installare e distribuire skills a livello aziendale</p></div></div>
+      <p>Una Skill è un package di istruzioni, risorse e script opzionali che insegna a Codex come eseguire un workflow specifico. È il modo per istituzionalizzare i processi del tuo team e renderli agentici.</p>
+      <p>Puoi condividere un'intera directory <code>.agents/skills</code> tra più sviluppatori, assicurandoti che l'agente esegua le procedure standard aziendali (es. processo di release, migrazione DB).</p>
+      <table>
+        <thead><tr><th>File</th><th>Scopo</th></tr></thead>
+        <tbody>
+          <tr><td><code>SKILL.md</code></td><td>Istruzioni principali in linguaggio naturale. Usa il frontmatter per name/description e trigger.</td></tr>
+          <tr><td><code>agents/openai.yaml</code></td><td>Metadata, policy di sicurezza (quali comandi può eseguire), tool deps e modelli.</td></tr>
+          <tr><td><code>scripts/</code></td><td>Script opzionali eseguiti dalla skill (es. <code>pre-flight.sh</code> o <code>post-review.py</code>).</td></tr>
+          <tr><td><code>resources/</code></td><td>Documenti di riferimento, esempi di PR, template di file JSON o Markdown.</td></tr>
+        </tbody>
+      </table>
+      <pre>.agents/skills/
+└── release-manager/
+    ├── SKILL.md                 # Come generare changelog e bumpare versione
+    ├── agents/
+    │   └── openai.yaml          # Permesso per `git tag` e `npm publish`
+    └── scripts/
+        └── verify-tests.sh      # Eseguito in automatico prima della release</pre>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>04</strong></div><div class="module-copy"><h2>Model Context Protocol (MCP)</h2><p>Connettere Codex a GitHub, Linear, Slack, DB e lazy loading</p></div></div>
+      <p>Il Model Context Protocol è lo standard de-facto del 2026 per connettere Codex a fonti dati esterne (Notion, Figma, database SQL) senza copiare/incollare testo.</p>
+      <div class="info-box"><div class="info-icon">⚡</div><div class="info-body"><strong>Lazy Loading:</strong> Gli MCP servers inseriscono molte informazioni nella Context Window di Codex. Usa <code>ENABLE_TOOL_SEARCH="true"</code> per caricare gli strumenti MCP dinamicamente, risparmiando il 30% dei token.</div></div>
+      <pre># Configurazione di connessione in ~/.codex/config.toml
+[[mcp_servers]]
+name = "github"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+env = { GITHUB_PERSONAL_ACCESS_TOKEN = "$GITHUB_PAT" }
+
+[[mcp_servers]]
+name = "postgres"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-postgres", "postgresql://user:pass@localhost/db"]</pre>
+      <p>Una volta configurato, puoi chiedere a Codex: <em>"Leggi la issue #42 su GitHub, interroga il database <code>postgres</code> per trovare l'utente incriminato, e implementa il fix."</em></p>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>05</strong></div><div class="module-copy"><h2>Codex Desktop & Worktrees</h2><p>Multi-agente, git worktrees paralleli, review, automazioni, computer use</p></div></div>
+      <p>Oltre alla CLI, l'App Desktop di Codex permette di orchestrare task complessi in modo visivo, specialmente utile per il Computer Use (es. pilotare il browser per fare scraping o test E2E).</p>
+      <table>
+        <thead><tr><th>Tipo Workspace</th><th>Comportamento</th><th>Quando usarlo (Best Practice 2026)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Local</strong></td><td>Lavora direttamente nella directory del progetto.</td><td>Task veloci, bug fix, unit test. Modifiche a basso rischio.</td></tr>
+          <tr><td><strong>Worktree</strong> (<code>--worktree</code>)</td><td>Codex crea automaticamente un Git worktree isolato in un path temporaneo.</td><td>Sviluppo di feature parallele, refactoring massicci. Previene conflitti con il tuo branch locale e non inquina il <code>git status</code>.</td></tr>
+          <tr><td><strong>Cloud / Sandbox</strong></td><td>Esegue in un container cloud o in una Docker sandbox locale sicura.</td><td>Task lunghi (es. migrazione DB), esecuzione di codice non fidato o pacchetti sconosciuti (previene attacchi supply chain).</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box"><div class="info-icon">💡</div><div class="info-body"><strong>Tip:</strong> Usa <code>codex --worktree nome-feature</code> per far sviluppare a Codex una funzionalità su un worktree invisibile, mentre tu continui a scrivere codice sul master.</div></div>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>06</strong></div><div class="module-copy"><h2>Automations — codex-action e CI/CD</h2><p>GitHub Actions con openai/codex-action, schedule, Triage Inbox e pipeline complete</p></div></div>
+      <p>OpenAI pubblica ufficialmente <strong>openai/codex-action</strong> (github.com/openai/codex-action): una GitHub Action che esegue Codex all'interno dei tuoi workflow CI/CD. Nessun server da gestire, nessun cron esterno.</p>
+      <div class="info-box"><div class="info-icon">&#9889;</div><div class="info-body"><strong>Setup rapido:</strong> Vai in <em>Settings &rarr; Secrets and variables &rarr; Actions</em> del tuo repo e aggiungi <code>OPENAI_API_KEY</code> come secret. Poi copia il YAML qui sotto.</div></div>
+
+      <h3>Workflow 1 — PR Review Automatica su ogni Pull Request</h3>
+      <pre># .github/workflows/codex-pr-review.yml
+name: Codex PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  codex-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+
+      - name: Run Codex Review
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            Sei un Staff Engineer senior. Analizza le modifiche di questa PR.
+            Cerca: bug logici, problemi di sicurezza (injection, auth bypass),
+            mancanza di error handling, assunzioni fragili.
+            Output formato: CRITICAL / WARNING / SUGGESTION / OK.
+          sandbox: read-only
+
+      - name: Commenta sulla PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🤖 Codex Review\n\n${{ steps.codex.outputs.final-message }}`
+            })</pre>
+
+      <h3>Workflow 2 — Security Scan Giornaliero con Auto-Fix</h3>
+      <pre># .github/workflows/codex-security-scan.yml
+name: Security Scan + Auto-Fix
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Ogni giorno alle 06:00 UTC
+  workflow_dispatch:     # Permettere esecuzione manuale
+
+jobs:
+  security-fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Codex Security Fix
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            1. Esegui `npm audit` e leggi l’output
+            2. Per ogni CVE critica o alta, aggiorna la dipendenza
+            3. Esegui i test: `npm test`
+            4. Se i test passano, crea un branch fix/security-$(date)
+               con le modifiche e apri una PR
+            5. Se i test falliscono, documenta in SECURITY-REPORT.md
+               i fix non applicabili e il motivo
+          sandbox: workspace-write</pre>
+
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Automation — Triage Inbox Giornaliero</div><div class="prompt-body">AUTOMATION TASK — Cron: ogni mattina alle 08:00
+
+Usa MCP Jira + MCP GitHub:
+1. Leggi tutte le issue Jira con label "bug" aperte negli ultimi 7 giorni
+2. Per ognuna, cerca il file sorgente nel repository più probabile (analisi del titolo)
+3. Se trovi il file, apri una PR con una prima proposta di fix e linking alla issue Jira
+4. Se non trovi il file, aggiungi alla issue il tag "needs-investigation" con un commento
+   che spiega dove potrebbe trovarsi il problema
+5. Scrivi un report TRIAGE-[data].md con il riepilogo delle azioni eseguite</div></div>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>07</strong></div><div class="module-copy"><h2>Subagents — Orchestrazione Multi-Agente Parallela</h2><p>Agenti specializzati in parallelo, Test Time Compute e pattern avanzati</p></div></div>
+      <p>L’architettura multi-agente di Codex usa <strong>Git worktrees isolati</strong> come sandbox per ogni agente parallelo. Ogni agente opera su un branch separato, senza interferire con gli altri. Il coordinatore (agente principale) integra i risultati alla fine.</p>
+
+      <h3>I 3 Pattern Fondamentali dei Subagents</h3>
+      <table>
+        <thead><tr><th>Pattern</th><th>Come funziona</th><th>Caso d'uso ideale</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Parallelo Indipendente</strong></td><td>3-4 agenti su worktrees diversi lavorano contemporaneamente su feature slegate</td><td>Sprint con più ticket indipendenti, velocity massima</td></tr>
+          <tr><td><strong>Compete &amp; Pick</strong></td><td>2-3 agenti implementano la stessa feature in modo diverso; un reviewer sceglie la migliore</td><td>Decisioni architetturali critiche, refactoring rischioso</td></tr>
+          <tr><td><strong>Pipeline Sequenziale</strong></td><td>Architect &rarr; Developer &rarr; Tester &rarr; Reviewer, ognuno con contesto pulito</td><td>Feature complesse che richiedono qualità enterprise</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Configurazione Agenti Paralleli in config.toml</h3>
+      <pre># ~/.codex/config.toml
+[agents]
+max_concurrent = 4              # Massimo 4 agenti in parallelo
+model = "codex-mini-latest"     # Modello leggero per subagenti
+worktree_base = "/tmp/codex-worktrees"  # Directory base per i worktrees</pre>
+
+      <h3>Pattern: Test Time Compute (Reviewer Avversariale)</h3>
+      <p>Una context window fresca trova errori che chi ha scritto il codice non vede. È il pattern più efficace per aumentare la qualità senza costo umano aggiuntivo.</p>
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Reviewer Avversariale con Subagente Isolato</div><div class="prompt-body">FASE 1 (Agente Principale): Implementa la feature X. Al termine, scrivi la git diff in /tmp/diff-for-review.patch.
+
+FASE 2 (Subagente con contesto vuoto):
+Leggi solo il file /tmp/diff-for-review.patch. Non hai contesto di come è stato scritto.
+Agisci come Staff Engineer con 15 anni di esperienza. Analizza criticamente:
+- Memory leak o resource leak
+- Race conditions
+- Input non sanitizzato (injection)
+- Logica difettosa agli edge case
+- Test mancanti o insufficienti
+
+Output obbligatorio:
+CRITICAL: [problema grave che blocca il merge]
+WARNING: [problema minore ma da correggere prima del merge]
+SUGGESTION: [miglioramento opzionale]
+OK: [aspetti corretti]
+
+FASE 3 (Agente Principale): Correggi tutti i CRITICAL prima di rispondermi.</div></div>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>08</strong></div><div class="module-copy"><h2>Codex Web, GitHub App e Copilot Enterprise</h2><p>@codex mentions, PR review asincrona, GitHub Copilot agent mode</p></div></div>
+      <p>Codex si integra in GitHub su due livelli: come <strong>GitHub App</strong> (installabile su qualsiasi repository) e come <strong>agente nativo di GitHub Copilot Enterprise</strong> (disponibile da febbraio 2026 per i piani Business/Enterprise).</p>
+
+      <h3>GitHub App — @codex Mentions</h3>
+      <p>Installa la GitHub App da <em>chatgpt.com/codex</em> → Settings. Una volta attivata, Codex monitora i tuoi repository e reagisce alle menzioni asincronamente.</p>
+      <pre># In un commento di GitHub Issue:
+@codex Analizza il codice nell'area di autenticazione (src/auth/).
+Implementa questa feature rispettando le regole in AGENTS.md.
+Apri una PR con un branch feature/auth-[nome-feature].
+
+# Su una riga specifica in una PR review:
+@codex questo if non gestisce il caso null. Fixalo mantenendo la stessa API pubblica.
+
+# Su un commento generale della PR:
+@codex review questa PR seguendo AGENTS.md.
+Focalizzati su: input validation, error handling, race conditions.</pre>
+
+      <h3>GitHub Copilot Enterprise — Codex come Agente Nativo</h3>
+      <p>Da febbraio 2026, i piani GitHub Copilot Business/Enterprise possono scegliere Codex come agente nel flusso nativo di GitHub. Questo permette a Codex di assegnare task da Copilot direttamente a branch del repository senza uscire dall’interfaccia GitHub.</p>
+      <table>
+        <thead><tr><th>Funzionalità</th><th>Come attivarla</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Assegna Issue a Codex</strong></td><td>Dall’issue, menu Assignee &rarr; scegli “Codex Agent”. Codex implementa e apre una PR.</td></tr>
+          <tr><td><strong>Review automatica PR</strong></td><td>Nelle impostazioni Copilot, abilita "Auto-review on PR open". Codex commenta ogni PR entro 2 minuti.</td></tr>
+          <tr><td><strong>Fix da commento di review</strong></td><td>Commenta una riga con <code>@copilot fix this</code>. Codex genera il commit correttivo nel branch della PR.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Issue to PR Completa (GitHub App)</div><div class="prompt-body">Leggi la issue #[N] su GitHub.
+
+Prima di scrivere codice:
+1. Analizza i file rilevanti nel repository
+2. Scrivi un commento sulla issue con il piano tecnico
+3. Aspetta 5 minuti (per permettere review umana del piano)
+4. Implementa in un branch feature/[nome] seguendo AGENTS.md
+5. Apri una PR con:
+   - Descrizione tecnica delle modifiche
+   - Lista dei test aggiunti
+   - Link alla issue
+   - Checklist: [ ] tests, [ ] lint, [ ] docs</div></div>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>09</strong></div><div class="module-copy"><h2>IDE Extension — Pairing nell'Editor</h2><p>VS Code Agent Mode, documentazione automatica e inline review</p></div></div>
+      <p>L'estensione Codex per VS Code va oltre il classico autocomplete: introduce un <strong>Agent Mode</strong> che permette di delegare task multi-step direttamente dall'editor senza passare al terminale.</p>
+      <pre># Installa l'estensione da VS Code Marketplace:
+code --install-extension openai.codex
+
+# Oppure aggiorna all'ultima versione
+code --install-extension openai.codex --force</pre>
+      <h3>Workflow Avanzati nell'IDE</h3>
+      <table>
+        <thead><tr><th>Scenario</th><th>Come Usarlo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Inline Review</strong></td><td>Seleziona un blocco di codice → Tasto destro → "Codex: Review Selection". Codex lascia commenti inline sulla logica e i rischi.</td></tr>
+          <tr><td><strong>Auto-documentazione</strong></td><td>Posiziona il cursore su una funzione e usa il comando palette: "Codex: Generate JSDoc". Genera docstrings completi con tipi, parametri ed esempi.</td></tr>
+          <tr><td><strong>Agent Mode</strong></td><td>Apri la chat Codex (Ctrl+Shift+C) e descrivi un task multi-step. Codex vede i file aperti, scrive il codice, esegue i test integrati e riporta i risultati in chat.</td></tr>
+          <tr><td><strong>Context da Selezione</strong></td><td>Seleziona il codice problematico, usa "Codex: Fix       <div class="module-header"><div class="module-number">Modulo<strong>10</strong></div><div class="module-copy"><h2>Sandbox, Rules e Sicurezza OS-Level</h2><p>Architettura sandbox reale (Seatbelt/Landlock/seccomp), Rules e danger-full-access</p></div></div>
+
+      <h3>Architettura Sandbox a Livello di Kernel (Dati Ufficiali OpenAI)</h3>
+      <p>La sandbox di Codex non è un semplice controllo software: è un isolamento a livello di kernel del sistema operativo. Anche se il modello AI venisse compromesso tramite prompt injection, non potrebbe sfuggire ai vincoli del kernel.</p>
+      <table>
+        <thead><tr><th>OS</th><th>Tecnologia</th><th>Cosa Blocca</th></tr></thead>
+        <tbody>
+          <tr><td><strong>macOS</strong></td><td><strong>Apple Seatbelt</strong> (<code>sandbox-exec</code>)</td><td>Genera dinamicamente profili sandbox in base alla policy selezionata. Blocca accesso al filesystem fuori dal workspace e tutte le chiamate di rete.</td></tr>
+          <tr><td><strong>Linux</strong></td><td><strong>Landlock</strong> + <strong>seccomp</strong></td><td>Landlock: access control per path a livello kernel. seccomp: filtra le system call, bloccando operazioni di rete e accesso ai file sensibili.</td></tr>
+          <tr><td><strong>Windows</strong></td><td><strong>Restricted User Tokens</strong> + <strong>Job Objects</strong></td><td>Ogni processo figlio gira con token a privilegi ridotti in un Job Object isolato. Limita lettura/scrittura del registry e azioni di sistema.</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box"><div class="info-icon">&#9888;</div><div class="info-body"><strong>Network disabilitata per default:</strong> In tutti i modi sandbox, l'accesso di rete è bloccato a livello kernel. Questo previene data exfiltration, C2 e download di dipendenze non autorizzate durante l'esecuzione. Per abilitarlo (es. tool che devono fare fetch) devi usare <code>danger-full-access</code> o configurare eccezioni specifiche.</div></div>
+
+      <h3>I 4 Livelli di Sandbox — Tabella Completa Ufficiale</h3>
+      <table>
+        <thead><tr><th>Modo</th><th>Filesystem</th><th>Network</th><th>Quando Usarlo</th></tr></thead>
+        <tbody>
+          <tr><td><code>read-only</code></td><td>Solo lettura ovunque</td><td>&#10007; Bloccata</td><td>Code review, planning, esplorazione sicura di repo sconosciuti</td></tr>
+          <tr><td><code>workspace-write</code></td><td>Lettura ovunque, scrittura solo nella dir git corrente</td><td>&#10007; Bloccata</td><td>Sviluppo standard quotidiano. Default consigliato.</td></tr>
+          <tr><td><code>writable-root</code></td><td>Scrittura su path espliciti definiti dall'utente</td><td>&#10007; Bloccata</td><td>Monorepo dove Codex deve scrivere in più directory</td></tr>
+          <tr><td><code>danger-full-access</code></td><td>Nessun limite</td><td>&#10003; Abilitata</td><td>Solo in ambienti già isolati (Docker, CI container). Mai in locale.</td></tr>
+        </tbody>
+      </table>
+      <pre># In config.toml — path aggiuntivi scrivibili (writable-root mode)
+[sandbox]
+mode = "writable-root"
+writable_roots = [
+  "/home/user/project-a",
+  "/home/user/shared-lib",
+  "/tmp/codex-output"
+]</pre>
+
+      <h3>Rules — Allowlist e Denylist Deterministiche</h3>
+      <p>Le Rules sono valutate <em>prima</em> del modello: impossibile bypassarle via prompt injection. Si combinano con la sandbox: la sandbox definisce il confine fisico, le Rules definiscono i comandi permessi dentro quel confine.</p>
+      <pre># ~/.codex/config.toml
+[rules]
+
+# Allowlist: Codex esegue SENZA chiedere conferma
+[[rules.allow]]
+command = "npm"
+args = ["test", "run", "ci", "audit", "install"]
+
+[[rules.allow]]
+command = "git"
+args = ["status", "diff", "log", "branch", "add", "commit"]
+
+# Denylist: BLOCCATO sempre, anche se esplicitamente richiesto dal modello
+[[rules.deny]]
+command = "git"
+args = ["push", "--force"]
+
+[[rules.deny]]
+pattern = ".*\\.env$"  # Blocca lettura/scrittura di qualsiasi file .env</pre>
+    </section>
+
+
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>11</strong></div><div class="module-copy"><h2>Codex Enterprise — Governance e Sicurezza</h2><p>Admin setup, managed config, permission profiles e audit trail</p></div></div>
+      <p>In contesti aziendali, Codex deve operare dentro confini precisi e tracciabili. Il livello Enterprise aggiunge governance centralizzata.</p>
+      <h3>Pillars della Sicurezza Enterprise</h3>
+      <table>
+        <thead><tr><th>Pillar</th><th>Implementazione</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Config Managed</strong></td><td>Un file <code>config.toml</code> centralizzato distribuito via Git o secret manager aziendale (es. AWS SSM). Gli sviluppatori non possono sovrascrivere le policy di deny.</td></tr>
+          <tr><td><strong>Permission Profiles</strong></td><td>Profili predefiniti per ruolo (es. <code>junior-dev</code>: solo lettura e test; <code>senior-dev</code>: scrittura con approvazione; <code>ci-bot</code>: exec non-interattivo con budget cap).</td></tr>
+          <tr><td><strong>AGENTS.md Globale</strong></td><td>Un AGENTS.md nella root aziendale (letto da tutti i repo via Git submodule) impone standard di codice uniformi e proibisce pattern non sicuri.</td></tr>
+          <tr><td><strong>Audit Logging</strong></td><td>Ogni tool call, file modificato e comando eseguito viene salvato in <code>~/.codex/log/</code> con timestamp, costo in token e hash dell'output. Integrabile con SIEM aziendali.</td></tr>
+          <tr><td><strong>Zero-Trust Sandbox</strong></td><td>Modalità <code>workspace-read</code>: Codex può leggere ma non modificare file al di fuori delle directory esplicitamente permesse. Ideale per agent di code review.</td></tr>
+        </tbody>
+      </table>
+      <pre># Esempio: config enterprise minimo
+[core]
+approval_policy = "always"  # Ogni azione richiede approvazione
+
+[sandbox]
+mode = "workspace-read"  # Default ultra-sicuro, sovrascrivibile per progetto
+
+[audit]
+enabled = true
+export_path = "/var/log/codex-audit/"  # Path centralizzato per SIEM</pre>
+    </section>
+
+    <section class="page-break">
+      <div class="module-header"><div class="module-number">Modulo<strong>12</strong></div><div class="module-copy"><h2>Prompt Engineering Avanzato per Codex</h2><p>Framework RIPER, 5 Principi, self-healing e tecniche master</p></div></div>
+      <h3>I 5 Principi del Prompt Codex</h3>
+      <ul>
+        <li><strong>Contesto del task:</strong> cosa si deve fare, perché e qual è la metrica di successo misurabile.</li>
+        <li><strong>Evidenza verificabile:</strong> specifica i test da eseguire, i file che devono essere creati o i comandi il cui output prova il successo.</li>
+        <li><strong>Constraint espliciti:</strong> di' esplicitamente cosa NON toccare (es. "Non modificare il database schema").</li>
+        <li><strong>Output format:</strong> risultato strutturato (JSON, Markdown, diff) per pipeline automatizzate.</li>
+        <li><strong>Iterazione:</strong> task incrementali e verificabili a ogni step, non un monolite da validare alla fine.</li>
+      </ul>
+      <h3>Framework RIPER (Research → Innovate → Plan → Execute → Review)</h3>
+      <p>Il workflow strutturato definitivo per task ad alta complessità. Impone separazione netta tra fasi: Codex non può "saltare" all'implementazione prima di aver capito il problema.</p>
+      <table>
+        <thead><tr><th>Fase</th><th>Istruzione a Codex</th><th>Output Atteso</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Research</strong></td><td>"Leggi il codebase. Non scrivere niente. Rispondimi solo con cosa hai capito."</td><td>Mappa del codice, dipendenze, pattern esistenti.</td></tr>
+          <tr><td><strong>Innovate</strong></td><td>"Proponi 3 approcci architetturali diversi per questo problema con pro e contro."</td><td>Opzioni architetturali, nessun codice.</td></tr>
+          <tr><td><strong>Plan</strong></td><td>"Scrivi un piano step-by-step. Per ogni step indica il file, il test e il criterio di successo."</td><td>Piano dettagliato approvabile.</td></tr>
+          <tr><td><strong>Execute</strong></td><td>"Implementa il piano approvato. Un step alla volta. Fermati dopo ogni step e aspetta la mia conferma."</td><td>Diff incrementali, test passanti.</td></tr>
+          <tr><td><strong>Review</strong></td><td>"Usa un subagente con contesto vuoto per fare review avversariale dell'implementazione."</td><td>Report CRITICAL/WARNING/SUGGESTION.</td></tr>
+        </tbody>
+      </table>
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Template — Feature Development (Completo)</div><div class="prompt-body">FEATURE: [Nome della feature]
+CONTESTO: [Descrizione del progetto e file AGENTS.md rilevanti]
+
+REQUISITI FUNZIONALI:
+- [Requisito 1] — verificabile con: [test specifico]
+- [Requisito 2] — verificabile con: [test specifico]
+
+CONSTRAINT:
+- NON modificare: [lista file o moduli sensibili]
+- NON installare nuovi pacchetti senza approvazione
+
+DEFINIZIONE DI DONE:
+- [ ] CHANGELOG.md aggiornato</div></div>
+    </section>
+
+
+    <section class="page-break">
+      <h1>Modulo Bonus — Trucchi Reali dalla Community</h1>
+
+      <p>
+        Questa sezione raccoglie pattern pratici emersi dall'uso reale di Codex nel 2026, da repository GitHub, discussioni su Reddit (<em>r/ChatGPTCoding</em>, <em>r/LocalLLaMA</em>) e community Discord di dev AI.
+        Non sono “prompt magici”: sono abitudini operative che migliorano affidabilità, qualità e sicurezza.
+      </p>
+
+      <div class="info-box">
+        <div class="info-icon">ℹ</div>
+        <div class="info-body">
+          <strong>Regola d'oro 2026:</strong> Codex performa al massimo quando lavori per <em>pipeline strutturate</em>, non per comandi isolati.
+          Pianifica, riduci lo scope, implementa in piccoli step, verifica con test e fai review incrociata.
+        </div>
+      </div>
+
+      <h2>1. Prima pianificazione, poi codice</h2>
+      <p>
+        L'errore più comune è chiedere subito a Codex di modificare file. In progetti reali
+        il risultato migliora drasticamente quando prima chiedi di ragionare su architettura, rischi, tradeoff
+        e piano operativo. Il risparmio di tempo ripaga sempre il "costo" della pianificazione.
+      </p>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Plan First (Esplorazione Prima del Codice)</div>
+        <div class="prompt-body">Prima non scrivere codice. Esplora silenziosamente.
+
+Analizza e rispondimi:
+1. Architettura attuale (quali file/moduli sono coinvolti)
+2. Obiettivo preciso della modifica
+3. Rischi tecnici e dipendenze fragili
+4. File che verranno modificati e file che NON devono essere toccati
+5. Piano step-by-step con test per ogni step
+6. Stima della complessità: bassa / media / alta
+
+Solo dopo la mia approvazione del piano, implementa.</div>
+      </div>
+
+      <h3>Auto-validazione del piano</h3>
+      <ul>
+        <li>Il piano cita file concreti con path reale?</li>
+        <li>Identifica rischi specifici (non generici)?</li>
+        <li>Propone test verificabili con un comando eseguibile?</li>
+        <li>Distingue tra ciò che Codex sa per certo e ciò che ipotizza?</li>
+      </ul>
+
+      <h2>2. Trasforma richieste vaghe in prompt operativi</h2>
+      <p>
+        Un trucco molto utile è usare prima un modello conversazionale per trasformare un’idea vaga
+        in una specifica precisa da dare a Codex. Il prompt finale deve contenere contesto, vincoli,
+        file, output atteso e definition of done.
+      </p>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Prompt Builder per Codex</div>
+        <div class="prompt-body">Trasforma questa richiesta vaga in un prompt operativo per Codex.
+
+Richiesta:
+[incolla richiesta]
+
+Il prompt finale deve includere:
+- contesto tecnico
+- obiettivo
+- file o directory coinvolte
+- vincoli
+- cosa non modificare
+- test da eseguire
+- definition of done
+- formato dell’output</div>
+      </div>
+
+      <h2>3. Task piccoli battono task enormi</h2>
+      <p>
+        Codex può gestire task complessi, ma in produzione conviene spezzare il lavoro in unità piccole.
+        Ogni step deve produrre un risultato verificabile: un test, un file, una diff, un report o una PR.
+      </p>
+
+      <table>
+        <thead>
+          <tr><th>Task debole</th><th>Task professionale</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>“Migliora il backend”</td><td>“Analizza solo src/services, trova duplicazioni, proponi piano, poi refactora un servizio alla volta.”</td></tr>
+          <tr><td>“Sistema i test”</td><td>“Esegui i test, classifica i fallimenti, fixa solo i test deterministici, segnala i flaky.”</td></tr>
+          <tr><td>“Rendi tutto sicuro”</td><td>“Fai audit solo su auth e input validation. Output: CRITICAL / WARNING / SUGGESTION.”</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. AGENTS.md deve prevenire contesto stantio</h2>
+      <p>
+        Nei workflow con più agenti o modifiche manuali, Codex può lavorare su una fotografia vecchia
+        del repository. Per evitarlo, inserisci regole esplicite nel file AGENTS.md.
+      </p>
+
+      <pre>## Context Freshness
+
+Before editing:
+- run git status
+- re-read every file you are about to modify
+- assume another human or agent may have changed the repo
+- never summarize stale state
+- before final answer, check git diff and tests</pre>
+
+      <h3>Auto-validazione</h3>
+      <ul>
+        <li>Codex controlla <code>git status</code> prima di modificare?</li>
+        <li>Rilegge i file prima di editarli?</li>
+        <li>Mostra diff finale?</li>
+        <li>Dichiara cosa ha verificato davvero?</li>
+      </ul>
+
+      <h2>5. Dai path espliciti quando il progetto è grande</h2>
+      <p>
+        Anche se Codex può esplorare la codebase, nei repository grandi conviene indirizzarlo.
+        I path riducono ambiguità, token sprecati e modifiche indesiderate.
+      </p>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Refactor con Path Vincolati</div>
+        <div class="prompt-body">Lavora solo su questi file:
+- src/services/payment.service.ts
+- src/services/payment.types.ts
+- tests/payment.service.test.ts
+
+Obiettivo:
+refactor della logica di pagamento mantenendo la stessa API pubblica.
+
+Non modificare:
+- database schema
+- API routes
+- config di deploy
+
+Verifica:
+- npm test -- payment.service.test.ts
+- npm run lint</div>
+      </div>
+
+      <h2>6. Usa review avversariale</h2>
+      <p>
+        Un pattern avanzato è separare chi implementa da chi revisiona. Anche con un solo Codex,
+        puoi usare due passaggi: prima implementazione, poi review avversariale della diff.
+      </p>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Reviewer Avversariale</div>
+        <div class="prompt-body">Agisci come reviewer avversariale.
+
+Non implementare codice.
+
+Analizza la diff e trova:
+- bug logici
+- assunzioni fragili
+- edge case mancanti
+- test insufficienti
+- rischi di sicurezza
+- regressioni possibili
+
+Output:
+CRITICAL:
+WARNING:
+SUGGESTION:
+TEST MANCANTI:
+DOMANDE APERTE:</div>
+      </div>
+
+      <h2>7. Usa agenti multipli solo quando serve davvero</h2>
+      <p>
+        Subagents e worktrees sono potenti, ma non vanno usati per ogni cosa. Sono ideali quando
+        vuoi confrontare approcci diversi o dividere lavoro realmente indipendente.
+      </p>
+
+      <table>
+        <thead><tr><th>Scenario</th><th>Uso consigliato</th></tr></thead>
+        <tbody>
+          <tr><td>Bug piccolo</td><td>Un solo agente, task breve, test regressione.</td></tr>
+          <tr><td>Refactor rischioso</td><td>Tre worktrees con strategie alternative.</td></tr>
+          <tr><td>Feature complessa</td><td>Architect → Developer → Tester → Reviewer.</td></tr>
+          <tr><td>Audit sicurezza</td><td>Implementer separato da reviewer avversariale.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>8. Sicurezza: mai fidarsi del full-access</h2>
+      <p>
+        Codex può essere estremamente produttivo, ma un agente con permessi ampi può anche fare danni.
+        La community tende a convergere su una regola semplice: permessi minimi, allowlist, review prima
+        di push o deploy.
+      </p>
+
+      <pre># Regole pratiche di sicurezza
+
+- Mai full-access su repository non fidati
+- Mai token con permessi eccessivi
+- Mai automazioni senza allowlist
+- Mai push/deploy senza review
+- Non esporre .env, secret o token nei prompt
+- Usa sandbox workspace-write come default
+- Blocca modifiche a CI/CD e file sensibili con hooks</pre>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Audit Sicurezza Prima di Automazione</div>
+        <div class="prompt-body">Prima di creare questa automazione, fai un audit di sicurezza.
+
+Valuta:
+1. Quali file può modificare
+2. Quali comandi può eseguire
+3. Quali secret potrebbe leggere
+4. Quali danni può causare
+5. Quali allowlist servono
+6. Quali hook di protezione aggiungere
+
+Output:
+- rischio basso / medio / alto
+- mitigazioni obbligatorie
+- configurazione consigliata</div>
+      </div>
+
+      <h2>9. Pattern operativo finale: P-S-I-V-R</h2>
+      <p>Per lavorare in modo professionale, usa sempre questo ciclo. Non saltare mai fasi: ogni fase è una rete di sicurezza per quella successiva.</p>
+
+      <table>
+        <thead><tr><th>Fase</th><th>Descrizione</th><th>Output verificabile</th><th>Fallback se fallisce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Plan</strong></td><td>Analizza architettura, rischi e file coinvolti</td><td>Piano tecnico approvato</td><td>Chiedi a un LLM diverso di trovare i buchi nel piano</td></tr>
+          <tr><td><strong>Scope</strong></td><td>Riduci il perimetro al minimo necessario</td><td>Lista file e vincoli espliciti</td><td>Spezza ulteriormente il task</td></tr>
+          <tr><td><strong>Implement</strong></td><td>Modifica in step piccoli con checkpoint git</td><td>Diff incrementale commitTata</td><td><code>git stash</code> e ricomincia da zero</td></tr>
+          <tr><td><strong>Verify</strong></td><td>Esegui test specifici, lint e build</td><td>Output test verdi, zero warning critici</td><td>Self-healing loop (max 5 cicli)</td></tr>
+          <tr><td><strong>Review</strong></td><td>Review avversariale con subagente isolato</td><td>Report CRITICAL/WARNING/SUGGESTION</td><td>Correggi solo i CRITICAL prima di mergiare</td></tr>
+        </tbody>
+      </table>
+
+      <h2>10. Handoff Document — Contesto tra sessioni</h2>
+      <p>
+        Quando hai una sessione lunga e devi chiuderla o il contesto è al limite, crea un Handoff Document prima di uscire.
+        La prossima sessione leggerà solo questo file e riprenderà esattamente da dove eri.
+      </p>
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 PROMPT — Genera Handoff Document</div>
+        <div class="prompt-body">Prima di chiudere questa sessione, scrivi un file HANDOFF.md con:
+
+1. Cosa stavamo costruendo (obiettivo preciso)
+2. Cosa hai già implementato (con percorsi file)
+3. Cosa ha funzionato e cosa no (inclusi tentativi falliti)
+4. Lo stato attuale dei test (passano? falliscono? quali?)
+5. I prossimi 3 step esatti da eseguire nella prossima sessione
+6. Eventuali "gotchas" scoperti da non dimenticare
+
+Il prossimo agente leggerà solo questo file. Sii chirurgico e preciso.</div>
+      </div>
+
+      <h2>11. Gestione del Budget di Contesto</h2>
+      <p>Il contesto è la risorsa più preziosa. Monitorarlo attivamente previene il "context rot" (degrado silenzioso della qualità).</p>
+      <table>
+        <thead><tr><th>Utilizzo Contesto</th><th>Azione Consigliata</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0–50%</strong></td><td>Lavora liberamente. Nessuna precauzione necessaria.</td></tr>
+          <tr><td><strong>50–70%</strong></td><td>Evita di includere file grandi non necessari. Usa <code>@file</code> solo per file specifici.</td></tr>
+          <tr><td><strong>70–90%</strong></td><td>Usa <code>/compact focus on [argomento critico]</code> al prossimo stopping point.</td></tr>
+          <tr><td><strong>90%+</strong></td><td><code>/clear</code> obbligatorio o nuova sessione con Handoff Document.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Esercizio Bonus — Workflow Community Completo</h2>
+      <p>Applica tutti i trucchi in un unico esercizio su una piccola feature reale del tuo progetto.</p>
+
+      <div class="prompt-box">
+        <div class="prompt-title">🎯 ESERCIZIO — Feature con Workflow P-S-I-V-R (Completo)</div>
+        <div class="prompt-body">Obiettivo: implementa una piccola feature nel progetto.
+
+Step obbligatori (NON saltarne nessuno):
+1. Non scrivere codice: esplora silenziosamente e crea piano tecnico
+2. Riduci scope a massimo 3 file (elencali esplicitamente)
+3. Checkpoint git prima di iniziare: `git add . &amp;&amp; git commit -m "checkpoint"`
+4. Implementa in diff piccoli verificabili
+5. Esegui i test specifici dopo ogni diff
+6. Fai review avversariale della diff finale con un subagente isolato
+7. Correggi solo i problemi CRITICAL
+8. Produci report finale strutturato
+
+Report finale:
+- cosa è cambiato (diff summary)
+- file modificati (con path)
+- test eseguiti e risultati
+- rischi residui identificati
+- cosa NON è stato fatto e perché</div>
+      </div>
+
+      <h3>Auto-validazione finale</h3>
+      <ul>
+        <li>Hai un piano approvato prima della prima riga di codice?</li>
+        <li>Hai limitato lo scope a massimo 3 file?</li>
+        <li>Hai un checkpoint git prima delle modifiche?</li>
+        <li>I test specifici passano tutti?</li>
+        <li>La review avversariale ha trovato almeno un rischio reale?</li>
+        <li>Il report finale distingue tra fatto, verificato e non verificato?</li>
+      </ul>
+    </section>
+
+    <section class="page-break">
+      <h1>Cheat Sheet — Riferimento Rapido Completo</h1>
+      <h2>CLI — Comandi Essenziali</h2>
+      <pre>npm install -g @openai/codex             # Installazione (richiede Node 18+)
+codex                                     # Avvio sessione interattiva (Suggest mode)
+codex --model codex-mini-latest "Prompt"  # Modello leggero per task semplici
+codex --model codex-1 "Prompt"            # Modello avanzato per task complessi
+codex --approval-policy suggest           # Mostra modifiche, tu approvi tutto
+codex --approval-policy auto-edit         # Modifica file, chiede solo per shell
+codex --full-auto                         # Tutto automatico (solo su CI/sandbox)
+codex exec "Task"                         # Esecuzione non-interattiva
+codex exec --json "Task" | jq             # Output JSON parsabile
+codex exec --max-budget-usd 0.50 "Task"   # Con budget cap di sicurezza
+codex --worktree nome-feature "Task"      # Agente su Git worktree isolato
+codex mcp list                            # Lista server MCP connessi
+codex status                              # Modello attivo, token usati, costo</pre>
+
+      <h2>Slash Commands in Sessione</h2>
+      <pre>/model codex-mini-latest     # Cambia a modello economico
+/model codex-1               # Passa a modello avanzato
+/compact focus on auth        # Compatta preservando contesto sull'argomento
+/clear                        # Azzera contesto (nuovo task non correlato)
+/rewind                       # Torna a checkpoint precedente (annulla azioni)
+/review                       # Revisione automatica delle diff non committate
+/skills                       # Lista skills disponibili nel progetto
+/cost                         # Spesa sessione corrente in USD + token
+@src/auth/login.ts            # Forza inclusione file nel contesto (token-efficient)
+!npm test                     # Esegui shell e inietta output nel contesto</pre>
+
+      <h2>Approval Modes — Tabella di Decisione</h2>
+      <pre>suggest     → sandbox: read-only   → approvi tutto: ideale per esplorazione
+auto-edit   → sandbox: workspace-write → modifica file, chiede per shell: sviluppo quotidiano
+full-auto   → sandbox: workspace-write → tutto automatico: solo CI/CD e container isolati</pre>
+
+      <h2>codex-action — GitHub Actions</h2>
+      <pre># Minimal setup in .github/workflows/codex.yml
+- uses: openai/codex-action@v1
+  with:
+    openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+    prompt: "Il tuo task qui"
+    sandbox: read-only  # oppure: workspace-write</pre>
+
+      <h2>Modelli — Quando Usarli</h2>
+      <pre>codex-mini-latest  → bug fix, test, boilerplate (veloce, economico)
+codex-1            → refactoring, feature multi-file (qualità alta)
+gpt-5.5            → pianificazione architetturale, Computer Use</pre>
+
+      <h2>Variabili d'Ambiente</h2>
+      <pre>OPENAI_API_KEY=sk-...         # Autenticazione API (obbligatorio headless)
+CODEX_HOME=$(pwd)/.codex      # Config progetto-specifico</pre>
+
+      <h2>File di Configurazione</h2>
+      <pre>~/.codex/config.toml     # Config globale (modello, approval_policy, sandbox)
+.agents/skills/          # Skills del repository (condivise col team)
+AGENTS.md                # Istruzioni persistenti (max 200 righe, regola d'oro)
+HANDOFF.md               # Contesto tra sessioni (genera prima di chiudere)
+~/.codex/log/            # Audit trail: ogni azione, token, costo</pre>
+
+      <div class="footer">OpenAI Codex — Corso Definitivo — Aprile 2026 · Fonti: github.com/openai/codex · github.com/openai/codex-action · openai.com/docs</div>
+    </section>
+  </main>
+</body>
+</html>
