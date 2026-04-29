@@ -32,7 +32,7 @@ Il corso esplora profondamente come le superfici operative di Codex interagiscon
 
 ## 🧠 I Pilastri del Corso
 
-Il corso è organizzato in 25 moduli principali più laboratori avanzati e playbook operativi.
+Il corso è organizzato in 27 moduli principali più laboratori avanzati e playbook operativi.
 
 ### 1. Desktop App come Command Center
 - Task Panel
@@ -127,4 +127,5 @@ Per i tech lead, il corso analizza in profondità la governance:
 - Architettura a **Profili Permissivi**: sandbox limitate per i Code Reviewer (`workspace-read`), profili avanzati isolati per gli Implementer.
 
 ---
+
 > Costruito per gli ingegneri del software che vogliono scalare. Ottimizzato per la qualità assoluta. Architettato per l'Enterprise.

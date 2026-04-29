@@ -32,7 +32,7 @@ The course deeply explores how Codex's operational surfaces interact in a modern
 
 ## 🧠 The Course Pillars
 
-The course is organized into 25 main modules plus advanced labs and operational playbooks.
+The course is organized into 27 main modules plus advanced labs and operational playbooks.
 
 ### 1. Desktop App as Command Center
 - Task Panel
@@ -115,8 +115,6 @@ Before closing this session, write a HANDOFF.md file with:
 4. The current state of tests (passing? failing? which ones?)
 5. The EXACT next 3 steps to execute in the next session
 6. Any discovered "gotchas"
-
-The next agent will read ONLY this file to continue. Be surgical and precise.
 ```
 
 ## 🔒 Focus: Enterprise & Security
@@ -127,4 +125,5 @@ For tech leads, the course analyzes governance in depth:
 - **Permissive Profiles** Architecture: limited sandbox profiles for Code Reviewers (`workspace-read`), isolated advanced profiles for Implementers.
 
 ---
+
 > Built for software engineers who want to scale. Optimized for absolute quality. Architected for the Enterprise.

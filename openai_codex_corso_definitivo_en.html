@@ -333,7 +333,7 @@
       <div class="divider"></div>
       <p class="tagline">CLI · codex-action · Desktop App · GitHub Copilot · Skills · MCP · Subagents · Worktrees · Computer Use · Enterprise</p>
       <div class="stats">
-        <div class="stat"><strong>14 Modules</strong><span>Theory + Practice</span></div>
+        <div class="stat"><strong>27</strong><span>Modules</span></div>
         <div class="stat"><strong>25+ Prompts</strong><span>Ready to use</span></div>
         <div class="stat"><strong>3 CI/CD YAMLs</strong><span>Updated Apr 2026</span></div>
       </div>
@@ -2231,57 +2231,98 @@ Then return to the Codex thread and use the review as input, not absolute truth.
       <div class="module-header"><div class="module-number">Module<strong>24</strong></div><div class="module-copy"><h2>Knowledge Workspace: Obsidian + NotebookLM + Codex</h2><p>Notes, vaults, research notebooks, and agents as a single system of operational knowledge.</p></div></div>
 
       <p>
-        Obsidian and NotebookLM can become two different levels of knowledge workspace around Codex.
-        Obsidian is great because a vault is a folder of Markdown files that Codex can read natively.
+        Obsidian and NotebookLM can become two different levels of knowledge workspace around Codex. 
+        While the IDE handles the code, these tools handle <strong>unstructured knowledge</strong> (research, architectural decisions, meeting notes).
       </p>
 
-      <div class="prompt"><div class="prompt-title">PROMPT — Read-only Obsidian vault audit</div><div class="prompt-body">Work on this Obsidian vault in read-only mode.
+      <h3>Obsidian: The "Second Brain" for Code</h3>
+      <p>
+        Obsidian is great because a vault is just a folder of Markdown files that Codex can read natively. 
+        You can point Codex to your vault to have it analyze your research notes or to ask it to document a feature starting from your scattered notes.
+      </p>
+
+      <div class="info-box"><div class="info-icon">&#128161;</div><div class="info-body"><strong>Tip:</strong> Create a <code>.codex/notes/</code> folder in your repository and sync it with your Obsidian vault via symlink or git submodule. This allows Codex to have direct access to your internal documentation while working on the code.</div></div>
+
+      <h3>NotebookLM: Research Sourcing</h3>
+      <p>
+        NotebookLM excels at synthesizing large amounts of external documentation (PDFs, websites, video transcripts). 
+        The recommended workflow is:
+      </p>
+      <ol>
+        <li>Upload documentation for a new library into NotebookLM.</li>
+        <li>Generate an "Implementation Guide" or a "Pattern Summary".</li>
+        <li>Export to Markdown and save in <code>.codex/research/</code>.</li>
+        <li>Use Codex to implement the feature, citing the research file as the source of truth.</li>
+      </ol>
+
+      <div class="prompt"><div class="prompt-title">PROMPT — Audit Obsidian vault read-only</div><div class="prompt-body">Work on this Obsidian vault in read-only mode.
 Analyze structure, links, tags, and note quality.
-Produce reports in .codex/reports/ without modifying original files.</div></div>
+Produce a report in .codex/reports/ without modifying the original files.</div></div>
     </section>
 
     <section id="figma-n8n" class="page-break">
       <div class="module-header"><div class="module-number">Module<strong>25</strong></div><div class="module-copy"><h2>Figma Plugin and n8n Automation Layer</h2><p>Serious design-to-code with Figma and external automations with n8n.</p></div></div>
 
       <p>
-        Figma helps Codex understand "what to build" visually. n8n helps decide "when to start"
-        a workflow and "who to notify" before/after.
+        Figma helps Codex understand "what to build" at a visual level. n8n helps decide "when to start" 
+        a workflow and "who to notify" before and after the AI's intervention.
+      </p>
+
+      <h3>Design-to-Code Loop</h3>
+      <p>
+        Using the Codex Figma plugin, you can extract CSS metadata, color tokens, and component structure. 
+        Codex can read this data to generate React/Vue/Tailwind components that faithfully respect the design system.
+      </p>
+
+      <h3>n8n: The Headless Orchestrator</h3>
+      <p>
+        n8n can act as a bridge between external events and the Codex CLI. For example, you can create a workflow that:
+        1. Listens to a GitHub webhook.
+        2. If an issue is labeled <code>codex-solve</code>, it starts a container with the Codex CLI.
+        3. Passes the issue description as a prompt.
+        4. Sends a Slack message when the PR is ready for review.
       </p>
 
       <div class="steps">
         <div class="step"><div><strong>Trigger</strong><span>A Figma frame changes or a designer flags ready-for-dev.</span></div></div>
-        <div class="step"><div><strong>n8n Normalizes</strong><span>Collects Figma links and metadata, creates GitHub/Linear ticket.</span></div></div>
-        <div class="step"><div><strong>Codex Executes</strong><span>Codex reads ticket, Figma, and repo, then implements in worktree.</span></div></div>
+        <div class="step"><div><strong>n8n Normalizes</strong><span>Collects Figma links and metadata, creates GitHub/Linear tickets.</span></div></div>
+        <div class="step"><div><strong>Codex Executes</strong><span>Codex reads tickets, Figma, and repo, then implements in worktree.</span></div></div>
       </div>
     </section>
 
     <section class="page-break">
+      <div class="module-header"><div class="module-number">Module<strong>26</strong></div><div class="module-copy"><h2>Final Capstone — Managing a Full Feature</h2><p>The final project demonstrating real competence in using Codex Desktop.</p></div></div>
 
-          <div class="module-header"><div class="module-number">Module<strong>★</strong></div><div class="module-copy"><h2>Final Capstone — Managing a Full Feature from the Desktop App</h2><p>The final project demonstrating real competence.</p></div></div>
+      <p>
+        The goal is to demonstrate that you can use the Desktop App as a complete agentic workspace, integrating all the techniques learned.
+      </p>
 
-          <p>
-            The goal is to demonstrate that you know how to use the Desktop App as a complete agentic work environment.
-          </p>
+      <h3>Capstone Project Checklist</h3>
+      <ul>
+        <li><strong>Planning:</strong> Generate a technical plan in <code>specs/</code> before writing code.</li>
+        <li><strong>Sandbox:</strong> Run the implementation in <code>workspace-write</code> mode.</li>
+        <li><strong>Multi-step:</strong> Split the task into at least 3 sub-tasks tracked in the Task Panel.</li>
+        <li><strong>Verification:</strong> Write and run tests (at least 80% coverage on the new feature).</li>
+        <li><strong>Handoff:</strong> Generate the final <code>HANDOFF.md</code> file for the next shift.</li>
+      </ul>
 
-          <div class="prompt"><div class="prompt-title">PROMPT — Desktop App Capstone</div><div class="prompt-body">CAPSTONE: Implement a full feature in a dedicated worktree.
-First create a plan, wait for approval, implement in small steps, verify in browser, and perform an adversarial review.</div></div>
-        
+      <div class="prompt"><div class="prompt-title">PROMPT — Desktop App Capstone</div><div class="prompt-body">CAPSTONE: Implement a full feature in a dedicated worktree.
+First create a plan, wait for approval, implement in small steps, verify in the browser, and conduct an adversarial review.</div></div>
     </section>
 
     <section class="page-break">
+      <div class="module-header"><div class="module-number">Module<strong>27</strong></div><div class="module-copy"><h2>Accuracy and Sources Audit</h2><p>What is officially documented and what is an advanced pattern.</p></div></div>
 
-          <div class="module-header"><div class="module-number">Module<strong>✓</strong></div><div class="module-copy"><h2>Accuracy and Sources Audit</h2><p>What is officially documented and what is an advanced pattern.</p></div></div>
+      <p>To be a true expert, you must distinguish between core product features and the prompt engineering techniques we've developed in the community.</p>
 
-          <h3>Documented Features</h3>
-          <ul>
-            <li>Parallel threads, worktrees, automations, integrated browser, plugins, and skills.</li>
-          </ul>
-
-          <h3>Advanced Patterns</h3>
-          <ul>
-            <li>Role cards, orchestrator memory, Chronicle, LLM Wiki workflows.</li>
-          </ul>
-        
+      <table>
+        <thead><tr><th>Area</th><th>Official Features (OpenAI)</th><th>Community Patterns</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Automation</strong></td><td><code>codex-action</code>, MCP, CLI exec</td><td>Role cards, adversarial loops, Chronicle</td></tr>
+          <tr><td><strong>Context</strong></td><td>Token limit, compact command, @mentions</td><td>Handoff protocol, manual context budgeting</td></tr>
+          <tr><td><strong>Security</strong></td><td>Seatbelt, Landlock, Restricted Tokens</td><td>Accuracy audit, 3-agent review</td></tr>
+        </tbody>
+      </table>
     </section>
 
     
