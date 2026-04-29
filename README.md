@@ -1,33 +1,41 @@
 <div align="center">
-  <br>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI Logo" width="80"/>
-  <h1>⬡ OpenAI Codex — The Definitive Guide</h1>
-  <p><strong>Masterclass Avanzata sull'Ecosistema Agentico di Codex (Edizione Aprile 2026)</strong></p>
-  <p><em>Advanced Masterclass on the Codex Agentic Ecosystem (April 2026 Edition)</em></p>
+  <h1>OpenAI Codex - The Definitive Course</h1>
+  <p><strong>April 2026 Edition - Updated to April 29, 2026</strong></p>
+  <p>Definitive HTML course on OpenAI Codex, available in Italian and English.</p>
 </div>
 
 ---
 
-<div align="center">
-  <h2>Select your language / Scegli la tua lingua</h2>
-  <br>
-  <a href="README.en.md">
-    <img src="https://flagcdn.com/w80/gb.png" alt="English" width="40" style="vertical-align:middle; margin-right: 10px;"/> <strong>English Version</strong>
-  </a>
-  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="README.it.md">
-    <img src="https://flagcdn.com/w80/it.png" alt="Italiano" width="40" style="vertical-align:middle; margin-right: 10px;"/> <strong>Versione Italiana</strong>
-  </a>
-  <br><br>
-</div>
+## Choose Your Language
 
----
+- [English README](README.en.md)
+- [README Italiano](README.it.md)
 
-### 🌐 About this repository
+## Course Files
 
-Welcome to the repository of the **Definitive Course on OpenAI Codex**. This is an advanced operational masterclass designed to help software engineers design, govern, and verify agentic workflows using the Codex ecosystem (Desktop App, CLI, IDE, and CI/CD).
+- [Italian course](openai_codex_corso_definitivo_it.html)
+- [English course](openai_codex_corso_definitivo_en.html)
 
-Benvenuto nel repository ufficiale del **Corso Definitivo su OpenAI Codex**. Questa è una masterclass operativa avanzata progettata per aiutare gli ingegneri del software a progettare, governare e verificare workflow agentici utilizzando l'ecosistema Codex (Desktop App, CLI, IDE e CI/CD).
+## What This Repository Contains
 
-> Choose your language above to read the full Masterclass introduction and documentation.
-> Scegli la tua lingua qui sopra per leggere l'introduzione completa e la documentazione della Masterclass.
+This repository intentionally contains only the public release files:
+
+- `README.md`
+- `README.it.md`
+- `README.en.md`
+- `openai_codex_corso_definitivo_it.html`
+- `openai_codex_corso_definitivo_en.html`
+
+No build step, local server, or extra dependency is required. Open the HTML file directly in a modern browser.
+
+## Current Model Positioning
+
+The course reflects the April 29, 2026 model hierarchy used throughout the HTML files:
+
+- `GPT-5.5` for frontier Codex work, long-running tasks, architecture, Computer Use, and complex agentic coding.
+- `GPT-5.3-Codex` as the specialized Codex/API model for agentic coding workflows.
+- `GPT-5.4`, `GPT-5.4-mini`, and `GPT-5.4-nano` as cost/latency alternatives where appropriate.
+
+## Scope
+
+The course covers Codex Desktop/App workflows, CLI, IDE usage, GitHub review, `codex-action`, AGENTS.md, sandbox and approval policies, MCP, skills, plugins, subagents, worktrees, enterprise governance, and master-level exercises.
