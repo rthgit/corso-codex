@@ -388,19 +388,21 @@
 <body>
   <main class="page">
     <section class="cover">
-      <svg class="hero-logo" viewBox="0 0 220 220" role="img" aria-label="OpenAI Codex logo" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="220" height="220" rx="48" fill="#10A37F" opacity="0.10"/>
-        <g fill="none" stroke="#10A37F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M110 33c23 0 39 15 45 34 21 5 34 22 34 43 0 22-14 38-34 44-6 19-22 33-45 33s-39-14-45-33c-20-6-34-22-34-44 0-21 13-38 34-43 6-19 22-34 45-34z"/>
-          <path d="M74 72l36-21 36 21v42l-36 21-36-21z"/>
-          <path d="M146 72l-36 21-36-21"/>
-          <path d="M74 148l36-21 36 21"/>
-          <path d="M110 51v42"/>
-          <path d="M110 127v42"/>
-          <path d="M74 72v42"/>
-          <path d="M146 72v42"/>
-        </g>
-        <text x="110" y="202" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="800" fill="#10A37F">CODEX</text>
+      <svg class="hero-logo" viewBox="0 0 220 220" role="img" aria-label="OpenAI Codex app icon" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="codexIconGradientIt" x1="45" y1="42" x2="174" y2="176" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#9B8CFF"/>
+            <stop offset="0.52" stop-color="#6867F5"/>
+            <stop offset="1" stop-color="#4F8BFF"/>
+          </linearGradient>
+          <filter id="codexIconShadowIt" x="-20%" y="-20%" width="140%" height="150%">
+            <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#6B6FF5" flood-opacity="0.25"/>
+          </filter>
+        </defs>
+        <rect x="32" y="30" width="156" height="156" rx="36" fill="#FFFFFF"/>
+        <path filter="url(#codexIconShadowIt)" fill="url(#codexIconGradientIt)" d="M83 58c11-15 33-19 49-7 12-1 25 4 32 15 10 15 8 34-4 47 4 14-1 30-13 40-13 11-32 13-47 5-16 6-35 1-46-12-11-13-13-31-5-46-6-14-3-31 8-42 7-7 16-11 26-11z"/>
+        <path d="M77 100l15 14-15 14" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M107 128h38" fill="none" stroke="#DDE4FF" stroke-width="11" stroke-linecap="round"/>
       </svg>
       <h1 class="title">OPENAI CODEX<br><span class="green">CORSO DEFINITIVO</span></h1>
       <p class="subtitle">da Zero a Master â€” Aprile 2026</p>
