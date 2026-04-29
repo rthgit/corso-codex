@@ -25,9 +25,9 @@
 
 ### 🌐 About this repository
 
-Welcome to the repository of the **Definitive Course on OpenAI Codex**. This guide represents the most advanced and comprehensive reference available today to master the Codex agentic ecosystem (Desktop App, CLI, CI/CD Integrations) in production and Enterprise environments.
+Welcome to the repository of the **Definitive Course on OpenAI Codex**. This is an advanced operational masterclass designed to help software engineers design, govern, and verify agentic workflows using the Codex ecosystem (Desktop App, CLI, IDE, and CI/CD).
 
-Benvenuto nel repository ufficiale del **Corso Definitivo su OpenAI Codex**. Questa guida rappresenta il riferimento più avanzato e completo oggi disponibile per padroneggiare l'ecosistema agentico di Codex (Desktop App, CLI, Integrazioni CI/CD) in ambienti di produzione e contesti Enterprise.
+Benvenuto nel repository ufficiale del **Corso Definitivo su OpenAI Codex**. Questa è una masterclass operativa avanzata progettata per aiutare gli ingegneri del software a progettare, governare e verificare workflow agentici utilizzando l'ecosistema Codex (Desktop App, CLI, IDE e CI/CD).
 
 > Choose your language above to read the full Masterclass introduction and documentation.
 > Scegli la tua lingua qui sopra per leggere l'introduzione completa e la documentazione della Masterclass.
