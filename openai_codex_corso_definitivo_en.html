@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpenAI Codex â€” The Definitive Guide</title>
+  <title>OpenAI Codex — The Definitive Guide</title>
   <style>
     :root{
       --primary:#10A37F;
@@ -343,7 +343,7 @@
     }
 
     li::before{
-      content:"â–¸";
+      content:"▸";
       position:absolute;
       left:0;
       color:var(--primary);
@@ -405,9 +405,9 @@
         <path d="M107 128h38" fill="none" stroke="#DDE4FF" stroke-width="11" stroke-linecap="round"/>
       </svg>
       <h1 class="title">OPENAI CODEX<br><span class="green">DEFINITIVE COURSE</span></h1>
-      <p class="subtitle">From Zero to Master â€” April 2026</p>
+      <p class="subtitle">From Zero to Master — April 2026</p>
       <div class="divider"></div>
-      <p class="tagline">CLI Â· codex-action Â· Desktop App Â· GitHub Copilot Â· Skills Â· MCP Â· Subagents Â· Worktrees Â· Computer Use Â· Enterprise</p>
+      <p class="tagline">CLI · codex-action · Desktop App · GitHub Copilot · Skills · MCP · Subagents · Worktrees · Computer Use · Enterprise</p>
       <div class="stats">
         <div class="stat"><strong>27+</strong><span>Modules and master tests</span></div>
         <div class="stat"><strong>35+ Prompts</strong><span>Ready to use</span></div>
@@ -418,19 +418,19 @@
     <section class="page-break">
       <h1>Introduction: What is OpenAI Codex in 2026</h1>
       <p>OpenAI Codex is the agentic coding platform from OpenAI. It is not just simple code completion: it is a multi-surface system that can read, write, execute, and debug code autonomously, in parallel, on the cloud, and locally. The official repository is <strong>github.com/openai/codex</strong>.</p>
-      <p>Launched in preview in April 2025 and now available on all paid ChatGPT plans (Plus, Pro, Team, Enterprise), Codex is powered by the <strong>codex-1</strong> family of models (optimized for SWE tasks) and the GPT-5.x general-purpose models.</p>
-      <div class="info-box"><div class="info-icon">â„¹</div><div class="info-body"><strong>What changed in 2026:</strong> OpenAI has progressively unified the "Codex" branding. Dedicated models (e.g., <code>code-davinci-002</code>) have been deprecated. Today, the Codex CLI uses <code>codex-mini-latest</code> (alias for <code>o4-mini</code>) by default, which excels at code reasoning at a low cost. For architectural tasks, <code>gpt-5.5</code> is used.</div></div>
+      <p>Launched in preview in April 2025 and now available on ChatGPT plans that include Codex (Plus, Pro, Business, Enterprise/Edu and, during promotional periods, additional plans), Codex is powered by the <strong>GPT-5.1-Codex</strong> model family, optimized for agentic software engineering workflows.</p>
+      <div class="info-box"><div class="info-icon">&#8505;</div><div class="info-body"><strong>Verify the model before publishing:</strong> older dedicated code models such as <code>code-davinci-002</code> are historical/deprecated. Codex CLI and IDE support the <code>GPT-5.1-Codex</code> family; the exact choice between Max, Mini, or other aliases depends on version, plan, and configuration. Always check the model picker, <code>config.toml</code>, or current docs.</div></div>
 
       <h2>Available Surfaces</h2>
       <table>
         <thead><tr><th>Surface</th><th>Main Use</th><th>Recommended Model</th></tr></thead>
         <tbody>
-          <tr><td><strong>Codex Desktop App</strong> (macOS/Win)</td><td>Parallel agent management, worktrees, automation, Computer Use</td><td><code>codex-1</code> / <code>gpt-5.5</code></td></tr>
-          <tr><td><strong>Codex CLI</strong> (terminal)</td><td>Local workflows, scripting, non-interactive exec, CI/CD</td><td><code>codex-mini-latest</code></td></tr>
-          <tr><td><strong>IDE Extension</strong> (VS Code, JetBrains, Xcode)</td><td>Inline pairing in the editor, agent mode, inline review</td><td><code>codex-1</code></td></tr>
-          <tr><td><strong>Web</strong> (chatgpt.com/codex)</td><td>Cloud tasks, GitHub PR review, browser access</td><td><code>codex-1</code></td></tr>
-          <tr><td><strong>GitHub Copilot</strong> (Enterprise)</td><td>Agent integrated into the GitHub flow, automatic PR review and fix</td><td><code>codex-1</code></td></tr>
-          <tr><td><strong>API / codex-action</strong></td><td>Multi-agent orchestration, GitHub Actions CI/CD</td><td>Any model</td></tr>
+          <tr><td><strong>Codex Desktop App</strong> (macOS/Windows)</td><td>Parallel agents, worktrees, skills, automations, Git, and local workflows without switching terminal or IDE</td><td><code>GPT-5.1-Codex Max</code> for quality; <code>Mini</code> for lighter tasks</td></tr>
+          <tr><td><strong>Codex CLI</strong> (terminal)</td><td>Local workflows, scripting, command execution, tests, refactors, and non-interactive <code>exec</code></td><td><code>GPT-5.1-Codex</code> family; default depends on version/configuration</td></tr>
+          <tr><td><strong>Codex IDE Extension</strong> (VS Code, Cursor, Windsurf, JetBrains where supported)</td><td>Editor pairing, agent mode, inline review, and direct project edits</td><td><code>GPT-5.1-Codex</code> family; selectable in model picker/config</td></tr>
+          <tr><td><strong>Codex Web</strong> (chatgpt.com/codex)</td><td>Cloud sandbox tasks, GitHub PR review, asynchronous delegation from the browser</td><td><code>GPT-5.1-Codex</code> according to plan availability</td></tr>
+          <tr><td><strong>GitHub App / PR Review</strong></td><td>Repository connection, automatic or requested reviews, comments, and GitHub workflows connected to Codex</td><td>Managed by Codex; not the same thing as GitHub Copilot</td></tr>
+          <tr><td><strong>Codex SDK/API</strong></td><td>Programmatic control, internal integrations, custom orchestration, and CI/CD automation</td><td>SDK/API configured model, to verify in current docs</td></tr>
         </tbody>
       </table>
 
@@ -438,66 +438,63 @@
       <table>
         <thead><tr><th>Task</th><th>Recommended Model</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td>Bug fix, unit tests, boilerplate</td><td><code>codex-mini-latest</code></td><td>Fast, cheap, optimized for code</td></tr>
-          <tr><td>Refactoring, complex features</td><td><code>codex-1</code></td><td>Understands large contexts and multi-file dependencies</td></tr>
-          <tr><td>Architectural planning</td><td><code>gpt-5.5</code></td><td>Deep reasoning, multi-variable analysis</td></tr>
-          <tr><td>Mechanical subagents (linting, fmt)</td><td><code>codex-mini-latest</code></td><td>-60% cost compared to flagship models</td></tr>
-          <tr><td>Computer Use (GUI automation)</td><td><code>gpt-5.5</code></td><td>Vision + reasoning required for UI interaction</td></tr>
+          <tr><td>Bug fix, unit tests, boilerplate</td><td><code>GPT-5.1-Codex Mini</code> when available</td><td>Lightweight choice for scoped, repetitive tasks</td></tr>
+          <tr><td>Refactoring, complex features</td><td><code>GPT-5.1-Codex Max</code> or the highest-quality Codex model available</td><td>Better for large contexts, multi-file dependencies, and reversible decisions</td></tr>
+          <tr><td>Architectural planning</td><td><code>GPT-5.1-Codex Max</code> with high reasoning</td><td>Deep reasoning before high-impact changes</td></tr>
+          <tr><td>Mechanical subagents (linting, fmt)</td><td><code>GPT-5.1-Codex Mini</code> when available</td><td>Reduces cost and latency on automatically verifiable work</td></tr>
+          <tr><td>Computer Use (GUI automation)</td><td>Codex model compatible with Computer Use in the selected surface</td><td>Requires GUI tools, screen observation, and dedicated safety policy</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>01</strong></div><div class="module-copy"><h2>Codex CLI â€” The Enhanced Terminal</h2><p>Installation, configuration, advanced commands, non-interactive exec, scripting, and context management</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>01</strong></div><div class="module-copy"><h2>Codex CLI — The Enhanced Terminal</h2><p>Installation, configuration, advanced commands, non-interactive exec, scripting, and context management</p></div></div>
       <h2>1.1 Installation and Setup</h2>
-      <p>The Codex CLI is open source, written in Rust to guarantee sub-millisecond latencies in file system management, and is available on macOS, Windows, and Linux. It integrates a local tokenizer for exact real-time context calculation.</p>
+      <p>The Codex CLI is OpenAI's open source agent that runs locally in your terminal. It is available via npm, Homebrew, or release binaries; requirements, platforms, and implementation details can change, so the operational source of truth is the official repository and <code>codex --help</code>.</p>
       <pre># Installation via npm (requires Node 18+)
 npm install -g @openai/codex
 
 # First launch and interactive authentication
 codex
 
-# Headless authentication (for CI/CD)
+# Use an API key when your configuration supports it
 export OPENAI_API_KEY="sk-..."
-codex login --headless
+codex "Analyze the project and propose the first tests"</pre>
 
-# Check status, active model, and remaining tokens
-codex status</pre>
-
-      <h2>1.2 The 3 Official Approval Modes â€” The Most Important Choice</h2>
-      <p>OpenAI officially documents three autonomy levels for the Codex CLI. The wrong choice causes either continuous blocks (suggest mode on CI pipelines) or security risks (full-auto on production repositories).</p>
+      <h2>1.2 Sandbox and Approval Policy — The Most Important Choice</h2>
+      <p>Codex separates the technical sandbox boundary from the approval policy. A bad configuration creates either operational friction or unnecessary risk: first define where Codex can read/write, then define when it must pause for confirmation.</p>
       <table>
         <thead><tr><th>Mode</th><th>Sandbox</th><th>Approval Policy</th><th>When to Use It</th></tr></thead>
         <tbody>
-          <tr><td><strong>Suggest</strong> (default)</td><td><code>read-only</code></td><td>Codex shows proposed changes, you approve every single action</td><td>Exploration, code review, first use on an unknown repository</td></tr>
-          <tr><td><strong>Auto Edit</strong></td><td><code>workspace-write</code></td><td>Modifies files autonomously, but asks for confirmation for shell commands</td><td>Daily active development. The optimal compromise for most devs</td></tr>
-          <tr><td><strong>Full Auto</strong></td><td><code>workspace-write</code></td><td>Executes everything autonomously (<code>on-request</code>): code + shell + commands</td><td>CI/CD, isolated Docker containers, nightly pipelines. NEVER on production repositories without git checkpoints</td></tr>
+          <tr><td><strong>Exploration</strong></td><td><code>read-only</code></td><td>Asks before editing files or leaving the allowed boundary</td><td>Code review, planning, first use on an unknown repository</td></tr>
+          <tr><td><strong>Daily development</strong></td><td><code>workspace-write</code></td><td>Writes inside the workspace and asks when it must go beyond the boundary</td><td>Features, tests, refactors with human control over risky steps</td></tr>
+          <tr><td><strong>Local automation</strong></td><td><code>workspace-write</code> + coherent approval</td><td>Presets such as <code>--full-auto</code> reduce interruptions while staying inside the configured sandbox</td><td>Repeatable tasks, CI, or isolated workspaces with git checkpoints</td></tr>
         </tbody>
       </table>
-      <pre># Launch with explicit approval mode
-codex --approval-policy suggest        # Safe mode (default)
-codex --approval-policy auto-edit      # Modifies files, asks for shell
-codex --full-auto                      # Alias for full auto (on CI/CD)
+      <pre># Always inspect the installed version
+codex --help
+codex exec --help
+
+# Low-friction local automation example
+codex --full-auto "Fix lint failures and then run tests"
 
 # Equivalent permanently configured in config.toml
 [core]
-approval_policy = "auto-edit"</pre>
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"</pre>
 
-      <h2>1.3 Non-Interactive Mode â€” exec</h2>
-      <p>Transforms Codex into an automated CLI tool, ideal for pre-commit hooks, CI/CD pipelines, or cron jobs. The <code>--max-budget-usd</code> flag is the only guardrail against infinite loops or anomalous billing.</p>
-      <pre># Execution with budget cap (prevents surprise billing)
-codex exec --max-budget-usd 0.50 "Generate unit tests for src/auth.ts"
+      <h2>1.3 Non-Interactive Mode — exec</h2>
+      <p><code>codex exec</code> is the non-interactive mode: useful for scripts, repeatable checks, and pipelines. Do not build critical automation on flags copied from old guides: run <code>codex exec --help</code>, pin the CLI version, and record the supported configuration in the repository.</p>
+      <pre># Non-interactive execution
+codex exec "Generate unit tests for src/auth.ts and show the diff"
 
-# JSON output for structured parsing in bash
-codex exec --json "Analyze the code and return bugs" | jq '.bugs[]'
+# Recommended CI pattern: clean environment, pinned version, reviewable diff
+codex exec "Analyze lint failures, apply only mechanical fixes, and rerun npm test"
 
-# Full auto on cloud container (safe because isolated)
-codex cloud exec --env ENV_ID --full-auto --attempts 3 "Fix bug #123"
+# Before using JSON, budget caps, or advanced flags, verify local support
+codex exec --help</pre>
 
-# Pipeline pre-commit hook (example .husky/pre-commit)
-codex exec --approval-policy auto-edit --max-budget-usd 0.10 "Fix lint errors"</pre>
-
-      <div class="prompt-box"><div class="prompt-title">ðŸŽ¯ PROMPT â€” CLI â€” Full Codebase Analysis</div><div class="prompt-body">Analyze the entire codebase in this directory, considering the AGENTS.md file. Identify:
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — CLI — Full Codebase Analysis</div><div class="prompt-body">Analyze the entire codebase in this directory, considering the AGENTS.md file. Identify:
 1. Architectural patterns used
 2. Deprecated or outdated dependencies
 3. Potential memory leaks (e.g., event listeners not removed)
@@ -534,17 +531,18 @@ Include an action plan for each critical issue.</div></div>
       <pre># ~/.codex/config.toml
 
 [core]
-model = "gpt-5.4"
+model = "gpt-5.1-codex"
 # Strict policy: Codex asks permission for everything except allow-listed commands
-approval_policy = "unless-allow-listed"
+approval_policy = "on-request"
 
 [sandbox]
 # "workspace-write" allows changes only inside the current git folder
 mode = "workspace-write"
 
-[[mcp_servers]]
-name = "github"
-url = "https://api.githubcopilot.com/mcp/"
+# MCP servers are configured per provider; verify the current command/URL.
+# Example shape only:
+[mcp_servers.github]
+command = "github-mcp-server"
 
 [[rules.allow]]
 command = "git"
@@ -556,10 +554,10 @@ budget_cap_session_usd = 2.0</pre>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>02</strong></div><div class="module-copy"><h2>AGENTS.md â€” Persistent Project Instructions</h2><p>Governance, conventions, test commands, and "Gotchas"</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>02</strong></div><div class="module-copy"><h2>AGENTS.md — Persistent Project Instructions</h2><p>Governance, conventions, test commands, and "Gotchas"</p></div></div>
       <p>AGENTS.md (also known as CLAUDE.md or system rules) is a text file, similar to README.md, that Codex reads automatically at the beginning of each session in your repository.</p>
-      <div class="info-box"><div class="info-icon">â„¹</div><div class="info-body"><strong>2026 Best Practice:</strong> Keep AGENTS.md under 200 lines. Use explicit paths and "Context Freshness" rules to prevent the agent from hallucinating non-existent patterns.</div></div>
-      <h2>2.1 How Codex Discovers AGENTS.md â€” The Official Hierarchical System</h2>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>2026 Best Practice:</strong> Keep AGENTS.md under 200 lines. Use explicit paths and "Context Freshness" rules to prevent the agent from hallucinating non-existent patterns.</div></div>
+      <h2>2.1 How Codex Discovers AGENTS.md — The Official Hierarchical System</h2>
       <p>Codex doesn't read just one AGENTS.md: it builds a <strong>hierarchical instruction chain</strong> by concatenating multiple files, from the repo root down to your current directory. Rules closer to the CWD take priority over global rules.</p>
       <table>
         <thead><tr><th>Discovery Order</th><th>Checked File</th><th>Behavior</th></tr></thead>
@@ -571,12 +569,12 @@ budget_cap_session_usd = 2.0</pre>
           <tr><td><strong>5. CWD</strong></td><td><code>[cwd]/AGENTS.md</code> or <code>AGENTS.override.md</code></td><td>Highest priority. Local override for isolated dev or testing.</td></tr>
         </tbody>
       </table>
-      <div class="info-box"><div class="info-icon">â„¹</div><div class="info-body"><strong>Total Limit:</strong> The process stops when the sum of the files reaches <code>project_doc_max_bytes</code> (default 32 KiB, configurable in config.toml). Files not included are silently ignored.</div></div>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>Total Limit:</strong> The process stops when the sum of the files reaches <code>project_doc_max_bytes</code> (default 32 KiB, configurable in config.toml). Files not included are silently ignored.</div></div>
 
       <h2>2.2 Advanced AGENTS.md Configuration in config.toml</h2>
       <pre># ~/.codex/config.toml
 
-# Increase limit if AGENTS.md gets truncated (check with `codex status`)
+# Increase limit if AGENTS.md gets truncated (check with `codex --help`)
 project_doc_max_bytes = 65536  # Default: 32768 (32 KiB)
 
 # Alternative filenames if AGENTS.md does not exist (custom naming monorepos)
@@ -589,9 +587,9 @@ project_doc_fallback_filenames = ["TEAM_GUIDE.md", ".agents.md", "CODEX.md"]</pr
 This is a REST API in Node.js + TypeScript (Express).
 
 ## Architecture and Naming
-- src/routes/ â†’ Express endpoints. Always use `kebab-case` for route files.
-- src/services/ â†’ business logic. Use classes with dependency injection.
-- src/models/ â†’ Prisma schemas.
+- src/routes/ → Express endpoints. Always use `kebab-case` for route files.
+- src/services/ → business logic. Use classes with dependency injection.
+- src/models/ → Prisma schemas.
 
 ## Essential Commands
 - Build: `npm run build`
@@ -611,7 +609,7 @@ Before starting modifications, always run `git status` and re-read the latest PR
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>03</strong></div><div class="module-copy"><h2>Skills and Plugins â€” Reusable Custom Capabilities</h2><p>Create, install, and distribute skills company-wide</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>03</strong></div><div class="module-copy"><h2>Skills and Plugins — Reusable Custom Capabilities</h2><p>Create, install, and distribute skills company-wide</p></div></div>
       <p>A Skill is a package of instructions, resources, and optional scripts that teaches Codex how to execute a specific workflow. It's the way to institutionalize your team's processes and make them agentic.</p>
       <p>You can share an entire <code>.agents/skills</code> directory among multiple developers, ensuring that the agent executes standard company procedures (e.g., release process, DB migration).</p>
       <table>
@@ -624,18 +622,18 @@ Before starting modifications, always run `git status` and re-read the latest PR
         </tbody>
       </table>
       <pre>.agents/skills/
-â””â”€â”€ release-manager/
-    â”œâ”€â”€ SKILL.md                 # How to generate changelog and bump version
-    â”œâ”€â”€ agents/
-    â”‚   â””â”€â”€ openai.yaml          # Permission for `git tag` and `npm publish`
-    â””â”€â”€ scripts/
-        â””â”€â”€ verify-tests.sh      # Executed automatically before release</pre>
+└── release-manager/
+    ├── SKILL.md                 # How to generate changelog and bump version
+    ├── agents/
+    │   └── openai.yaml          # Permission for `git tag` and `npm publish`
+    └── scripts/
+        └── verify-tests.sh      # Executed automatically before release</pre>
     </section>
 
     <section class="page-break">
       <div class="module-header"><div class="module-number">Module<strong>04</strong></div><div class="module-copy"><h2>Model Context Protocol (MCP)</h2><p>Connecting Codex to GitHub, Linear, Slack, DB, and lazy loading</p></div></div>
       <p>The Model Context Protocol is the de facto standard of 2026 for connecting Codex to external data sources (Notion, Figma, SQL databases) without copying/pasting text.</p>
-      <div class="info-box"><div class="info-icon">âš¡</div><div class="info-body"><strong>Lazy Loading:</strong> MCP servers insert a lot of information into the Codex Context Window. Use <code>ENABLE_TOOL_SEARCH="true"</code> to load MCP tools dynamically, saving 30% of tokens.</div></div>
+      <div class="info-box"><div class="info-icon">⚡</div><div class="info-body"><strong>Lazy Loading:</strong> MCP servers insert a lot of information into the Codex Context Window. Use <code>ENABLE_TOOL_SEARCH="true"</code> to load MCP tools dynamically, saving 30% of tokens.</div></div>
       <pre># Connection configuration in ~/.codex/config.toml
 [[mcp_servers]]
 name = "github"
@@ -661,15 +659,15 @@ args = ["-y", "@modelcontextprotocol/server-postgres", "postgresql://user:pass@l
           <tr><td><strong>Cloud / Sandbox</strong></td><td>Executes in a cloud container or a secure local Docker sandbox.</td><td>Long tasks (e.g., DB migration), execution of untrusted code or unknown packages (prevents supply chain attacks).</td></tr>
         </tbody>
       </table>
-      <div class="info-box"><div class="info-icon">ðŸ’¡</div><div class="info-body"><strong>Tip:</strong> Use <code>codex --worktree feature-name</code> to let Codex develop a feature on an invisible worktree, while you continue writing code on master.</div></div>
+      <div class="info-box"><div class="info-icon">💡</div><div class="info-body"><strong>Tip:</strong> Use <code>codex --worktree feature-name</code> to let Codex develop a feature on an invisible worktree, while you continue writing code on master.</div></div>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>06</strong></div><div class="module-copy"><h2>Automations â€” codex-action and CI/CD</h2><p>GitHub Actions with openai/codex-action, schedule, Triage Inbox, and full pipelines</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>06</strong></div><div class="module-copy"><h2>Automations — codex-action and CI/CD</h2><p>GitHub Actions with openai/codex-action, schedule, Triage Inbox, and full pipelines</p></div></div>
       <p>OpenAI officially publishes <strong>openai/codex-action</strong> (github.com/openai/codex-action): a GitHub Action that runs Codex within your CI/CD workflows. No servers to manage, no external cron jobs.</p>
       <div class="info-box"><div class="info-icon">&#9889;</div><div class="info-body"><strong>Quick Setup:</strong> Go to <em>Settings &rarr; Secrets and variables &rarr; Actions</em> in your repo and add <code>OPENAI_API_KEY</code> as a secret. Then copy the YAML below.</div></div>
 
-      <h3>Workflow 1 â€” Automatic PR Review on every Pull Request</h3>
+      <h3>Workflow 1 — Automatic PR Review on every Pull Request</h3>
       <pre># .github/workflows/codex-pr-review.yml
 name: Codex PR Review
 
@@ -708,10 +706,10 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## ðŸ¤– Codex Review\n\n${{ steps.codex.outputs.final-message }}`
+              body: `## 🤖 Codex Review\n\n${{ steps.codex.outputs.final-message }}`
             })</pre>
 
-      <h3>Workflow 2 â€” Daily Security Scan with Auto-Fix</h3>
+      <h3>Workflow 2 — Daily Security Scan with Auto-Fix</h3>
       <pre># .github/workflows/codex-security-scan.yml
 name: Security Scan + Auto-Fix
 
@@ -750,7 +748,7 @@ jobs:
                the unapplicable fixes and the reason
           sandbox: workspace-write</pre>
 
-      <div class="prompt-box"><div class="prompt-title">ðŸŽ¯ PROMPT â€” Automation â€” Daily Triage Inbox</div><div class="prompt-body">AUTOMATION TASK â€” Cron: every morning at 08:00
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Automation — Daily Triage Inbox</div><div class="prompt-body">AUTOMATION TASK — Cron: every morning at 08:00
 
 Use MCP Jira + MCP GitHub:
 1. Read all Jira issues with "bug" label open in the last 7 days
@@ -762,7 +760,7 @@ Use MCP Jira + MCP GitHub:
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>07</strong></div><div class="module-copy"><h2>Subagents â€” Parallel Multi-Agent Orchestration</h2><p>Specialized agents in parallel, Test Time Compute, and advanced patterns</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>07</strong></div><div class="module-copy"><h2>Subagents — Parallel Multi-Agent Orchestration</h2><p>Specialized agents in parallel, Test Time Compute, and advanced patterns</p></div></div>
       <p>Codex's multi-agent architecture uses <strong>isolated Git worktrees</strong> as sandboxes for each parallel agent. Each agent operates on a separate branch, without interfering with the others. The coordinator (main agent) integrates the results at the end.</p>
 
       <h3>The 3 Fundamental Subagent Patterns</h3>
@@ -779,12 +777,12 @@ Use MCP Jira + MCP GitHub:
       <pre># ~/.codex/config.toml
 [agents]
 max_concurrent = 4              # Maximum 4 parallel agents
-model = "codex-mini-latest"     # Lightweight model for subagents
+model = "gpt-5.1-codex"     # Verify current Mini/Max aliases in your plan
 worktree_base = "/tmp/codex-worktrees"  # Base directory for worktrees</pre>
 
       <h3>Pattern: Test Time Compute (Adversarial Reviewer)</h3>
       <p>A fresh context window finds errors that the person who wrote the code cannot see. It's the most effective pattern for increasing quality without additional human cost.</p>
-      <div class="prompt-box"><div class="prompt-title">ðŸŽ¯ PROMPT â€” Adversarial Reviewer with Isolated Subagent</div><div class="prompt-body">PHASE 1 (Main Agent): Implement feature X. Upon completion, write the git diff to /tmp/diff-for-review.patch.
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Adversarial Reviewer with Isolated Subagent</div><div class="prompt-body">PHASE 1 (Main Agent): Implement feature X. Upon completion, write the git diff to /tmp/diff-for-review.patch.
 
 PHASE 2 (Subagent with empty context):
 Read only the file /tmp/diff-for-review.patch. You have no context of how it was written.
@@ -805,50 +803,40 @@ PHASE 3 (Main Agent): Fix all CRITICAL issues before replying to me.</div></div>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>08</strong></div><div class="module-copy"><h2>Codex Web, GitHub App, and Copilot Enterprise</h2><p>@codex mentions, asynchronous PR review, GitHub Copilot agent mode</p></div></div>
-      <p>Codex integrates into GitHub on two levels: as a <strong>GitHub App</strong> (installable on any repository) and as a <strong>native agent of GitHub Copilot Enterprise</strong> (available from February 2026 for Business/Enterprise plans).</p>
+      <div class="module-header"><div class="module-number">Module<strong>08</strong></div><div class="module-copy"><h2>Codex Web, GitHub App, and GitHub Review</h2><p>@codex review, asynchronous code review, cloud tasks connected to the repository</p></div></div>
+      <p>Codex integrates with GitHub through Codex cloud and Codex settings: connect the repository, enable code review, and use comments such as <code>@codex review</code> on pull requests. This is not the same thing as GitHub Copilot Enterprise; this course treats Codex as the OpenAI surface.</p>
 
-      <h3>GitHub App â€” @codex Mentions</h3>
-      <p>Install the GitHub App from <em>chatgpt.com/codex</em> â†’ Settings. Once activated, Codex monitors your repositories and reacts to mentions asynchronously.</p>
-      <pre># In a GitHub Issue comment:
-@codex Analyze the code in the authentication area (src/auth/).
-Implement this feature respecting the rules in AGENTS.md.
-Open a PR with a feature/auth-[feature-name] branch.
+      <h3>GitHub App and @codex Review</h3>
+      <p>After configuring Codex cloud and enabling review for the repository, you can request review directly from GitHub. The documented official form is a pull request comment with <code>@codex review</code>; other workflows should be verified in the current UI and settings.</p>
+      <pre># On a general PR comment:
+@codex review
 
-# On a specific line in a PR review:
-@codex this if does not handle the null case. Fix it keeping the same public API.
-
-# On a general PR comment:
+# Recommended operational comment, when the repository supports it:
 @codex review this PR following AGENTS.md.
 Focus on: input validation, error handling, race conditions.</pre>
 
-      <h3>GitHub Copilot Enterprise â€” Codex as Native Agent</h3>
-      <p>From February 2026, GitHub Copilot Business/Enterprise plans can choose Codex as an agent in the native GitHub flow. This allows Codex to assign tasks from Copilot directly to repository branches without leaving the GitHub interface.</p>
+      <h3>Correct Workflow: Issue to PR</h3>
       <table>
-        <thead><tr><th>Feature</th><th>How to activate it</th></tr></thead>
+        <thead><tr><th>Phase</th><th>Correct practice</th></tr></thead>
         <tbody>
-          <tr><td><strong>Assign Issue to Codex</strong></td><td>From the issue, Assignee menu &rarr; choose "Codex Agent". Codex implements and opens a PR.</td></tr>
-          <tr><td><strong>Automatic PR review</strong></td><td>In Copilot settings, enable "Auto-review on PR open". Codex comments on every PR within 2 minutes.</td></tr>
-          <tr><td><strong>Fix from review comment</strong></td><td>Comment a line with <code>@copilot fix this</code>. Codex generates the corrective commit in the PR branch.</td></tr>
+          <tr><td><strong>Repository connection</strong></td><td>Configure Codex cloud and enable Code review in the repository's Codex settings.</td></tr>
+          <tr><td><strong>PR review</strong></td><td>Use <code>@codex review</code> or the review automation available in the plan/workspace.</td></tr>
+          <tr><td><strong>Fix from review</strong></td><td>Turn findings and comments into explicit prompts for Codex CLI/Web/App, avoiding undocumented Copilot syntax.</td></tr>
         </tbody>
       </table>
 
-      <div class="prompt-box"><div class="prompt-title">ðŸŽ¯ PROMPT â€” Full Issue to PR (GitHub App)</div><div class="prompt-body">Read issue #[N] on GitHub.
+      <div class="prompt-box"><div class="prompt-title"> PROMPT — Full Issue to PR (GitHub App)</div><div class="prompt-body">Read issue #[N] and prepare a reviewable PR.
 
 Before writing code:
 1. Analyze relevant files in the repository
-2. Write a comment on the issue with the technical plan
-3. Wait 5 minutes (to allow human review of the plan)
-4. Implement in a feature/[name] branch following AGENTS.md
-5. Open a PR with:
-   - Technical description of changes
-   - List of added tests
-   - Link to the issue
-   - Checklist: [ ] tests, [ ] lint, [ ] docs</div></div>
+2. Write a short technical plan with risks and tests
+3. Implement in a feature/[name] branch following AGENTS.md
+4. Run the tests and lint commands declared by the repository
+5. Open or prepare a PR with description, checklist, and known limits</div></div>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>09</strong></div><div class="module-copy"><h2>IDE Extension â€” Editor Pairing</h2><p>VS Code Agent Mode, automatic documentation and inline review</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>09</strong></div><div class="module-copy"><h2>IDE Extension — Editor Pairing</h2><p>VS Code Agent Mode, automatic documentation and inline review</p></div></div>
       <p>The Codex extension for VS Code goes beyond classic autocomplete: it introduces an <strong>Agent Mode</strong> that allows delegating multi-step tasks directly from the editor without switching to the terminal.</p>
       <pre># Install the extension from VS Code Marketplace:
 code --install-extension openai.codex
@@ -859,7 +847,7 @@ code --install-extension openai.codex --force</pre>
       <table>
         <thead><tr><th>Scenario</th><th>How to Use It</th></tr></thead>
         <tbody>
-          <tr><td><strong>Inline Review</strong></td><td>Select a block of code â†’ Right click â†’ "Codex: Review Selection". Codex leaves inline comments on logic and risks.</td></tr>
+          <tr><td><strong>Inline Review</strong></td><td>Select a block of code → Right click → "Codex: Review Selection". Codex leaves inline comments on logic and risks.</td></tr>
           <tr><td><strong>Auto-documentation</strong></td><td>Place cursor on a function and use command palette: "Codex: Generate JSDoc". Generates full docstrings with types, parameters, and examples.</td></tr>
           <tr><td><strong>Agent Mode</strong></td><td>Open Codex chat (Ctrl+Shift+C) and describe a multi-step task. Codex sees open files, writes code, runs integrated tests, and reports results in chat.</td></tr>
           <tr><td><strong>Context from Selection</strong></td><td>Select problematic code, use "Codex: Fix" and describe the error. Codex will replace the code only when approved.</td></tr>
@@ -870,38 +858,40 @@ code --install-extension openai.codex --force</pre>
     <section class="page-break">
       <div class="module-header"><div class="module-number">Module<strong>10</strong></div><div class="module-copy"><h2>Sandbox, Rules and OS-Level Security</h2><p>Real sandbox architecture (Seatbelt/Landlock/seccomp), Rules and danger-full-access</p></div></div>
 
-      <h3>Kernel-Level Sandbox Architecture (Official OpenAI Data)</h3>
-      <p>The Codex sandbox is not a simple software check: it is kernel-level isolation of the operating system. Even if the AI model were compromised via prompt injection, it could not escape the kernel constraints.</p>
+      <h3>Sandbox Architecture: Practical Boundary</h3>
+      <p>Codex sandboxing is a product boundary configured through <code>sandbox_mode</code>, <code>approval_policy</code>, writable roots, rules, and managed permissions. Platform internals can vary by OS and release, so teach the operational contract rather than relying on undocumented kernel details.</p>
       <table>
         <thead><tr><th>OS</th><th>Technology</th><th>What it Blocks</th></tr></thead>
         <tbody>
-          <tr><td><strong>macOS</strong></td><td><strong>Apple Seatbelt</strong> (<code>sandbox-exec</code>)</td><td>Dynamically generates sandbox profiles based on the selected policy. Blocks filesystem access outside the workspace and all network calls.</td></tr>
-          <tr><td><strong>Linux</strong></td><td><strong>Landlock</strong> + <strong>seccomp</strong></td><td>Landlock: kernel-level access control for paths. seccomp: filters system calls, blocking network operations and sensitive file access.</td></tr>
-          <tr><td><strong>Windows</strong></td><td><strong>Restricted User Tokens</strong> + <strong>Job Objects</strong></td><td>Every child process runs with reduced-privilege tokens in an isolated Job Object. Limits registry read/write and system actions.</td></tr>
+          <tr><td><strong>macOS</strong></td><td><strong>Apple Seatbelt</strong> (<code>sandbox-exec</code>)</td><td>Dynamically generates sandbox profiles based on the selected policy. Enforces the selected filesystem and process boundary according to the active policy.</td></tr>
+          <tr><td><strong>Linux</strong></td><td><strong>Landlock</strong> + <strong>seccomp</strong></td><td>Linux isolation depends on the configured sandbox and environment; verify the current platform docs for exact mechanics.</td></tr>
+          <tr><td><strong>Windows</strong></td><td><strong>Restricted User Tokens</strong> + <strong>Job Objects</strong></td><td>Windows behavior depends on the Codex Windows implementation and workspace controls; verify current limitations before relying on it for high-risk automation.</td></tr>
         </tbody>
       </table>
-      <div class="info-box"><div class="info-icon">&#9888;</div><div class="info-body"><strong>Network disabled by default:</strong> In all sandbox modes, network access is blocked at the kernel level. This prevents data exfiltration, C2, and download of unauthorized dependencies during execution. To enable it (e.g., tools that need to fetch) you must use <code>danger-full-access</code> or configure specific exceptions.</div></div>
+      <div class="info-box"><div class="info-icon">&#9888;</div><div class="info-body"><strong>Network and approvals:</strong> Network access depends on the active sandbox, approval policy, managed permissions, and environment. Do not assume package download or remote access is allowed: inspect configuration and grant narrow exceptions when the workflow requires them.</div></div>
 
-      <h3>The 4 Sandbox Levels â€” Official Full Table</h3>
+      <h3>Sandbox Modes — Operational Decision Table</h3>
       <table>
         <thead><tr><th>Mode</th><th>Filesystem</th><th>Network</th><th>When to Use It</th></tr></thead>
         <tbody>
-          <tr><td><code>read-only</code></td><td>Read-only everywhere</td><td>&#10007; Blocked</td><td>Code review, planning, safe exploration of unknown repos</td></tr>
-          <tr><td><code>workspace-write</code></td><td>Read everywhere, write only in current git dir</td><td>&#10007; Blocked</td><td>Standard daily development. Recommended default.</td></tr>
-          <tr><td><code>writable-root</code></td><td>Write on user-defined explicit paths</td><td>&#10007; Blocked</td><td>Monorepos where Codex must write to multiple directories</td></tr>
-          <tr><td><code>danger-full-access</code></td><td>No limits</td><td>&#10003; Enabled</td><td>Only in already isolated environments (Docker, CI container). Never locally.</td></tr>
+          <tr><td><code>read-only</code></td><td>Inspect files, but cannot edit or run commands without approval</td><td>Depends on configuration</td><td>Code review, planning, safe exploration of unknown repos</td></tr>
+          <tr><td><code>workspace-write</code></td><td>Read files, edit inside the workspace, run routine local commands inside that boundary</td><td>Depends on configuration and approvals</td><td>Standard daily development. Recommended default for local work.</td></tr>
+          <tr><td><code>workspace-write</code> + writable roots</td><td>Extends writable paths explicitly without removing the sandbox</td><td>Depends on configured permissions</td><td>Monorepos or shared libraries where Codex must write to multiple directories</td></tr>
+          <tr><td><code>danger-full-access</code></td><td>Runs without sandbox restrictions</td><td>No sandbox boundary</td><td>Only when you intentionally want full access in a disposable or already isolated environment</td></tr>
         </tbody>
       </table>
-      <pre># In config.toml â€” additional writable paths (writable-root mode)
-[sandbox]
-mode = "writable-root"
+      <pre># In config.toml — additional writable roots
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
 writable_roots = [
   "/home/user/project-a",
   "/home/user/shared-lib",
   "/tmp/codex-output"
 ]</pre>
 
-      <h3>Rules â€” Deterministic Allowlist and Denylist</h3>
+      <h3>Rules — Deterministic Allowlist and Denylist</h3>
       <p>Rules are evaluated <em>before</em> the model: impossible to bypass via prompt injection. They combine with the sandbox: the sandbox defines the physical boundary, Rules define the allowed commands within that boundary.</p>
       <pre># ~/.codex/config.toml
 [rules]
@@ -925,7 +915,7 @@ pattern = ".*\\.env$"  # Blocks reading/writing of any .env file</pre>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>11</strong></div><div class="module-copy"><h2>Codex Enterprise â€” Governance and Security</h2><p>Admin setup, managed config, permission profiles, and audit trail</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>11</strong></div><div class="module-copy"><h2>Codex Enterprise — Governance and Security</h2><p>Admin setup, managed config, permission profiles, and audit trail</p></div></div>
       <p>In corporate environments, Codex must operate within precise and trackable boundaries. The Enterprise tier adds centralized governance.</p>
       <h3>Pillars of Enterprise Security</h3>
       <table>
@@ -960,7 +950,7 @@ export_path = "/var/log/codex-audit/"  # Centralized path for SIEM</pre>
         <li><strong>Output format:</strong> structured result (JSON, Markdown, diff) for automated pipelines.</li>
         <li><strong>Iteration:</strong> incremental and verifiable tasks at each step, not a monolith to validate at the end.</li>
       </ul>
-      <h3>RIPER Framework (Research â†’ Innovate â†’ Plan â†’ Execute â†’ Review)</h3>
+      <h3>RIPER Framework (Research → Innovate → Plan → Execute → Review)</h3>
       <p>The definitive structured workflow for highly complex tasks. Enforces a strict separation between phases: Codex cannot "jump" to implementation before understanding the problem.</p>
       <table>
         <thead><tr><th>Phase</th><th>Instruction to Codex</th><th>Expected Output</th></tr></thead>
@@ -972,12 +962,12 @@ export_path = "/var/log/codex-audit/"  # Centralized path for SIEM</pre>
           <tr><td><strong>Review</strong></td><td>"Use an empty context subagent to perform an adversarial review of the implementation."</td><td>CRITICAL/WARNING/SUGGESTION report.</td></tr>
         </tbody>
       </table>
-      <div class="prompt-box"><div class="prompt-title">ðŸŽ¯ PROMPT â€” Template â€” Feature Development (Full)</div><div class="prompt-body">FEATURE: [Feature Name]
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Template — Feature Development (Full)</div><div class="prompt-body">FEATURE: [Feature Name]
 CONTEXT: [Project description and relevant AGENTS.md files]
 
 FUNCTIONAL REQUIREMENTS:
-- [Requirement 1] â€” verifiable with: [specific test]
-- [Requirement 2] â€” verifiable with: [specific test]
+- [Requirement 1] — verifiable with: [specific test]
+- [Requirement 2] — verifiable with: [specific test]
 
 CONSTRAINTS:
 - DO NOT modify: [list of sensitive files or modules]
@@ -988,7 +978,7 @@ DEFINITION OF DONE:
     </section>
 
     <section class="page-break">
-      <h1>Bonus Module â€” Real Community Tricks</h1>
+      <h1>Bonus Module — Real Community Tricks</h1>
 
       <p>
         This section collects practical patterns emerging from real Codex use in 2026, from GitHub repositories, Reddit discussions (<em>r/ChatGPTCoding</em>, <em>r/LocalLLaMA</em>) and AI dev Discord communities.
@@ -996,7 +986,7 @@ DEFINITION OF DONE:
       </p>
 
       <div class="info-box">
-        <div class="info-icon">â„¹</div>
+        <div class="info-icon">ℹ</div>
         <div class="info-body">
           <strong>2026 Golden Rule:</strong> Codex performs best when you work for <em>structured pipelines</em>, not isolated commands.
           Plan, reduce scope, implement in small steps, verify with tests, and cross-review.
@@ -1011,7 +1001,7 @@ DEFINITION OF DONE:
       </p>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Plan First (Exploration Before Code)</div>
+        <div class="prompt-title">🎯 PROMPT — Plan First (Exploration Before Code)</div>
         <div class="prompt-body">Do not write code yet. Explore silently.
 
 Analyze and answer me:
@@ -1041,7 +1031,7 @@ Only after my approval of the plan, implement.</div>
       </p>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Prompt Builder for Codex</div>
+        <div class="prompt-title">🎯 PROMPT — Prompt Builder for Codex</div>
         <div class="prompt-body">Turn this vague request into an operational prompt for Codex.
 
 Request:
@@ -1105,7 +1095,7 @@ Before editing:
       </p>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Refactor with Constrained Paths</div>
+        <div class="prompt-title">🎯 PROMPT — Refactor with Constrained Paths</div>
         <div class="prompt-body">Work only on these files:
 - src/services/payment.service.ts
 - src/services/payment.types.ts
@@ -1131,7 +1121,7 @@ Verify:
       </p>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Adversarial Reviewer</div>
+        <div class="prompt-title">🎯 PROMPT — Adversarial Reviewer</div>
         <div class="prompt-body">Act as an adversarial reviewer.
 
 Do not implement code.
@@ -1163,7 +1153,7 @@ OPEN QUESTIONS:</div>
         <tbody>
           <tr><td>Small bug</td><td>A single agent, short task, regression test.</td></tr>
           <tr><td>Risky refactor</td><td>Three worktrees with alternative strategies.</td></tr>
-          <tr><td>Complex feature</td><td>Architect â†’ Developer â†’ Tester â†’ Reviewer.</td></tr>
+          <tr><td>Complex feature</td><td>Architect → Developer → Tester → Reviewer.</td></tr>
           <tr><td>Security audit</td><td>Implementer separated from adversarial reviewer.</td></tr>
         </tbody>
       </table>
@@ -1186,7 +1176,7 @@ OPEN QUESTIONS:</div>
 - Block modifications to CI/CD and sensitive files with hooks</pre>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Security Audit Before Automation</div>
+        <div class="prompt-title">🎯 PROMPT — Security Audit Before Automation</div>
         <div class="prompt-body">Before creating this automation, do a security audit.
 
 Evaluate:
@@ -1217,19 +1207,19 @@ Output:
         </tbody>
       </table>
 
-      <h2>10. Handoff Document â€” Context across sessions</h2>
+      <h2>10. Handoff Document — Context across sessions</h2>
       <p>
         When you have a long session and need to close it, or the context is at its limit, create a Handoff Document before exiting.
         The next session will read only this file and pick up exactly where you left off.
       </p>
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ PROMPT â€” Generate Handoff Document</div>
+        <div class="prompt-title">🎯 PROMPT — Generate Handoff Document</div>
         <div class="prompt-body">Before closing this session, write a HANDOFF.md file with:
 
 1. What we were building (precise goal)
 2. What you have already implemented (with file paths)
 3. What worked and what didn't (including failed attempts)
-4. The current state of tests (passing? failing? which ones?)
+4. The current state of tests (passing failing which ones?)
 5. The exact next 3 steps to execute in the next session
 6. Any discovered "gotchas" not to forget
 
@@ -1241,9 +1231,9 @@ The next agent will only read this file. Be surgical and precise.</div>
       <table>
         <thead><tr><th>Context Usage</th><th>Recommended Action</th></tr></thead>
         <tbody>
-          <tr><td><strong>0â€“50%</strong></td><td>Work freely. No precautions needed.</td></tr>
-          <tr><td><strong>50â€“70%</strong></td><td>Avoid including large unnecessary files. Use <code>@file</code> only for specific files.</td></tr>
-          <tr><td><strong>70â€“90%</strong></td><td>Use <code>/compact focus on [critical topic]</code> at the next stopping point.</td></tr>
+          <tr><td><strong>0–50%</strong></td><td>Work freely. No precautions needed.</td></tr>
+          <tr><td><strong>50–70%</strong></td><td>Avoid including large unnecessary files. Use <code>@file</code> only for specific files.</td></tr>
+          <tr><td><strong>70–90%</strong></td><td>Use <code>/compact focus on [critical topic]</code> at the next stopping point.</td></tr>
           <tr><td><strong>90%+</strong></td><td>Mandatory <code>/clear</code> or new session with Handoff Document.</td></tr>
         </tbody>
       </table>
@@ -1253,7 +1243,7 @@ The next agent will only read this file. Be surgical and precise.</div>
         <p>These are not "magic prompts." They are operational micro-habits that truly change the quality of work.</p>
 
         <div class="trick-grid">
-          <div class="trick"><span class="label">TRICK 01 Â· Stop before code</span><h3>Block the agent before it writes</h3><p>When the task is new or risky, the first response must be only plan, files, and risks.</p><div class="micro-prompt">Do not write code.
+          <div class="trick"><span class="label">TRICK 01 · Stop before code</span><h3>Block the agent before it writes</h3><p>When the task is new or risky, the first response must be only plan, files, and risks.</p><div class="micro-prompt">Do not write code.
 First tell me:
 - involved files
 - max 6-step plan
@@ -1261,23 +1251,23 @@ First tell me:
 - tests to run
 - what you will not touch</div></div>
 
-          <div class="trick"><span class="label">TRICK 02 Â· Diff budget</span><h3>Impose a limit on the diff</h3><p>If you don't limit the diff, Codex can turn a small fix into a global refactor.</p><div class="micro-prompt">Limit:
+          <div class="trick"><span class="label">TRICK 02 · Diff budget</span><h3>Impose a limit on the diff</h3><p>If you don't limit the diff, Codex can turn a small fix into a global refactor.</p><div class="micro-prompt">Limit:
 - maximum 3 modified files
 - no refactor out of scope
 - if more files are needed, stop and ask for confirmation</div></div>
 
-          <div class="trick"><span class="label">TRICK 03 Â· Ask what it read</span><h3>Make it tell you what it read</h3><p>Before accepting a plan, verify that the agent has read the right files.</p><div class="micro-prompt">Before the plan, list:
+          <div class="trick"><span class="label">TRICK 03 · Ask what it read</span><h3>Make it tell you what it read</h3><p>Before accepting a plan, verify that the agent has read the right files.</p><div class="micro-prompt">Before the plan, list:
 - files read
 - why they are relevant
 - files you haven't read but might be needed</div></div>
 
-          <div class="trick"><span class="label">TRICK 04 Â· One failure, one fix</span><h3>Don't let it run in a loop</h3><p>If a test fails, Codex must fix once and then explain. It must not try randomly.</p><div class="micro-prompt">If a test fails:
+          <div class="trick"><span class="label">TRICK 04 · One failure, one fix</span><h3>Don't let it run in a loop</h3><p>If a test fails, Codex must fix once and then explain. It must not try randomly.</p><div class="micro-prompt">If a test fails:
 1. explain root cause
 2. propose a fix
 3. apply it only once
 4. if it fails again, stop</div></div>
 
-          <div class="trick"><span class="label">TRICK 05 Â· Reviewer with no ego</span><h3>Use a second pass as a reviewer</h3><p>The reviewer must not defend the solution. They must look for reasons not to merge it.</p><div class="micro-prompt">Perform an adversarial review.
+          <div class="trick"><span class="label">TRICK 05 · Reviewer with no ego</span><h3>Use a second pass as a reviewer</h3><p>The reviewer must not defend the solution. They must look for reasons not to merge it.</p><div class="micro-prompt">Perform an adversarial review.
 Do not fix.
 Only find:
 CRITICAL
@@ -1286,13 +1276,13 @@ MISSING TESTS
 POSSIBLE REGRESSIONS
 MERGE DECISION</div></div>
 
-          <div class="trick"><span class="label">TRICK 06 Â· Screenshot is evidence</span><h3>For UI, ask for observations</h3><p>In browser/Computer Use, the agent must describe what it sees, not what it thinks is happening.</p><div class="micro-prompt">Visual verification:
+          <div class="trick"><span class="label">TRICK 06 · Screenshot is evidence</span><h3>For UI, ask for observations</h3><p>In browser/Computer Use, the agent must describe what it sees, not what it thinks is happening.</p><div class="micro-prompt">Visual verification:
 - describe what you see
 - indicate URL/state
 - report console errors
 - do not modify code until you reproduce</div></div>
 
-          <div class="trick"><span class="label">TRICK 07 Â· Worktree or nothing</span><h3>Every serious experiment goes in a worktree</h3><p>If you don't know if the solution is good, don't do it in the main branch.</p><div class="micro-prompt">Work in a worktree.
+          <div class="trick"><span class="label">TRICK 07 · Worktree or nothing</span><h3>Every serious experiment goes in a worktree</h3><p>If you don't know if the solution is good, don't do it in the main branch.</p><div class="micro-prompt">Work in a worktree.
 At the end, do not merge.
 Give me:
 - pros/cons
@@ -1300,7 +1290,7 @@ Give me:
 - tests
 - merge/discard recommendation</div></div>
 
-          <div class="trick"><span class="label">TRICK 08 Â· Durable facts only</span><h3>Do not save everything in memory</h3><p>Only the orchestrator decides what becomes global memory. Agents propose facts.</p><div class="micro-prompt">Produce candidate_memory:
+          <div class="trick"><span class="label">TRICK 08 · Durable facts only</span><h3>Do not save everything in memory</h3><p>Only the orchestrator decides what becomes global memory. Agents propose facts.</p><div class="micro-prompt">Produce candidate_memory:
 - fact
 - confidence
 - evidence
@@ -1308,14 +1298,14 @@ Give me:
 - scope
 Do not directly update the vector DB.</div></div>
 
-          <div class="trick"><span class="label">TRICK 09 Â· No â€œdoneâ€ without proof</span><h3>â€œDoneâ€ means nothing</h3><p>Every closed task must state what was verified and what was not.</p><div class="micro-prompt">Mandatory final report:
+          <div class="trick"><span class="label">TRICK 09 · No “done” without proof</span><h3>“Done” means nothing</h3><p>Every closed task must state what was verified and what was not.</p><div class="micro-prompt">Mandatory final report:
 - modified files
 - executed tests
 - test output
 - what you haven't verified
 - residual risks</div></div>
 
-          <div class="trick"><span class="label">TRICK 10 Â· Manager approval gate</span><h3>Architectural decisions = escalation</h3><p>A worker must not change design, API, or global test strategy without approval.</p><div class="micro-prompt">If needed:
+          <div class="trick"><span class="label">TRICK 10 · Manager approval gate</span><h3>Architectural decisions = escalation</h3><p>A worker must not change design, API, or global test strategy without approval.</p><div class="micro-prompt">If needed:
 - new API
 - production refactor
 - CMake/test strategy change
@@ -1324,11 +1314,11 @@ stop and ask the manager.</div></div>
         </div>
       </div>
 
-      <h2>Bonus Exercise â€” Full Community Workflow</h2>
+      <h2>Bonus Exercise — Full Community Workflow</h2>
       <p>Apply all tricks in a single exercise on a real small feature of your project.</p>
 
       <div class="prompt-box">
-        <div class="prompt-title">ðŸŽ¯ EXERCISE â€” Feature with P-S-I-V-R Workflow (Full)</div>
+        <div class="prompt-title">🎯 EXERCISE — Feature with P-S-I-V-R Workflow (Full)</div>
         <div class="prompt-body">Goal: implement a small feature in the project.
 
 Mandatory steps (DO NOT skip any):
@@ -1389,7 +1379,7 @@ Final report:
             </tbody>
           </table>
 
-          <h3>Real template â€” tests-quality worker</h3>
+          <h3>Real template — tests-quality worker</h3>
           <pre># Agent: tests-quality
 
 ## Mission
@@ -1501,7 +1491,7 @@ The manager may additionally provide root project context from `j:\game_engine\.
             <div class="step"><div><strong>Approve implementation</strong><span>Only after manager review are modifications authorized on owned_paths.</span></div></div>
           </div>
 
-          <div class="prompt"><div class="prompt-title">PROMPT â€” Starting a specialized worker</div><div class="prompt-body">Assume the role described in the following role card.
+          <div class="prompt"><div class="prompt-title">PROMPT — Starting a specialized worker</div><div class="prompt-body">Assume the role described in the following role card.
 
 Rules:
 - Start from the worker's local files, not from the orchestrator root
@@ -1566,7 +1556,7 @@ Do not treat root files as local worker state.
 - Handoff</pre>
 
           <div class="exercise">
-            <strong>Exercise 13 â€” Creating three real workers</strong>
+            <strong>Exercise 13 — Creating three real workers</strong>
             <ol>
               <li>Create three role cards: <code>tests-quality</code>, <code>backend-api</code>, <code>frontend-ui</code>.</li>
               <li>Assign different owned areas to each.</li>
@@ -1607,22 +1597,22 @@ Do not treat root files as local worker state.
           </div>
 
           <h3>Correct architecture</h3>
-          <pre>                 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                 â”‚    ORCHESTRATOR    â”‚
-                 â”‚  manager / router  â”‚
-                 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                           â”‚
+          <pre>                 ┌────────────────────┐
+                 │    ORCHESTRATOR    │
+                 │  manager / router  │
+                 └─────────┬──────────┘
+                           │
                 validates and saves memory
-                           â”‚
-                 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                 â”‚   VECTOR DATABASE  â”‚
-                 â”‚   global memory    â”‚
-                 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                           â”‚
+                           │
+                 ┌─────────▼──────────┐
+                 │   VECTOR DATABASE  │
+                 │   global memory    │
+                 └─────────┬──────────┘
+                           │
                targeted retrieval for task
-                           â”‚
-      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-      â–¼                    â–¼                    â–¼
+                           │
+      ┌────────────────────┼────────────────────┐
+      ▼                    ▼                    ▼
 tests-quality         backend-api          frontend-ui
 local state           local state          local state
 state/report          state/report         state/report</pre>
@@ -1734,7 +1724,7 @@ state/report          state/report         state/report</pre>
   }
 }</pre>
 
-          <div class="prompt"><div class="prompt-title">PROMPT â€” Orchestrator: update global memory</div><div class="prompt-body">Act as orchestrator.
+          <div class="prompt"><div class="prompt-title">PROMPT — Orchestrator: update global memory</div><div class="prompt-body">Act as orchestrator.
 
 Input:
 - agent's state.json
@@ -1756,7 +1746,7 @@ Output:
 - rejected_items with reason
 - retrieval hints for future tasks</div></div>
 
-          <div class="prompt"><div class="prompt-title">PROMPT â€” Orchestrator: prepare context for a worker</div><div class="prompt-body">Act as orchestrator.
+          <div class="prompt"><div class="prompt-title">PROMPT — Orchestrator: prepare context for a worker</div><div class="prompt-body">Act as orchestrator.
 
 I need to start the worker:
 [agent-name]
@@ -1792,7 +1782,7 @@ Output for the worker:
           </table>
 
           <div class="exercise">
-            <strong>Exercise 14 â€” Simulate orchestrator + vector DB</strong>
+            <strong>Exercise 14 — Simulate orchestrator + vector DB</strong>
             <ol>
               <li>Create two workers: <code>tests-quality</code> and <code>backend-api</code>.</li>
               <li>Make each produce <code>state.json</code>, <code>report.md</code> and candidate_memory.</li>
@@ -1834,7 +1824,7 @@ Output for the worker:
         </tbody>
       </table>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Screenshot to implementation</div><div class="prompt-body">Use the attached screenshot as a visual reference.
+      <div class="prompt"><div class="prompt-title">PROMPT — Screenshot to implementation</div><div class="prompt-body">Use the attached screenshot as a visual reference.
 
 Before:
 1. Describe what you see in the screenshot.
@@ -1853,7 +1843,7 @@ After:
 - Compare result with screenshot.
 - Report residual differences.</div></div>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Debug from screenshot</div><div class="prompt-body">Analyze the bug screenshot.
+      <div class="prompt"><div class="prompt-title">PROMPT — Debug from screenshot</div><div class="prompt-body">Analyze the bug screenshot.
 
 Rules:
 - First describe the visible bug.
@@ -1873,7 +1863,7 @@ Output:
 
       <div class="validation">
         <strong>Self-validation:</strong> if Codex does not first describe what it sees, it is using the image poorly.
-        If it modifies code without linking screenshot â†’ file â†’ browser verification, the workflow is incomplete.
+        If it modifies code without linking screenshot → file → browser verification, the workflow is incomplete.
       </div>
     </section>
 
@@ -1895,7 +1885,7 @@ Output:
     milestones.md
     regressions.md</pre>
 
-      <pre># Chronicle â€” 2026-04-25
+      <pre># Chronicle — 2026-04-25
 
 ## Completed
 - Split monolithic test executable into focused CTest suites.
@@ -1917,7 +1907,7 @@ Output:
 ## Next Suggested Work
 - Add regression tests for editor API edge cases.</pre>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Update Chronicle</div><div class="prompt-body">Update the project chronicle.
+      <div class="prompt"><div class="prompt-title">PROMPT — Update Chronicle</div><div class="prompt-body">Update the project chronicle.
 
 Read:
 - state.json of involved agents
@@ -1946,7 +1936,7 @@ Rules:
     </section>
 
     <section id="video-2-coverage" class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>â–¶2</strong></div><div class="module-copy"><h2>Video Coverage: Codex as an Operational Super-App</h2><p>What to add from the video "Stop using Claude. Start using Codex?"</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>22</strong></div><div class="module-copy"><h2>Video Coverage: Codex as an Operational Super-App</h2><p>What to add from the video "Stop using Claude. Start using Codex?"</p></div></div>
 
       <p>
         This video positions Codex not just as a coding agent, but as a "super-app" where
@@ -2023,7 +2013,7 @@ Rules:
         </tbody>
       </table>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Generate a non-code artifact in the Desktop App</div><div class="prompt-body">Create a non-code artifact.
+      <div class="prompt"><div class="prompt-title">PROMPT — Generate a non-code artifact in the Desktop App</div><div class="prompt-body">Create a non-code artifact.
 
 Output type:
 [document / deck / spreadsheet / PDF]
@@ -2072,7 +2062,7 @@ Review criteria:
         <li>Did Codex explain how it checked the output?</li>
       </ul>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Review generated artifact</div><div class="prompt-body">Review the generated artifact.
+      <div class="prompt"><div class="prompt-title">PROMPT — Review generated artifact</div><div class="prompt-body">Review the generated artifact.
 
 Check:
 1. Does it follow the requested format?
@@ -2108,7 +2098,7 @@ Output:
         </tbody>
       </table>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Context from IDE sync</div><div class="prompt-body">Before replying, tell me what IDE context you received.
+      <div class="prompt"><div class="prompt-title">PROMPT — Context from IDE sync</div><div class="prompt-body">Before replying, tell me what IDE context you received.
 
 List:
 - open or relevant files
@@ -2152,7 +2142,7 @@ gh auth login</pre>
         the agent environment, or the sandbox.
       </div>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Windows setup diagnosis</div><div class="prompt-body">Diagnose my Windows setup for Codex Desktop App.
+      <div class="prompt"><div class="prompt-title">PROMPT — Windows setup diagnosis</div><div class="prompt-body">Diagnose my Windows setup for Codex Desktop App.
 
 Check:
 1. Agent mode: Windows native or WSL2
@@ -2215,7 +2205,7 @@ claude "Implement the feature described in specs/auth.md. Do not commit."
 codex exec "Review the current git diff. Do not modify files.
 Return CRITICAL, WARNING, TEST GAPS, SECURITY RISKS, MERGE DECISION."</pre>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Apply external review in Codex Desktop</div><div class="prompt-body">I obtained this external review from another agent:
+      <div class="prompt"><div class="prompt-title">PROMPT — Apply external review in Codex Desktop</div><div class="prompt-body">I obtained this external review from another agent:
 
 [paste review]
 
@@ -2227,7 +2217,7 @@ Task:
 5. Run targeted tests.
 6. Produce final report with what was accepted, rejected, and why.</div></div>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Claude as reviewer in Codex terminal</div><div class="prompt-body">In the integrated terminal run:
+      <div class="prompt"><div class="prompt-title">PROMPT — Claude as reviewer in Codex terminal</div><div class="prompt-body">In the integrated terminal run:
 
 claude "Review the current git diff. Do not modify files.
 Focus on:
@@ -2247,7 +2237,7 @@ MERGE DECISION"
 Then return to the Codex thread and use the review as input, not absolute truth.</div></div>
 
       <div class="exercise">
-        <strong>Exercise 22 â€” Three-agent review loop</strong>
+        <strong>Exercise 22 — Three-agent review loop</strong>
         <ol>
           <li>Pick a small but real task.</li>
           <li>Have one agent implement it.</li>
@@ -2293,7 +2283,7 @@ Then return to the Codex thread and use the review as input, not absolute truth.
       </table>
 
       <div class="exercise">
-        <strong>Exercise 23 â€” Designing a tests-quality plugin</strong>
+        <strong>Exercise 23 — Designing a tests-quality plugin</strong>
         <ol>
           <li>Define .codex-plugin/plugin.json.</li>
           <li>Create a skill for test review.</li>
@@ -2388,7 +2378,7 @@ Output:
         <li>Use Codex to implement the feature, citing the research file as the source of truth.</li>
       </ol>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Audit Obsidian vault read-only</div><div class="prompt-body">Work on this Obsidian vault in read-only mode.
+      <div class="prompt"><div class="prompt-title">PROMPT — Audit Obsidian vault read-only</div><div class="prompt-body">Work on this Obsidian vault in read-only mode.
 Analyze structure, links, tags, and note quality.
 Produce a report in .codex/reports/ without modifying the original files.</div></div>
 
@@ -2541,7 +2531,7 @@ Do not write code until the brief is complete.</div></div>
     </section>
 
     <section class="page-break">
-      <div class="module-header"><div class="module-number">Module<strong>26</strong></div><div class="module-copy"><h2>Final Capstone â€” Managing a Full Feature</h2><p>The final project demonstrating real competence in using Codex Desktop.</p></div></div>
+      <div class="module-header"><div class="module-number">Module<strong>26</strong></div><div class="module-copy"><h2>Final Capstone — Managing a Full Feature</h2><p>The final project demonstrating real competence in using Codex Desktop.</p></div></div>
 
       <p>
         The goal is to demonstrate that you can use the Desktop App as a complete agentic workspace, integrating all the techniques learned.
@@ -2556,7 +2546,7 @@ Do not write code until the brief is complete.</div></div>
         <li><strong>Handoff:</strong> Generate the final <code>HANDOFF.md</code> file for the next shift.</li>
       </ul>
 
-      <div class="prompt"><div class="prompt-title">PROMPT â€” Desktop App Capstone</div><div class="prompt-body">CAPSTONE: Implement a full feature in a dedicated worktree.
+      <div class="prompt"><div class="prompt-title">PROMPT — Desktop App Capstone</div><div class="prompt-body">CAPSTONE: Implement a full feature in a dedicated worktree.
 First create a plan, wait for approval, implement in small steps, verify in the browser, and conduct an adversarial review.</div></div>
 
       <h3>Master Capstone: Production-Grade Feature Simulation</h3>
@@ -2734,25 +2724,25 @@ Do not rewrite everything: only correct what may become false or ambiguous.</div
     </section>
 
 <section class="page-break">
-      <h1>Cheat Sheet â€” Complete Quick Reference</h1>
-      <h2>CLI â€” Essential Commands</h2>
+      <h1>Cheat Sheet — Complete Quick Reference</h1>
+      <h2>CLI — Essential Commands</h2>
       <pre>npm install -g @openai/codex             # Installation (requires Node 18+)
 codex                                     # Start interactive session (Suggest mode)
-codex --model codex-mini-latest "Prompt"  # Lightweight model for simple tasks
-codex --model codex-1 "Prompt"            # Advanced model for complex tasks
+codex --model gpt-5.1-codex "Prompt"       # Use a supported Codex model id
+codex --model <codex-mini-or-max> "Prompt" # Pick Mini/Max from current docs
 codex --approval-policy suggest           # Shows changes, you approve everything
-codex --approval-policy auto-edit         # Modifies files, asks only for shell
+codex --approval-policy on-request         # Works in sandbox, asks beyond boundary
 codex --full-auto                         # Fully automatic (CI/sandbox only)
 codex exec "Task"                         # Non-interactive execution
 codex exec --json "Task" | jq             # Parsable JSON output
 codex exec --max-budget-usd 0.50 "Task"   # With security budget cap
 codex --worktree feature-name "Task"      # Agent on isolated Git worktree
 codex mcp list                            # List connected MCP servers
-codex status                              # Active model, used tokens, cost</pre>
+codex --help                               # Inspect supported flags for this version</pre>
 
       <h2>Session Slash Commands</h2>
-      <pre>/model codex-mini-latest     # Switch to budget model
-/model codex-1               # Switch to advanced model
+      <pre>/model gpt-5.1-codex       # Use supported Codex model id
+/model <codex-mini-or-max> # Pick current Mini/Max alias when available
 /compact focus on auth        # Compact preserving context on the topic
 /clear                        # Reset context (new unrelated task)
 /rewind                       # Back to previous checkpoint (undo actions)
@@ -2762,12 +2752,12 @@ codex status                              # Active model, used tokens, cost</pre
 @src/auth/login.ts            # Force file inclusion in context (token-efficient)
 !npm test                     # Run shell and inject output into context</pre>
 
-      <h2>Approval Modes â€” Decision Table</h2>
-      <pre>suggest     â†’ sandbox: read-only   â†’ approve everything: ideal for exploration
-auto-edit   â†’ sandbox: workspace-write â†’ modifies files, asks for shell: daily development
-full-auto   â†’ sandbox: workspace-write â†’ fully automatic: only CI/CD and isolated containers</pre>
+      <h2>Approval Modes — Decision Table</h2>
+      <pre>read-only + on-request       → exploration/review with strict approvals
+workspace-write + on-request → daily development with a clear boundary
+workspace-write + --full-auto → local automation only in isolated repos with git checkpoints</pre>
 
-      <h2>codex-action â€” GitHub Actions</h2>
+      <h2>codex-action — GitHub Actions</h2>
       <pre># Minimal setup in .github/workflows/codex.yml
 - uses: openai/codex-action@v1
   with:
@@ -2775,10 +2765,10 @@ full-auto   â†’ sandbox: workspace-write â†’ fully automatic: only CI/
     prompt: "Your task here"
     sandbox: read-only  # or: workspace-write</pre>
 
-      <h2>Models â€” When to Use Them</h2>
-      <pre>codex-mini-latest  â†’ bug fix, test, boilerplate (fast, cheap)
-codex-1            â†’ refactoring, multi-file feature (high quality)
-gpt-5.5            â†’ architectural planning, Computer Use</pre>
+      <h2>Models — When to Use Them</h2>
+      <pre>GPT-5.1-Codex Mini  → bug fix, tests, boilerplate when available
+GPT-5.1-Codex Max   → refactoring, multi-file features, architecture
+Always verify exact model ids in current Codex docs</pre>
 
       <h2>Environment Variables</h2>
       <pre>OPENAI_API_KEY=sk-...         # API authentication (mandatory for headless)
@@ -2791,7 +2781,7 @@ AGENTS.md                # Persistent instructions (max 200 lines, golden rule)
 HANDOFF.md               # Context across sessions (generate before closing)
 ~/.codex/log/            # Audit trail: every action, tokens, cost</pre>
 
-      <div class="footer">OpenAI Codex â€” Definitive Course â€” April 2026 Â· Sources: github.com/openai/codex Â· github.com/openai/codex-action Â· openai.com/docs</div>
+      <div class="footer">OpenAI Codex — Definitive Course — April 2026 · Sources: github.com/openai/codex · github.com/openai/codex-action · openai.com/docs</div>
     </section>
   </main>
 </body>
