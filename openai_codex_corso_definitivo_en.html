@@ -54,6 +54,14 @@
       margin-bottom:24px;
     }
 
+    .hero-logo{
+      width:min(280px, 70%);
+      height:auto;
+      display:block;
+      margin:0 auto 28px;
+      object-fit:contain;
+    }
+
     h1{
       margin:48px 0 24px;
       padding:18px 22px;
@@ -271,6 +279,58 @@
       padding:16px 18px;
     }
 
+    .prompt, .exercise, .warning, .note{
+      border:1px solid var(--border);
+      border-radius:14px;
+      overflow:hidden;
+      margin:22px 0 30px;
+    }
+
+    .prompt-title{
+      background:var(--primary);
+      color:var(--white);
+      padding:12px 18px;
+      font-weight:700;
+    }
+
+    .prompt-body{
+      background:var(--light);
+      padding:18px 22px;
+      white-space:pre-wrap;
+      font-family:"Courier New", Courier, monospace;
+      font-size:15px;
+    }
+
+    .exercise, .note, .warning{
+      padding:18px 22px;
+      background:#fff;
+    }
+
+    .exercise{border-left:6px solid var(--primary)}
+    .note{border-left:6px solid var(--accent); background:var(--info)}
+    .warning{border-left:6px solid #F59E0B; background:#FFFBEB}
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+      margin:24px 0 30px;
+    }
+
+    .step{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--light);
+      padding:16px;
+    }
+
+    .step span{
+      display:block;
+      color:var(--gray);
+      font-size:14px;
+      margin-top:6px;
+    }
+
     ul{
       padding-left:0;
       list-style:none;
@@ -319,6 +379,7 @@
       .page{padding:28px}
       .title{font-size:40px}
       .stats{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
       .module-header{grid-template-columns:1fr}
       .module-number{padding:18px}
     }
@@ -333,9 +394,9 @@
       <div class="divider"></div>
       <p class="tagline">CLI · codex-action · Desktop App · GitHub Copilot · Skills · MCP · Subagents · Worktrees · Computer Use · Enterprise</p>
       <div class="stats">
-        <div class="stat"><strong>27</strong><span>Modules</span></div>
-        <div class="stat"><strong>25+ Prompts</strong><span>Ready to use</span></div>
-        <div class="stat"><strong>3 CI/CD YAMLs</strong><span>Updated Apr 2026</span></div>
+        <div class="stat"><strong>27+</strong><span>Modules and master tests</span></div>
+        <div class="stat"><strong>35+ Prompts</strong><span>Ready to use</span></div>
+        <div class="stat"><strong>27 Tests</strong><span>Updated Apr 2026</span></div>
       </div>
     </section>
 
@@ -2225,6 +2286,63 @@ Then return to the Codex thread and use the review as input, not absolute truth.
           <li>Set initial read-only guardrails.</li>
         </ol>
       </div>
+
+      <h3>Real Architecture of an Enterprise Plugin</h3>
+      <p>
+        A plugin should not be treated as a folder of prompts. It is an internal product: it has a mission,
+        explicit boundaries, versioned instructions, sample inputs, failure cases, security policy, and
+        a repeatable validation method. If a skill only says "review this", results will vary. If it defines
+        scope, priorities, severity, and output format, Codex becomes much more stable and easier to integrate
+        into team workflows.
+      </p>
+
+      <table>
+        <thead><tr><th>Element</th><th>Design Question</th><th>Common Mistake</th></tr></thead>
+        <tbody>
+          <tr><td>Manifest</td><td>How is the plugin discovered, described, and authorized?</td><td>Generic name, vague description, no ownership.</td></tr>
+          <tr><td>Skill</td><td>Which procedure should Codex follow without reinventing it every time?</td><td>Overlong skill, not testable, full of implicit exceptions.</td></tr>
+          <tr><td>Command</td><td>Which task should be runnable as a repeatable routine?</td><td>A command that mixes analysis, file edits, tests, and deploy.</td></tr>
+          <tr><td>MCP</td><td>Which external data does the workflow truly need?</td><td>Connecting everything, increasing risk surface and noise.</td></tr>
+          <tr><td>Assets</td><td>Which templates, schemas, or examples reduce ambiguity?</td><td>No canonical example of a successful output.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Testing a Plugin Like Software</h3>
+      <p>
+        The right way to validate a plugin is to run it against small but realistic repositories:
+        a clean repo, a repo with broken tests, a repo with a known vulnerability, a legacy repo without tests,
+        and a repo with incomplete documentation. For every scenario, define the acceptable output in advance.
+        Without verifiable expectations, you are not testing the plugin; you are only reading a plausible answer.
+      </p>
+
+      <div class="prompt"><div class="prompt-title">PROMPT - Codex plugin review</div><div class="prompt-body">Review this Codex plugin as if it will be used by an enterprise team.
+
+Check:
+1. Manifest clarity
+2. Skill scope
+3. Instruction safety
+4. Risk of unrequested edits
+5. Compatibility with multi-agent workflows
+6. Output format quality
+7. Examples and edge cases
+
+Output:
+- blocking issues
+- recommended improvements
+- minimum tests before release
+- decision: approve, fix, or rewrite</div></div>
+
+      <div class="exercise">
+        <strong>Practice Test 23 - Complete plugin in 90 minutes</strong>
+        <ol>
+          <li>Create a plugin named <code>release-readiness</code>.</li>
+          <li>Define a skill that checks tests, changelog, migrations, security notes, and rollback.</li>
+          <li>Add a read-only command that generates a readiness report.</li>
+          <li>Run it on a branch with at least three modified files.</li>
+          <li>Have Codex review the plugin adversarially.</li>
+          <li>Score the result from 1 to 5 on usefulness, precision, and safety.</li>
+        </ol>
+      </div>
     </section>
 
     <section id="knowledge-workspace" class="page-break">
@@ -2258,6 +2376,60 @@ Then return to the Codex thread and use the review as input, not absolute truth.
       <div class="prompt"><div class="prompt-title">PROMPT — Audit Obsidian vault read-only</div><div class="prompt-body">Work on this Obsidian vault in read-only mode.
 Analyze structure, links, tags, and note quality.
 Produce a report in .codex/reports/ without modifying the original files.</div></div>
+
+      <h3>Operational Knowledge Workspace Schema</h3>
+      <p>
+        The knowledge workspace should separate three kinds of knowledge: stable knowledge, recent decisions,
+        and unverified hypotheses. Codex works better when those layers are not mixed. An "current architecture"
+        note should not contain future ideas; a "decision" note should include date, context, rejected alternatives,
+        and consequences; a "research" note should distinguish primary source, summary, and interpretation.
+      </p>
+
+      <table>
+        <thead><tr><th>Folder</th><th>Content</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td><code>.codex/notes/</code></td><td>Operational notes, conventions, local decisions.</td><td>Short, current, and readable by an agent.</td></tr>
+          <tr><td><code>.codex/research/</code></td><td>Summaries from docs, papers, issues, changelogs.</td><td>Every summary must include source and verification date.</td></tr>
+          <tr><td><code>.codex/adr/</code></td><td>Architecture Decision Records.</td><td>One decision per file, with tradeoffs and rollback path.</td></tr>
+          <tr><td><code>.codex/reports/</code></td><td>Agent-generated audits.</td><td>Not a source of truth until approved.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Knowledge Ingestion Protocol</h3>
+      <ol>
+        <li>Collect sources and notes without immediately moving them into persistent instructions.</li>
+        <li>Ask Codex for a summary with internal file citations and open questions.</li>
+        <li>Promote only verified facts into <code>AGENTS.md</code>, ADRs, or operational notes.</li>
+        <li>Archive outdated hypotheses and decisions instead of deleting them: they explain why.</li>
+        <li>Before an important task, ask Codex to build a maximum 800-word context pack.</li>
+      </ol>
+
+      <div class="prompt"><div class="prompt-title">PROMPT - Build a Codex context pack</div><div class="prompt-body">Read .codex/notes, .codex/research, and .codex/adr.
+Build a context pack for the next task.
+
+Constraints:
+- maximum 800 words
+- only facts useful to the task
+- separate verified facts, decisions, risks, open questions
+- cite internal source files
+- do not modify original notes
+
+Final output:
+1. Operational brief
+2. Files to read first
+3. Risks not to forget
+4. Questions to ask the human before implementation</div></div>
+
+      <div class="exercise">
+        <strong>Practice Test 24 - From empty vault to operational vault</strong>
+        <ol>
+          <li>Create <code>.codex/adr/</code> and write three ADRs about real project choices.</li>
+          <li>Import one external documentation page into <code>.codex/research/</code>.</li>
+          <li>Ask Codex to produce a context pack for a feature.</li>
+          <li>Only implement after removing unnecessary context.</li>
+          <li>Measure whether the task improves: fewer questions, fewer mistakes, smaller diff.</li>
+        </ol>
+      </div>
     </section>
 
     <section id="figma-n8n" class="page-break">
@@ -2288,6 +2460,69 @@ Produce a report in .codex/reports/ without modifying the original files.</div><
         <div class="step"><div><strong>n8n Normalizes</strong><span>Collects Figma links and metadata, creates GitHub/Linear tickets.</span></div></div>
         <div class="step"><div><strong>Codex Executes</strong><span>Codex reads tickets, Figma, and repo, then implements in worktree.</span></div></div>
       </div>
+
+      <h3>Serious Design-to-Code: What to Give Codex</h3>
+      <p>
+        A Figma link alone is not enough. To get solid code, provide the exact frame, component state,
+        breakpoints, tokens, interaction behavior, empty states, errors, loading, accessibility, real content,
+        and technical constraints from the repository. Codex should not merely "copy the design"; it should
+        translate it into maintainable, testable components consistent with the existing design system.
+      </p>
+
+      <table>
+        <thead><tr><th>Input</th><th>Why It Matters</th><th>Expected Output</th></tr></thead>
+        <tbody>
+          <tr><td>Figma frame</td><td>Defines layout and visual hierarchy.</td><td>Coherent components, not a fragile static page.</td></tr>
+          <tr><td>Tokens</td><td>Prevents invented colors and spacing.</td><td>Use existing variables or propose missing tokens.</td></tr>
+          <tr><td>UI states</td><td>Prevents implementation that only looks good in the ideal state.</td><td>Loading, empty, error, disabled, hover, focus.</td></tr>
+          <tr><td>Real data</td><td>Tests text length and edge cases.</td><td>Robust layout for short and long content.</td></tr>
+          <tr><td>Repo rules</td><td>Respects architecture, tests, and libraries.</td><td>Small diff integrated with local patterns.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>n8n as a Governance Layer</h3>
+      <p>
+        n8n should not be used only to "launch Codex". Its value is deciding when a workflow is safe to start,
+        which data to pass, who must approve, and what to do when the task fails. In a team, n8n can create
+        tickets, enrich them with context, start Codex in read-only planning mode, notify reviewers, and stop
+        automation when a requirement is missing.
+      </p>
+
+      <pre>GitHub/Figma webhook
+  -> validate payload
+  -> enrich with repo rules and design metadata
+  -> create issue or update ticket
+  -> run Codex read-only planning
+  -> wait for human approval
+  -> run Codex implementation in worktree
+  -> run tests and visual checks
+  -> notify reviewers with report and diff link</pre>
+
+      <div class="prompt"><div class="prompt-title">PROMPT - Figma brief ready for Codex</div><div class="prompt-body">Prepare an implementation brief from this Figma frame:
+
+[link or frame description]
+
+Include:
+1. components to create or modify
+2. color/spacing/typography tokens to use
+3. mandatory UI states
+4. responsive requirements
+5. accessibility requirements
+6. tests and screenshots to produce
+7. risks of divergence from the design system
+
+Do not write code until the brief is complete.</div></div>
+
+      <div class="exercise">
+        <strong>Practice Test 25 - Controlled design-to-code pipeline</strong>
+        <ol>
+          <li>Choose a real Figma component or create a descriptive mockup.</li>
+          <li>Generate a ticket with brief, states, sample data, and acceptance criteria.</li>
+          <li>Have Codex produce a plan without modifying files.</li>
+          <li>Approve only after checking accessibility, responsiveness, and tests.</li>
+          <li>Implement, then request a visual review with desktop and mobile screenshots.</li>
+        </ol>
+      </div>
     </section>
 
     <section class="page-break">
@@ -2308,6 +2543,68 @@ Produce a report in .codex/reports/ without modifying the original files.</div><
 
       <div class="prompt"><div class="prompt-title">PROMPT — Desktop App Capstone</div><div class="prompt-body">CAPSTONE: Implement a full feature in a dedicated worktree.
 First create a plan, wait for approval, implement in small steps, verify in the browser, and conduct an adversarial review.</div></div>
+
+      <h3>Master Capstone: Production-Grade Feature Simulation</h3>
+      <p>
+        The capstone must demonstrate real command of the workflow, not merely the ability to make an agent write code.
+        The feature should include planning, selected context, incremental implementation, tests, review, documentation,
+        risk management, and handoff. A good final project produces a readable diff, a verifiable report, and a clear
+        decision: ready for PR, needs fixes, or should be rejected.
+      </p>
+
+      <table>
+        <thead><tr><th>Phase</th><th>Deliverable</th><th>Success Criterion</th></tr></thead>
+        <tbody>
+          <tr><td>Discovery</td><td>Brief, scope, non-goals, risks.</td><td>The task is clear and does not require constant repo rereading.</td></tr>
+          <tr><td>Architecture</td><td>Technical plan and file ownership.</td><td>Changes are bounded and consistent with existing patterns.</td></tr>
+          <tr><td>Implementation</td><td>Incremental diff in a worktree.</td><td>Every step can be explained and tested independently.</td></tr>
+          <tr><td>Verification</td><td>Automated tests, manual tests, screenshots if UI.</td><td>The report maps every requirement to a verification.</td></tr>
+          <tr><td>Review</td><td>Adversarial review and targeted fixes.</td><td>Only confirmed issues are fixed.</td></tr>
+          <tr><td>Handoff</td><td>HANDOFF.md, changelog, next steps.</td><td>Another developer can continue without reopening the whole thread.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Evaluation Rubric</h3>
+      <table>
+        <thead><tr><th>Area</th><th>1 - Weak</th><th>3 - Good</th><th>5 - Master</th></tr></thead>
+        <tbody>
+          <tr><td>Prompt</td><td>Vague, no constraints.</td><td>Clear but incomplete.</td><td>Scope, risks, output, acceptance criteria.</td></tr>
+          <tr><td>Context</td><td>Too much information or wrong files.</td><td>Useful but not optimized.</td><td>Minimal, verified, cited context pack.</td></tr>
+          <tr><td>Diff</td><td>Large, scattered, hard to review.</td><td>Coherent with some noise.</td><td>Small, intentional, documented.</td></tr>
+          <tr><td>Tests</td><td>Missing or manual only.</td><td>Happy path covered.</td><td>Edge cases, regressions, and failure modes covered.</td></tr>
+          <tr><td>Review</td><td>No independent review.</td><td>General review.</td><td>Adversarial review with justified decisions.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="prompt"><div class="prompt-title">PROMPT - Codex Master final exam</div><div class="prompt-body">Act as the technical examiner for my Codex capstone.
+
+Evaluate:
+1. brief quality
+2. context usage
+3. solution architecture
+4. diff size and readability
+5. tests and manual checks
+6. security/sandbox handling
+7. final report quality
+
+Give a 1-5 score for each area.
+Indicate:
+- what is production-ready
+- what blocks the PR
+- what is only optional improvement
+- which lesson I should repeat</div></div>
+
+      <div class="exercise">
+        <strong>Practice Test 26 - Full feature with final review</strong>
+        <ol>
+          <li>Choose a small but end-to-end feature: UI + state + persistence or API + tests + docs.</li>
+          <li>Write an issue with measurable acceptance criteria.</li>
+          <li>Have Codex create a plan and stop before editing.</li>
+          <li>Implement in no more than five steps, verifying each step.</li>
+          <li>Run review with a second agent or <code>/review</code>.</li>
+          <li>Produce <code>HANDOFF.md</code> and a final report to attach to the PR.</li>
+        </ol>
+      </div>
     </section>
 
     <section class="page-break">
@@ -2323,9 +2620,104 @@ First create a plan, wait for approval, implement in small steps, verify in the 
           <tr><td><strong>Security</strong></td><td>Seatbelt, Landlock, Restricted Tokens</td><td>Accuracy audit, 3-agent review</td></tr>
         </tbody>
       </table>
+
+      <h3>Truth Method: How Not to Teach Stale Information</h3>
+      <p>
+        Codex changes quickly. A master course must teach the verification method too: before publishing a module,
+        separate official documentation, behavior observed in your environment, and teaching technique. Versions,
+        model names, available plans, limits, and integrations can change; durable skills are workflow, review,
+        security, context, tests, and diff control.
+      </p>
+
+      <table>
+        <thead><tr><th>Claim Type</th><th>How to Verify</th><th>How to Write It in the Course</th></tr></thead>
+        <tbody>
+          <tr><td>Product availability</td><td>OpenAI Help Center and Codex pages for plans, app, IDE, and cloud.</td><td>"As of the verification date..." instead of "always".</td></tr>
+          <tr><td>CLI commands</td><td>Official <code>github.com/openai/codex</code> repo and <code>codex --help</code>.</td><td>Show the command and explain when to recheck it.</td></tr>
+          <tr><td>Automations</td><td>Official docs, action repo, real GitHub workflow.</td><td>Include minimal YAML and safety criteria.</td></tr>
+          <tr><td>Advanced patterns</td><td>Experience, internal tests, team retrospectives.</td><td>Label as "recommended pattern", not official feature.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Primary Sources to Check Before Each Release</h3>
+      <ul>
+        <li><strong>OpenAI Help Center - Codex:</strong> <code>https://help.openai.com/en/articles/11369540-codex-in-chatgpt</code></li>
+        <li><strong>Codex CLI Help Center:</strong> <code>https://help.openai.com/en/articles/11096431-openai-codex-ci-getting-started</code></li>
+        <li><strong>OpenAI Developers - Codex:</strong> <code>https://developers.openai.com/codex/</code></li>
+        <li><strong>Codex use cases:</strong> <code>https://developers.openai.com/codex/explore/</code></li>
+        <li><strong>Official repository:</strong> <code>https://github.com/openai/codex</code></li>
+      </ul>
+
+      <div class="prompt"><div class="prompt-title">PROMPT - Final course accuracy audit</div><div class="prompt-body">Act as the technical fact-checker for this Codex course.
+
+For each module:
+1. identify official claims
+2. identify unofficial patterns
+3. flag model names, plans, commands, or integrations that need verification
+4. propose more robust wording when something may change
+5. create a table: source, claim, status, risk
+
+Do not rewrite everything: only correct what may become false or ambiguous.</div></div>
+
+      <div class="exercise">
+        <strong>Practice Test 27 - Pre-publication audit</strong>
+        <ol>
+          <li>Open the official primary sources.</li>
+          <li>Check every command in the cheat sheet.</li>
+          <li>Mark every course pattern as official, observed, or recommended.</li>
+          <li>Update the verification date.</li>
+          <li>Run one final review as student, instructor, and security reviewer.</li>
+        </ol>
+      </div>
     </section>
 
-    
+    <section id="master-exercise-matrix" class="page-break">
+      <h1>Master Exercise Matrix - 27 Tests to Become Operational</h1>
+      <p>
+        This matrix turns the course into a complete practical path. Each module has a measurable test:
+        reading is not enough, you must produce a verifiable artifact. By the end, you should have a demo repository,
+        a prompt library, a context system, a CI/CD workflow, and a capstone ready for review.
+      </p>
+
+      <table>
+        <thead><tr><th>Module</th><th>Master Test</th><th>Artifact to Deliver</th></tr></thead>
+        <tbody>
+          <tr><td>01</td><td>Install and configure Codex CLI, then run one read-only task and one controlled edit task.</td><td>Command log, minimal diff, approval mode notes.</td></tr>
+          <tr><td>02</td><td>Write an <code>AGENTS.md</code> of no more than 200 lines for a real project.</td><td><code>AGENTS.md</code> with test commands, style, gotchas, and safety.</td></tr>
+          <tr><td>03</td><td>Create a reusable skill for test review or release readiness.</td><td><code>SKILL.md</code> with scope, procedure, and output.</td></tr>
+          <tr><td>04</td><td>Design an MCP map: which data is needed, unnecessary, or risky.</td><td>Tool, permission, risk, and manual fallback table.</td></tr>
+          <tr><td>05</td><td>Open two worktrees for independent tasks and compare the diffs.</td><td>Report on isolation, avoided conflicts, and merge strategy.</td></tr>
+          <tr><td>06</td><td>Design a Codex GitHub Action with safe triggers and risk budget.</td><td>Minimal YAML plus approval policy.</td></tr>
+          <tr><td>07</td><td>Split one task across three subagents: explorer, implementer, reviewer.</td><td>Role plan, file ownership, and final report.</td></tr>
+          <tr><td>08</td><td>Simulate asynchronous review via GitHub issue or PR comment.</td><td>Structured comment with context, request, and criteria.</td></tr>
+          <tr><td>09</td><td>Use the IDE for a small refactor with inline review.</td><td>Diff, screenshot, or notes from the editor interaction.</td></tr>
+          <tr><td>10</td><td>Compare read-only, workspace-write, and full-auto on a non-destructive task.</td><td>Risk/benefit table and personal rules.</td></tr>
+          <tr><td>11</td><td>Design enterprise policy for permissions, audit, and secrets.</td><td>One-page governance document.</td></tr>
+          <tr><td>12</td><td>Rewrite three weak prompts using role, context, constraints, and output.</td><td>Before/after prompt library with evaluation.</td></tr>
+          <tr><td>13</td><td>Create three role cards for specialized agents.</td><td>Role cards with mission, boundaries, escalation, and report.</td></tr>
+          <tr><td>14</td><td>Design long memory with verified facts and minimal retrieval.</td><td><code>memory.md</code>, JSON schema, and promotion policy.</td></tr>
+          <tr><td>15</td><td>Use a screenshot or mockup to generate a UI plan without immediate code.</td><td>Visual brief, risks, component list.</td></tr>
+          <tr><td>16</td><td>Create a project Chronicle after three tasks.</td><td>Operational diary with decisions and next steps.</td></tr>
+          <tr><td>17</td><td>Have two agents review the same diff and compare the results.</td><td>Agreement/disagreement matrix and final decision.</td></tr>
+          <tr><td>18</td><td>Generate a non-code artifact: doc, deck, PDF, or spreadsheet.</td><td>Final file plus visual verification checklist.</td></tr>
+          <tr><td>19</td><td>Use task sidebar/artifact viewer to track a complex output.</td><td>Report on what reduced confusion or noise.</td></tr>
+          <tr><td>20</td><td>Build a power-user workflow with voice, pop-out, and IDE sync.</td><td>Personal 10-step routine.</td></tr>
+          <tr><td>21</td><td>Diagnose Windows/WSL/GitHub CLI setup.</td><td>Environment checklist and priority fixes.</td></tr>
+          <tr><td>22</td><td>Run an implementer + reviewer + human approver loop.</td><td>Diff, two reviews, justified human decision.</td></tr>
+          <tr><td>23</td><td>Design the <code>release-readiness</code> plugin.</td><td>Manifest, skill, command, and test plan.</td></tr>
+          <tr><td>24</td><td>Create a context pack from Obsidian/NotebookLM vault.</td><td>Maximum 800-word context pack with internal sources.</td></tr>
+          <tr><td>25</td><td>Transform a Figma frame into an implementable ticket.</td><td>Design-to-code brief with states and visual tests.</td></tr>
+          <tr><td>26</td><td>Complete an end-to-end feature in a worktree.</td><td>PR-ready diff, tests, HANDOFF, and capstone report.</td></tr>
+          <tr><td>27</td><td>Run an accuracy audit of the full course.</td><td>Source/claim/status/risk table.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Final rule:</strong> if an exercise does not produce an artifact, it is not master-level training yet.
+        Every test must leave something reviewable: file, diff, report, screenshot, YAML, prompt, or decision log.
+      </div>
+    </section>
+
 <section class="page-break">
       <h1>Cheat Sheet — Complete Quick Reference</h1>
       <h2>CLI — Essential Commands</h2>
