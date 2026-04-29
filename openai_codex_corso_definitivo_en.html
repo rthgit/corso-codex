@@ -418,17 +418,17 @@
     <section class="page-break">
       <h1>Introduction: What is OpenAI Codex in 2026</h1>
       <p>OpenAI Codex is the agentic coding platform from OpenAI. It is not just simple code completion: it is a multi-surface system that can read, write, execute, and debug code autonomously, in parallel, on the cloud, and locally. The official repository is <strong>github.com/openai/codex</strong>.</p>
-      <p>Launched in preview in April 2025 and now available on ChatGPT plans that include Codex (Plus, Pro, Business, Enterprise/Edu and, during promotional periods, additional plans), Codex is powered by the <strong>GPT-5.1-Codex</strong> model family, optimized for agentic software engineering workflows.</p>
-      <div class="info-box"><div class="info-icon">&#8505;</div><div class="info-body"><strong>Verify the model before publishing:</strong> older dedicated code models such as <code>code-davinci-002</code> are historical/deprecated. Codex CLI and IDE support the <code>GPT-5.1-Codex</code> family; the exact choice between Max, Mini, or other aliases depends on version, plan, and configuration. Always check the model picker, <code>config.toml</code>, or current docs.</div></div>
+      <p>As of April 29, 2026, Codex must be taught with the updated model hierarchy: <strong>GPT-5.5</strong> is the frontier model available in Codex for eligible plans, <strong>GPT-5.3-Codex</strong> is the specialized agentic coding/API model, while <strong>GPT-5.4</strong> and <strong>GPT-5.4-mini</strong> remain documented alternatives for cost, latency, and less extreme workloads.</p>
+      <div class="info-box"><div class="info-icon">&#8505;</div><div class="info-body"><strong>April 29, 2026 update:</strong> OpenAI states that GPT-5.5 is available in ChatGPT and Codex and is the strongest current model for agentic coding; GPT-5.3-Codex remains the specialized Codex entry in the API docs; GPT-5.4-mini/nano are documented for latency and cost. The course should no longer present earlier Codex model families as the current state.</div></div>
 
       <h2>Available Surfaces</h2>
       <table>
         <thead><tr><th>Surface</th><th>Main Use</th><th>Recommended Model</th></tr></thead>
         <tbody>
-          <tr><td><strong>Codex Desktop App</strong> (macOS/Windows)</td><td>Parallel agents, worktrees, skills, automations, Git, and local workflows without switching terminal or IDE</td><td><code>GPT-5.1-Codex Max</code> for quality; <code>Mini</code> for lighter tasks</td></tr>
-          <tr><td><strong>Codex CLI</strong> (terminal)</td><td>Local workflows, scripting, command execution, tests, refactors, and non-interactive <code>exec</code></td><td><code>GPT-5.1-Codex</code> family; default depends on version/configuration</td></tr>
-          <tr><td><strong>Codex IDE Extension</strong> (VS Code, Cursor, Windsurf, JetBrains where supported)</td><td>Editor pairing, agent mode, inline review, and direct project edits</td><td><code>GPT-5.1-Codex</code> family; selectable in model picker/config</td></tr>
-          <tr><td><strong>Codex Web</strong> (chatgpt.com/codex)</td><td>Cloud sandbox tasks, GitHub PR review, asynchronous delegation from the browser</td><td><code>GPT-5.1-Codex</code> according to plan availability</td></tr>
+          <tr><td><strong>Codex Desktop App</strong> (macOS/Windows)</td><td>Parallel agents, worktrees, skills, automations, Git, and local workflows without switching terminal or IDE</td><td><code>GPT-5.5</code> for master and long-running tasks; <code>GPT-5.4-mini</code> for lighter tasks when available</td></tr>
+          <tr><td><strong>Codex CLI</strong> (terminal)</td><td>Local workflows, scripting, command execution, tests, refactors, and non-interactive <code>exec</code></td><td><code>GPT-5.5</code> or <code>GPT-5.3-Codex</code> depending on plan, version, and configuration</td></tr>
+          <tr><td><strong>Codex IDE Extension</strong> (VS Code, Cursor, Windsurf, JetBrains where supported)</td><td>Editor pairing, agent mode, inline review, and direct project edits</td><td><code>GPT-5.5</code> for complex work; <code>GPT-5.4-mini</code> for quick verifiable edits</td></tr>
+          <tr><td><strong>Codex Web</strong> (chatgpt.com/codex)</td><td>Cloud sandbox tasks, GitHub PR review, asynchronous delegation from the browser</td><td><code>GPT-5.5</code> on eligible plans; rollout and limits depend on the plan</td></tr>
           <tr><td><strong>GitHub App / PR Review</strong></td><td>Repository connection, automatic or requested reviews, comments, and GitHub workflows connected to Codex</td><td>Managed by Codex; not the same thing as GitHub Copilot</td></tr>
           <tr><td><strong>Codex SDK/API</strong></td><td>Programmatic control, internal integrations, custom orchestration, and CI/CD automation</td><td>SDK/API configured model, to verify in current docs</td></tr>
         </tbody>
@@ -438,10 +438,10 @@
       <table>
         <thead><tr><th>Task</th><th>Recommended Model</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td>Bug fix, unit tests, boilerplate</td><td><code>GPT-5.1-Codex Mini</code> when available</td><td>Lightweight choice for scoped, repetitive tasks</td></tr>
-          <tr><td>Refactoring, complex features</td><td><code>GPT-5.1-Codex Max</code> or the highest-quality Codex model available</td><td>Better for large contexts, multi-file dependencies, and reversible decisions</td></tr>
-          <tr><td>Architectural planning</td><td><code>GPT-5.1-Codex Max</code> with high reasoning</td><td>Deep reasoning before high-impact changes</td></tr>
-          <tr><td>Mechanical subagents (linting, fmt)</td><td><code>GPT-5.1-Codex Mini</code> when available</td><td>Reduces cost and latency on automatically verifiable work</td></tr>
+          <tr><td>Bug fix, unit tests, boilerplate</td><td><code>GPT-5.4-mini</code> or the current mini model</td><td>Lightweight choice for scoped, repetitive tasks</td></tr>
+          <tr><td>Refactoring, complex features</td><td><code>GPT-5.5</code></td><td>Current frontier model for complex coding and agentic work</td></tr>
+          <tr><td>Architectural planning</td><td><code>GPT-5.5</code> with high/xhigh reasoning</td><td>Deep reasoning before high-impact changes</td></tr>
+          <tr><td>Mechanical subagents (linting, fmt)</td><td><code>GPT-5.4-mini</code> or <code>GPT-5.4-nano</code></td><td>Reduces cost and latency on automatically verifiable work</td></tr>
           <tr><td>Computer Use (GUI automation)</td><td>Codex model compatible with Computer Use in the selected surface</td><td>Requires GUI tools, screen observation, and dedicated safety policy</td></tr>
         </tbody>
       </table>
@@ -531,7 +531,7 @@ Include an action plan for each critical issue.</div></div>
       <pre># ~/.codex/config.toml
 
 [core]
-model = "gpt-5.1-codex"
+model = "gpt-5.5"
 # Strict policy: Codex asks permission for everything except allow-listed commands
 approval_policy = "on-request"
 
@@ -777,7 +777,7 @@ Use MCP Jira + MCP GitHub:
       <pre># ~/.codex/config.toml
 [agents]
 max_concurrent = 4              # Maximum 4 parallel agents
-model = "gpt-5.1-codex"     # Verify current Mini/Max aliases in your plan
+model = "gpt-5.5"     # Use GPT-5.4-mini for lightweight subagents when available
 worktree_base = "/tmp/codex-worktrees"  # Base directory for worktrees</pre>
 
       <h3>Pattern: Test Time Compute (Adversarial Reviewer)</h3>
@@ -2728,8 +2728,8 @@ Do not rewrite everything: only correct what may become false or ambiguous.</div
       <h2>CLI — Essential Commands</h2>
       <pre>npm install -g @openai/codex             # Installation (requires Node 18+)
 codex                                     # Start interactive session (Suggest mode)
-codex --model gpt-5.1-codex "Prompt"       # Use a supported Codex model id
-codex --model <codex-mini-or-max> "Prompt" # Pick Mini/Max from current docs
+codex --model gpt-5.4-mini "Prompt"    # Cost/latency model
+codex --model gpt-5.5 "Prompt"         # Frontier model for complex tasks
 codex --approval-policy suggest           # Shows changes, you approve everything
 codex --approval-policy on-request         # Works in sandbox, asks beyond boundary
 codex --full-auto                         # Fully automatic (CI/sandbox only)
@@ -2741,8 +2741,8 @@ codex mcp list                            # List connected MCP servers
 codex --help                               # Inspect supported flags for this version</pre>
 
       <h2>Session Slash Commands</h2>
-      <pre>/model gpt-5.1-codex       # Use supported Codex model id
-/model <codex-mini-or-max> # Pick current Mini/Max alias when available
+      <pre>/model gpt-5.4-mini     # Switch to cost/latency model
+/model gpt-5.5          # Switch to frontier model
 /compact focus on auth        # Compact preserving context on the topic
 /clear                        # Reset context (new unrelated task)
 /rewind                       # Back to previous checkpoint (undo actions)
@@ -2766,9 +2766,9 @@ workspace-write + --full-auto → local automation only in isolated repos with g
     sandbox: read-only  # or: workspace-write</pre>
 
       <h2>Models — When to Use Them</h2>
-      <pre>GPT-5.1-Codex Mini  → bug fix, tests, boilerplate when available
-GPT-5.1-Codex Max   → refactoring, multi-file features, architecture
-Always verify exact model ids in current Codex docs</pre>
+      <pre>GPT-5.4-mini &rarr; bug fix, tests, boilerplate when available
+GPT-5.3-Codex &rarr; specialized agentic coding/API work
+GPT-5.5      &rarr; architecture, Computer Use, planning, and master tasks</pre>
 
       <h2>Environment Variables</h2>
       <pre>OPENAI_API_KEY=sk-...         # API authentication (mandatory for headless)
