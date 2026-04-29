@@ -1,100 +1,33 @@
 <div align="center">
   <br>
   <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI Logo" width="80"/>
-  <h1>⬡ OpenAI Codex — La Guida Definitiva</h1>
+  <h1>⬡ OpenAI Codex — The Definitive Guide</h1>
   <p><strong>Masterclass Avanzata sull'Ecosistema Agentico di Codex (Edizione Aprile 2026)</strong></p>
-  <p><em>Da zero all'ingegneria dei workflow automatizzati: CLI, Desktop App, Worktrees, Handoffs e Governance Enterprise.</em></p>
+  <p><em>Advanced Masterclass on the Codex Agentic Ecosystem (April 2026 Edition)</em></p>
 </div>
 
 ---
 
-## 📌 Visione e Scopo
-
-Benvenuto nel repository del **Corso Definitivo su OpenAI Codex**. Nel 2026, l'interazione con l'Intelligenza Artificiale nel software engineering è passata dal semplice autocompletamento (tipo Copilot) all'**orchestrazione agentica autonoma**. 
-
-Codex non è più solo una chat in cui incollare codice: è un ambiente operativo composto da più "superfici" che lavorano in parallelo. Questo corso non ti insegna dei semplici "prompt magici", ma l'**Ingegneria dei Workflow**: come costruire un "Command Center" per la tua codebase, come isolare agenti specializzati, come gestire il Context Budget e come implementare protocolli di sicurezza per i team (Sandbox e Audit).
-
-Se vuoi passare dal fare domande a un LLM al **governare un team di sub-agenti** che scrivono, verificano, testano ed eseguono review avversariali in totale autonomia, sei nel posto giusto.
-
----
-
-## 🏗️ L'Architettura dell'Ecosistema Codex
-
-Il corso esplora profondamente come le tre superfici operative di Codex interagiscono in uno stack di sviluppo moderno:
-
-1. **L'Estensione IDE (Tactical Mode)**: Micro-editing, spiegazioni inline e refactoring localizzato nel file corrente.
-2. **La Desktop App (Command Center)**: Il pannello di controllo dove orchestrare *Subagents in parallelo*, gestire Task Panels, monitorare log in tempo reale e usare il **Computer Use** per interagire visivamente con UI e Browser integrati.
-3. **La CLI & GitHub Actions (Automation Mode)**: L'esecuzione headless. Lavorare con `codex-1` in background su `worktrees` Git isolati, oppure automatizzare review di Pull Request in CI/CD tramite `codex-action`.
+<div align="center">
+  <h2>Select your language / Scegli la tua lingua</h2>
+  <br>
+  <a href="README.en.md">
+    <img src="https://flagcdn.com/w80/gb.png" alt="English" width="40" style="vertical-align:middle; margin-right: 10px;"/> <strong>English Version</strong>
+  </a>
+  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="README.it.md">
+    <img src="https://flagcdn.com/w80/it.png" alt="Italiano" width="40" style="vertical-align:middle; margin-right: 10px;"/> <strong>Versione Italiana</strong>
+  </a>
+  <br><br>
+</div>
 
 ---
 
-## 🧠 I Pilastri del Corso (I 14 Moduli)
+### 🌐 About this repository
 
-Il documento principale (vedi sezione "Come Utilizzare") è strutturato in 14 moduli densi di contenuto tecnico, diagrammi e prompt copy-paste ready.
+Welcome to the repository of the **Definitive Course on OpenAI Codex**. This guide represents the most advanced and comprehensive reference available today to master the Codex agentic ecosystem (Desktop App, CLI, CI/CD Integrations) in production and Enterprise environments.
 
-### 1. Fondamenta e Governance
-- **Configurazione e Setup (`.codex/config.toml`)**: Come impostare le policy di approvazione (`suggest`, `auto-edit`, `full-auto`) e i livelli fisici di Sandbox (`read-only`, `workspace-write`, `danger-full-access`).
-- **Context Budgeting e Memoria**: Come usare i comandi `/compact`, `/clear` e l'inclusione esplicita di contesto (es. `@src/auth/`) per non far degradare le prestazioni del modello in sessioni lunghe.
+Benvenuto nel repository ufficiale del **Corso Definitivo su OpenAI Codex**. Questa guida rappresenta il riferimento più avanzato e completo oggi disponibile per padroneggiare l'ecosistema agentico di Codex (Desktop App, CLI, Integrazioni CI/CD) in ambienti di produzione e contesti Enterprise.
 
-### 2. Il Framework Operativo (P-S-I-V-R)
-Smetti di scrivere codice direttamente. Il corso insegna il workflow definitivo per evitare regressioni e codice inutile:
-- **P - Plan**: Esplorazione read-only e generazione di un piano tecnico con evidenza dei rischi.
-- **S - Scope**: Riduzione del perimetro di modifica (max 3 file per volta).
-- **I - Implement**: Scrittura incrementale del codice.
-- **V - Verify**: Esecuzione dei test *prima* della conferma.
-- **R - Review (Adversarial)**: Spawning di un subagente isolato il cui unico scopo è trovare bug e falle di sicurezza nella diff appena scritta (Adversarial Review Loop).
-
-### 3. Desktop App Mastery
-- **Worktree Orchestration**: Come lanciare Codex in isolamento su un `git worktree` separato. L'agente modifica, builda e testa un branch parallelo senza inquinare la tua working directory principale.
-- **Role Cards & Worker Context**: Pattern architetturale per dotare gli agenti di "ruoli" (es. *test-quality*, *backend-api*). Ogni agente possiede i propri `owned_paths`, il suo file `state.json` e le sue regole di *Escalation*.
-- **Handoffs Documentati**: Mai far perdere il contesto agli agenti. Ogni agente specializzato passa il lavoro al successivo compilando report Markdown chirurgici su fatti verificati (`durable_facts`), file toccati e comandi eseguiti.
-
-### 4. Orchestrator & Vector DB (Avanzato)
-In progetti enormi, passare i file di log non basta. Il Modulo 14 insegna a costruire un ecosistema dove:
-1. I *Workers* inviano dati strutturati (Candidati di Memoria).
-2. L'*Orchestratore* (che governa la sessione) accetta, deduplica e valida le informazioni.
-3. Il contesto globale (Durable Facts) viene salvato per futuri Retrieval mirati in un DB Vettoriale, riducendo esponenzialmente lo spreco di token.
-
----
-
-## 🛠️ Come Utilizzare Questo Repository
-
-Il "succo" del corso è interamente contenuto in un file HTML ingegnerizzato per garantire la migliore UX visiva (High Contrast, Layout Enterprise, Esportabile in PDF).
-
-1. Clona il repository:
-   ```bash
-   git clone https://github.com/rthgit/corso-codex.git
-   cd corso-codex
-   ```
-2. Apri il file **`openai_codex_corso_definitivo_con_community.html`** in un qualsiasi browser moderno (Chrome, Edge, Safari).
-3. Esplora i moduli, copia i template dei **Prompt Professionali** e applicali direttamente nella tua Codex Desktop App o CLI.
-
-*(Nota: Il file `codex_desktop_app_corso_pratico_tricks (1).html` è una vecchia bozza mantenuta solo per archivio).*
-
----
-
-## 💡 Snippet Reale: Il Prompt dell'Handoff
-
-Per farti capire il livello di profondità, ecco un esempio di "Trick Operativo" insegnato nel corso per non perdere contesto a fine giornata:
-
-```markdown
-Prima di chiudere questa sessione, scrivi un file HANDOFF.md con:
-1. Cosa stavamo costruendo (obiettivo preciso)
-2. Cosa hai già implementato (con path esatti ai file)
-3. Cosa ha funzionato e cosa no (tentativi falliti, in modo da non ripeterli)
-4. Lo stato attuale dei test (passano? falliscono? quali?)
-5. I prossimi 3 step ESATTI da eseguire nella prossima sessione
-6. Eventuali "gotchas" scoperti
-
-Il prossimo agente leggerà SOLO questo file per continuare. Sii chirurgico e preciso.
-```
-
-## 🔒 Focus: Enterprise & Security
-
-Per i tech lead, il corso analizza in profondità la governance. Codex non deve operare come una "scatola nera" pericolosa per il repo:
-- Utilizzo obbligatorio del `config.toml` globale distribuito via secret manager.
-- Implementazione delle **Rules** (`allowlist` / `denylist`) per impedire nativamente all'agente di eseguire comandi distruttivi o leggere file contenenti token (`.env`).
-- Architettura a **Profili Permissivi**: profili sandbox limitati per i Code Reviewer (`workspace-read`), profili avanzati isolati per gli Implementer.
-
----
-> Costruito per gli ingegneri del software che vogliono scalare. Ottimizzato per la qualità assoluta. Architettato per l'Enterprise.
+> Choose your language above to read the full Masterclass introduction and documentation.
+> Scegli la tua lingua qui sopra per leggere l'introduzione completa e la documentazione della Masterclass.

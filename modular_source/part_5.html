@@ -1,0 +1,19 @@
+
+      <div class="module-header"><div class="module-number">Module<strong>04</strong></div><div class="module-copy"><h2>Model Context Protocol (MCP)</h2><p>Connecting Codex to GitHub, Linear, Slack, DB, and lazy loading</p></div></div>
+      <p>The Model Context Protocol is the de facto standard of 2026 for connecting Codex to external data sources (Notion, Figma, SQL databases) without copying/pasting text.</p>
+      <div class="info-box"><div class="info-icon">⚡</div><div class="info-body"><strong>Lazy Loading:</strong> MCP servers insert a lot of information into the Codex Context Window. Use <code>ENABLE_TOOL_SEARCH="true"</code> to load MCP tools dynamically, saving 30% of tokens.</div></div>
+      <pre># Connection configuration in ~/.codex/config.toml
+[[mcp_servers]]
+name = "github"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+env = { GITHUB_PERSONAL_ACCESS_TOKEN = "$GITHUB_PAT" }
+
+[[mcp_servers]]
+name = "postgres"
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-postgres", "postgresql://user:pass@localhost/db"]</pre>
+      <p>Once configured, you can ask Codex: <em>"Read issue #42 on GitHub, query the <code>postgres</code> database to find the offending user, and implement the fix."</em></p>
+    </section>
+
+    

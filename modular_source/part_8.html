@@ -1,0 +1,44 @@
+
+      <div class="module-header"><div class="module-number">Module<strong>07</strong></div><div class="module-copy"><h2>Subagents — Parallel Multi-Agent Orchestration</h2><p>Specialized agents in parallel, Test Time Compute, and advanced patterns</p></div></div>
+      <p>Codex's multi-agent architecture uses <strong>isolated Git worktrees</strong> as sandboxes for each parallel agent. Each agent operates on a separate branch, without interfering with the others. The coordinator (main agent) integrates the results at the end.</p>
+
+      <h3>The 3 Fundamental Subagent Patterns</h3>
+      <table>
+        <thead><tr><th>Pattern</th><th>How it works</th><th>Ideal use case</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Independent Parallel</strong></td><td>3-4 agents on different worktrees work simultaneously on unrelated features</td><td>Sprints with multiple independent tickets, maximum velocity</td></tr>
+          <tr><td><strong>Compete &amp; Pick</strong></td><td>2-3 agents implement the same feature differently; a reviewer chooses the best one</td><td>Critical architectural decisions, risky refactoring</td></tr>
+          <tr><td><strong>Sequential Pipeline</strong></td><td>Architect &rarr; Developer &rarr; Tester &rarr; Reviewer, each with a clean context</td><td>Complex features requiring enterprise quality</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Parallel Agents Configuration in config.toml</h3>
+      <pre># ~/.codex/config.toml
+[agents]
+max_concurrent = 4              # Maximum 4 parallel agents
+model = "codex-mini-latest"     # Lightweight model for subagents
+worktree_base = "/tmp/codex-worktrees"  # Base directory for worktrees</pre>
+
+      <h3>Pattern: Test Time Compute (Adversarial Reviewer)</h3>
+      <p>A fresh context window finds errors that the person who wrote the code cannot see. It's the most effective pattern for increasing quality without additional human cost.</p>
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Adversarial Reviewer with Isolated Subagent</div><div class="prompt-body">PHASE 1 (Main Agent): Implement feature X. Upon completion, write the git diff to /tmp/diff-for-review.patch.
+
+PHASE 2 (Subagent with empty context):
+Read only the file /tmp/diff-for-review.patch. You have no context of how it was written.
+Act as a Staff Engineer with 15 years of experience. Critically analyze:
+- Memory leaks or resource leaks
+- Race conditions
+- Unsanitized inputs (injection)
+- Faulty logic at edge cases
+- Missing or insufficient tests
+
+Mandatory output:
+CRITICAL: [severe problem blocking merge]
+WARNING: [minor problem to fix before merge]
+SUGGESTION: [optional improvement]
+OK: [correct aspects]
+
+PHASE 3 (Main Agent): Fix all CRITICAL issues before replying to me.</div></div>
+    </section>
+
+    

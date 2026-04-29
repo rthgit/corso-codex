@@ -1,0 +1,232 @@
+
+          <div class="module-header"><div class="module-number">Module<strong>13</strong></div><div class="module-copy"><h2>Role cards for specialized agents</h2><p>How to define a serious worker agent: mission, boundaries, local context, escalation, and report format.</p></div></div>
+
+          <p>
+            The previous module defines the operational state of the agent. This module instead defines
+            the <strong>role card</strong>: the document that tells an agent who it is, what mission it has,
+            what areas it owns, what it must avoid, and when it must stop to ask the manager.
+          </p>
+
+          <div class="note">
+            <strong>Fundamental difference:</strong>
+            <ul>
+              <li><code>state.json</code> says what the agent has done and verified.</li>
+              <li>The role card says how the agent must behave before, during, and after work.</li>
+            </ul>
+          </div>
+
+          <h3>Why a role card is more advanced than a prompt</h3>
+          <table>
+            <thead><tr><th>Simple prompt</th><th>Professional role card</th></tr></thead>
+            <tbody>
+              <tr><td>"Improve the tests."</td><td>Defines mission, product goal, boundaries, files to read, risks, escalation, and output.</td></tr>
+              <tr><td>Does not distinguish root context and local context.</td><td>Explicitly states which files are worker state and which are managerial context.</td></tr>
+              <tr><td>Can modify too much.</td><td>Sets initial read-only mode and future write scope.</td></tr>
+              <tr><td>Doesn't know when to stop.</td><td>Has precise escalation rules to the manager.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Real template — tests-quality worker</h3>
+          <pre># Agent: tests-quality
+
+## Mission
+
+Improve the test strategy for the engine and keep no-UI validation reliable.
+
+## Product Goal
+
+Most engine/editor behavior should be testable headlessly, with deterministic regression coverage and no accidental reliance on the ImGui shell.
+
+## Inherited Project Context
+
+This folder is the `tests-quality` worker's local Codex context. Start here, not in the orchestrator's root `.codex` folder.
+
+Read role-local files first:
+
+1. `.codex/AGENTS.md`
+2. `.codex/memory.md`
+3. `.codex/memory_log.json`
+4. `.codex/work_history.md`
+5. `.codex/questions.md`
+
+The manager may additionally provide root project context from `j:\game_engine\.codex\AGENTS.md`, `deep-research-report.md`, `important_sites.txt`, and `planning-and-problem-solving-guide.md` when needed. Do not treat those root files as this worker's own state.
+
+## Owned Areas
+
+- Initial work is read-only unless manager approves implementation.
+- Proposed future write scope:
+  - `tests/`
+  - test-only CMake structure.
+  - docs covering test strategy.
+- Do not refactor production code without manager approval.
+
+## Required Behavior
+
+- Identify monolithic-test risks and propose focused test suites.
+- Preserve `build_no_ui` as a valid headless validation path.
+- Avoid parallel test hazards caused by shared temp filenames.
+
+## Escalate To Manager If
+
+- Splitting tests requires broad CMake restructuring.
+- A production behavior is untestable without adding an API.
+- A test reveals a real product behavior ambiguity.
+
+## Report Format
+
+- Summary.
+- Current test risks.
+- Proposed suite split.
+- Immediate high-value tests.
+- Commands run.</pre>
+
+          <h3>Field-by-field analysis</h3>
+          <table>
+            <thead><tr><th>Section</th><th>Function in Desktop App workflow</th><th>Why it's important</th></tr></thead>
+            <tbody>
+              <tr><td><code>Mission</code></td><td>Defines the agent's operational mandate.</td><td>Prevents the agent from expanding the task beyond its specialization.</td></tr>
+              <tr><td><code>Product Goal</code></td><td>Links technical work to a product goal.</td><td>Guides decisions when there are tradeoffs.</td></tr>
+              <tr><td><code>Inherited Project Context</code></td><td>Says where to start and which files to read first.</td><td>Prevents confusion between worker local state and orchestrator root context.</td></tr>
+              <tr><td><code>Owned Areas</code></td><td>Establishes read/write boundaries.</td><td>Reduces conflicts with other agents and unauthorized modifications.</td></tr>
+              <tr><td><code>Required Behavior</code></td><td>Lists mandatory behaviors.</td><td>Turns vague principles into operational criteria.</td></tr>
+              <tr><td><code>Escalate To Manager If</code></td><td>Defines stop conditions.</td><td>Prevents the agent from making unauthorized architectural decisions.</td></tr>
+              <tr><td><code>Report Format</code></td><td>Standardizes final output.</td><td>Makes work reviewable and comparable.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Advanced pattern: local worker context</h3>
+          <p>
+            The most important part of the example is this: the worker doesn't start from the orchestrator root,
+            but from its own local folder. This allows having separate memory and instructions for each
+            agent.
+          </p>
+
+          <pre>.codex/
+  agents/
+    tests-quality/
+      AGENTS.md
+      memory.md
+      memory_log.json
+      work_history.md
+      questions.md
+      state.json
+      report.md
+      handoff.md
+
+    backend-api/
+      AGENTS.md
+      memory.md
+      memory_log.json
+      work_history.md
+      questions.md
+      state.json
+      report.md
+      handoff.md</pre>
+
+          <div class="warning">
+            <strong>Mistake to avoid:</strong> don't make every worker read the entire `.codex` root
+            as if it were its state. The manager can provide global context, but the worker's operational state
+            must remain local to its role.
+          </div>
+
+          <h3>How to use it in the Desktop App</h3>
+          <div class="steps">
+            <div class="step"><div><strong>Create the worker</strong><span>Open a dedicated task in the Desktop App with a role name, e.g., <code>tests-quality</code>.</span></div></div>
+            <div class="step"><div><strong>Paste the role card</strong><span>The role card becomes the initial brief of the thread.</span></div></div>
+            <div class="step"><div><strong>Enforce read-only</strong><span>First phase analysis only: no changes until the manager approves.</span></div></div>
+            <div class="step"><div><strong>Request report</strong><span>The agent must produce risks, plan, suite split, immediate tests, and commands.</span></div></div>
+            <div class="step"><div><strong>Approve implementation</strong><span>Only after manager review are modifications authorized on owned_paths.</span></div></div>
+          </div>
+
+          <div class="prompt"><div class="prompt-title">PROMPT — Starting a specialized worker</div><div class="prompt-body">Assume the role described in the following role card.
+
+Rules:
+- Start from the worker's local files, not from the orchestrator root
+- Work initially in read-only
+- Do not modify production
+- Do not exceed owned_paths
+- If you encounter an escalation condition, stop and ask the manager
+- Produce the report in the requested format
+
+First answer:
+1. Confirm mission
+2. List the local files you will read
+3. List owned areas
+4. List escalation conditions
+5. Ask for confirmation before proceeding</div></div>
+
+          <h3>Generalized version of the role card</h3>
+          <pre># Agent: [agent-name]
+
+## Mission
+[Agent's main responsibility]
+
+## Product Goal
+[Product goal guiding technical decisions]
+
+## Inherited Project Context
+This folder is the worker's local context.
+Read first:
+1. `.codex/AGENTS.md`
+2. `.codex/memory.md`
+3. `.codex/memory_log.json`
+4. `.codex/work_history.md`
+5. `.codex/questions.md`
+
+The manager can provide root context when needed.
+Do not treat root files as local worker state.
+
+## Owned Areas
+- Initial mode: read-only
+- Future write scope:
+  - [path 1]
+  - [path 2]
+- Do not modify out-of-scope areas without manager approval.
+
+## Required Behavior
+- [mandatory behavior 1]
+- [mandatory behavior 2]
+- [mandatory behavior 3]
+
+## Escalate To Manager If
+- [escalation condition 1]
+- [escalation condition 2]
+- [escalation condition 3]
+
+## Report Format
+- Summary
+- Risks
+- Proposed plan
+- Immediate actions
+- Commands run
+- Open questions
+- Handoff</pre>
+
+          <div class="exercise">
+            <strong>Exercise 13 — Creating three real workers</strong>
+            <ol>
+              <li>Create three role cards: <code>tests-quality</code>, <code>backend-api</code>, <code>frontend-ui</code>.</li>
+              <li>Assign different owned areas to each.</li>
+              <li>Define at least three escalation conditions for each worker.</li>
+              <li>Start three threads in the Desktop App, one per worker.</li>
+              <li>Each worker must initially work in read-only.</li>
+              <li>The manager only approves plans, not immediate modifications.</li>
+              <li>At the end, compare reports and handoffs.</li>
+            </ol>
+          </div>
+
+          <div class="validation">
+            <strong>Auto-validation:</strong>
+            <ul>
+              <li>Does the role card clearly distinguish mission and product goal?</li>
+              <li>Does the worker know which local files to read first?</li>
+              <li>Is the write scope limited?</li>
+              <li>Are escalation conditions concrete?</li>
+              <li>Is the final report sufficient for a human reviewer?</li>
+              <li>Can a new thread continue the work using only role card, state, and report?</li>
+            </ul>
+          </div>
+        
+    </section>
+
+    

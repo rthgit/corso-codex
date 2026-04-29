@@ -1,0 +1,98 @@
+
+      <div class="module-header"><div class="module-number">Module<strong>06</strong></div><div class="module-copy"><h2>Automations — codex-action and CI/CD</h2><p>GitHub Actions with openai/codex-action, schedule, Triage Inbox, and full pipelines</p></div></div>
+      <p>OpenAI officially publishes <strong>openai/codex-action</strong> (github.com/openai/codex-action): a GitHub Action that runs Codex within your CI/CD workflows. No servers to manage, no external cron jobs.</p>
+      <div class="info-box"><div class="info-icon">&#9889;</div><div class="info-body"><strong>Quick Setup:</strong> Go to <em>Settings &rarr; Secrets and variables &rarr; Actions</em> in your repo and add <code>OPENAI_API_KEY</code> as a secret. Then copy the YAML below.</div></div>
+
+      <h3>Workflow 1 — Automatic PR Review on every Pull Request</h3>
+      <pre># .github/workflows/codex-pr-review.yml
+name: Codex PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  codex-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+
+      - name: Run Codex Review
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            You are a senior Staff Engineer. Analyze the changes in this PR.
+            Look for: logic bugs, security issues (injection, auth bypass),
+            lack of error handling, fragile assumptions.
+            Output format: CRITICAL / WARNING / SUGGESTION / OK.
+          sandbox: read-only
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🤖 Codex Review\n\n${{ steps.codex.outputs.final-message }}`
+            })</pre>
+
+      <h3>Workflow 2 — Daily Security Scan with Auto-Fix</h3>
+      <pre># .github/workflows/codex-security-scan.yml
+name: Security Scan + Auto-Fix
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 06:00 UTC
+  workflow_dispatch:     # Allow manual execution
+
+jobs:
+  security-fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Codex Security Fix
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt: |
+            1. Run `npm audit` and read the output
+            2. For each critical or high CVE, update the dependency
+            3. Run the tests: `npm test`
+            4. If tests pass, create a branch fix/security-$(date)
+               with the changes and open a PR
+            5. If tests fail, document in SECURITY-REPORT.md
+               the unapplicable fixes and the reason
+          sandbox: workspace-write</pre>
+
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — Automation — Daily Triage Inbox</div><div class="prompt-body">AUTOMATION TASK — Cron: every morning at 08:00
+
+Use MCP Jira + MCP GitHub:
+1. Read all Jira issues with "bug" label open in the last 7 days
+2. For each, search for the most likely source file in the repository (title analysis)
+3. If you find the file, open a PR with an initial fix proposal and linking to the Jira issue
+4. If you don't find the file, add the "needs-investigation" tag to the issue with a comment
+   explaining where the problem might be located
+5. Write a TRIAGE-[date].md report with a summary of the executed actions</div></div>
+    </section>
+
+    

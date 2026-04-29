@@ -1,0 +1,56 @@
+
+      <div class="module-header"><div class="module-number">Module<strong>02</strong></div><div class="module-copy"><h2>AGENTS.md — Persistent Project Instructions</h2><p>Governance, conventions, test commands, and "Gotchas"</p></div></div>
+      <p>AGENTS.md (also known as CLAUDE.md or system rules) is a text file, similar to README.md, that Codex reads automatically at the beginning of each session in your repository.</p>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>2026 Best Practice:</strong> Keep AGENTS.md under 200 lines. Use explicit paths and "Context Freshness" rules to prevent the agent from hallucinating non-existent patterns.</div></div>
+      <h2>2.1 How Codex Discovers AGENTS.md — The Official Hierarchical System</h2>
+      <p>Codex doesn't read just one AGENTS.md: it builds a <strong>hierarchical instruction chain</strong> by concatenating multiple files, from the repo root down to your current directory. Rules closer to the CWD take priority over global rules.</p>
+      <table>
+        <thead><tr><th>Discovery Order</th><th>Checked File</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Global</strong></td><td><code>$CODEX_HOME/AGENTS.override.md</code></td><td>If it exists, overwrites everything. Company policy file, non-modifiable by devs.</td></tr>
+          <tr><td><strong>2. Global fallback</strong></td><td><code>$CODEX_HOME/AGENTS.md</code></td><td>Personal global rules (e.g., preferred style, default tools).</td></tr>
+          <tr><td><strong>3. Project root</strong></td><td><code>[git-root]/AGENTS.md</code></td><td>Standard project rules, read by the whole team.</td></tr>
+          <tr><td><strong>4. Subdirectories</strong></td><td>Every <code>AGENTS.md</code> in intermediate paths</td><td>Rules for submodules. Concatenated in root&rarr;CWD order.</td></tr>
+          <tr><td><strong>5. CWD</strong></td><td><code>[cwd]/AGENTS.md</code> or <code>AGENTS.override.md</code></td><td>Highest priority. Local override for isolated dev or testing.</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box"><div class="info-icon">ℹ</div><div class="info-body"><strong>Total Limit:</strong> The process stops when the sum of the files reaches <code>project_doc_max_bytes</code> (default 32 KiB, configurable in config.toml). Files not included are silently ignored.</div></div>
+
+      <h2>2.2 Advanced AGENTS.md Configuration in config.toml</h2>
+      <pre># ~/.codex/config.toml
+
+# Increase limit if AGENTS.md gets truncated (check with `codex status`)
+project_doc_max_bytes = 65536  # Default: 32768 (32 KiB)
+
+# Alternative filenames if AGENTS.md does not exist (custom naming monorepos)
+project_doc_fallback_filenames = ["TEAM_GUIDE.md", ".agents.md", "CODEX.md"]</pre>
+
+      <h2>2.3 Full AGENTS.md for Node.js/TypeScript Project</h2>
+      <pre># AGENTS.md
+
+## Project
+This is a REST API in Node.js + TypeScript (Express).
+
+## Architecture and Naming
+- src/routes/ → Express endpoints. Always use `kebab-case` for route files.
+- src/services/ → business logic. Use classes with dependency injection.
+- src/models/ → Prisma schemas.
+
+## Essential Commands
+- Build: `npm run build`
+- Test: `npm test` (DO NOT modify Jest config files)
+- Lint: `npm run lint -- --fix`
+
+## Security Rules
+- NEVER hardcode API keys in the code. Use dotenv and `process.env`.
+- Always verify user permissions in controllers, not in services.
+
+## "Gotchas" (Decision Log)
+- [Common Bug]: When adding a new Prisma model, remember to update the seed file `prisma/seed.ts`.
+- [Tip]: Authentication is handled by the `authMw` middleware, do not apply it manually to public routes.
+
+## Context Freshness
+Before starting modifications, always run `git status` and re-read the latest PRD.</pre>
+    </section>
+
+    

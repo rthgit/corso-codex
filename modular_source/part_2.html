@@ -1,0 +1,109 @@
+
+      <div class="module-header"><div class="module-number">Module<strong>01</strong></div><div class="module-copy"><h2>Codex CLI — The Enhanced Terminal</h2><p>Installation, configuration, advanced commands, non-interactive exec, scripting, and context management</p></div></div>
+      <h2>1.1 Installation and Setup</h2>
+      <p>The Codex CLI is open source, written in Rust to guarantee sub-millisecond latencies in file system management, and is available on macOS, Windows, and Linux. It integrates a local tokenizer for exact real-time context calculation.</p>
+      <pre># Installation via npm (requires Node 18+)
+npm install -g @openai/codex
+
+# First launch and interactive authentication
+codex
+
+# Headless authentication (for CI/CD)
+export OPENAI_API_KEY="sk-..."
+codex login --headless
+
+# Check status, active model, and remaining tokens
+codex status</pre>
+
+      <h2>1.2 The 3 Official Approval Modes — The Most Important Choice</h2>
+      <p>OpenAI officially documents three autonomy levels for the Codex CLI. The wrong choice causes either continuous blocks (suggest mode on CI pipelines) or security risks (full-auto on production repositories).</p>
+      <table>
+        <thead><tr><th>Mode</th><th>Sandbox</th><th>Approval Policy</th><th>When to Use It</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Suggest</strong> (default)</td><td><code>read-only</code></td><td>Codex shows proposed changes, you approve every single action</td><td>Exploration, code review, first use on an unknown repository</td></tr>
+          <tr><td><strong>Auto Edit</strong></td><td><code>workspace-write</code></td><td>Modifies files autonomously, but asks for confirmation for shell commands</td><td>Daily active development. The optimal compromise for most devs</td></tr>
+          <tr><td><strong>Full Auto</strong></td><td><code>workspace-write</code></td><td>Executes everything autonomously (<code>on-request</code>): code + shell + commands</td><td>CI/CD, isolated Docker containers, nightly pipelines. NEVER on production repositories without git checkpoints</td></tr>
+        </tbody>
+      </table>
+      <pre># Launch with explicit approval mode
+codex --approval-policy suggest        # Safe mode (default)
+codex --approval-policy auto-edit      # Modifies files, asks for shell
+codex --full-auto                      # Alias for full auto (on CI/CD)
+
+# Equivalent permanently configured in config.toml
+[core]
+approval_policy = "auto-edit"</pre>
+
+      <h2>1.3 Non-Interactive Mode — exec</h2>
+      <p>Transforms Codex into an automated CLI tool, ideal for pre-commit hooks, CI/CD pipelines, or cron jobs. The <code>--max-budget-usd</code> flag is the only guardrail against infinite loops or anomalous billing.</p>
+      <pre># Execution with budget cap (prevents surprise billing)
+codex exec --max-budget-usd 0.50 "Generate unit tests for src/auth.ts"
+
+# JSON output for structured parsing in bash
+codex exec --json "Analyze the code and return bugs" | jq '.bugs[]'
+
+# Full auto on cloud container (safe because isolated)
+codex cloud exec --env ENV_ID --full-auto --attempts 3 "Fix bug #123"
+
+# Pipeline pre-commit hook (example .husky/pre-commit)
+codex exec --approval-policy auto-edit --max-budget-usd 0.10 "Fix lint errors"</pre>
+
+      <div class="prompt-box"><div class="prompt-title">🎯 PROMPT — CLI — Full Codebase Analysis</div><div class="prompt-body">Analyze the entire codebase in this directory, considering the AGENTS.md file. Identify:
+1. Architectural patterns used
+2. Deprecated or outdated dependencies
+3. Potential memory leaks (e.g., event listeners not removed)
+4. Duplicate functions candidate for refactoring
+5. Lack of error handling
+Create an ANALYSIS.md file with your findings ordered by severity. 
+Include an action plan for each critical issue.</div></div>
+
+      <h2>1.3 Context Management</h2>
+      <p>Codex's "Context Window" is not infinite. A "polluted" context leads to buggy code. Senior developers use these commands to keep the context "fresh".</p>
+      <table>
+        <thead><tr><th>Command</th><th>Description and When to Use It</th></tr></thead>
+        <tbody>
+          <tr><td><code>/compact [focus]</code></td><td>Compresses the current session preserving technical decisions. Use e.g. <code>/compact focus on auth rules</code> when you exceed 70% of the context.</td></tr>
+          <tr><td><code>/clear</code></td><td>Clears the context. Always use before starting a completely unrelated new task to prevent pollution.</td></tr>
+          <tr><td><code>/rewind</code> (or Esc+Esc)</td><td>Undoes the last N actions and returns to a clean checkpoint if Codex has taken a wrong direction.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1.4 Navigation and Shortcuts</h2>
+      <table>
+        <thead><tr><th>Command</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>/model</code></td><td>Changes model during a session (e.g., from 5.5 to plan to 5.4-mini to write boilerplate)</td></tr>
+          <tr><td><code>/review</code></td><td>Starts automatic review of uncommitted changes</td></tr>
+          <tr><td><code>@</code></td><td>Fuzzy search to force inclusion of a specific file in the context (much more token-efficient than a verbal query)</td></tr>
+          <tr><td><code>!</code></td><td>Executes shell commands and injects output into the context (e.g., <code>!npm run test</code>)</td></tr>
+          <tr><td><code>/cost</code></td><td>Shows current spend in USD and tokens of the session</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1.5 config.toml Configuration</h2>
+      <p>The global Codex configuration, which defines security constraints (sandbox) and approval policies for destructive commands.</p>
+      <pre># ~/.codex/config.toml
+
+[core]
+model = "gpt-5.4"
+# Strict policy: Codex asks permission for everything except allow-listed commands
+approval_policy = "unless-allow-listed" 
+
+[sandbox]
+# "workspace-write" allows changes only inside the current git folder
+mode = "workspace-write"
+
+[[mcp_servers]]
+name = "github"
+url = "https://api.githubcopilot.com/mcp/"
+
+[[rules.allow]]
+command = "git"
+args = ["status", "diff"] # Codex can execute these without confirmation
+
+[agents]
+max_concurrent = 4
+budget_cap_session_usd = 2.0</pre>
+    </section>
+
+    
