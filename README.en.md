@@ -58,3 +58,9 @@ Modular sources, archives, and local audit files are not part of the public rele
 ---
 
 Built for professional Codex usage: method, safety, verification, and repeatable workflows.
+
+## Author
+
+Christian Quintino De Luca
+
+Email: [INFO@RTHITALIA.COM](mailto:INFO@RTHITALIA.COM)

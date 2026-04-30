@@ -39,3 +39,9 @@ The course reflects the April 29, 2026 model hierarchy used throughout the HTML 
 ## Scope
 
 The course covers Codex Desktop/App workflows, CLI, IDE usage, GitHub review, `codex-action`, AGENTS.md, sandbox and approval policies, MCP, skills, plugins, subagents, worktrees, enterprise governance, and master-level exercises.
+
+## Author
+
+Christian Quintino De Luca
+
+Email: [INFO@RTHITALIA.COM](mailto:INFO@RTHITALIA.COM)

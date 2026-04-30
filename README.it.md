@@ -58,3 +58,9 @@ I file sorgente modulari, gli archivi e gli audit locali non fanno parte del ril
 ---
 
 Costruito per chi vuole usare Codex in modo professionale: con metodo, sicurezza, verifiche e workflow ripetibili.
+
+## Autore
+
+Christian Quintino De Luca
+
+Email: [INFO@RTHITALIA.COM](mailto:INFO@RTHITALIA.COM)
