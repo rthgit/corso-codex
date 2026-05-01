@@ -1941,33 +1941,40 @@ Regole:
     </section>
 
     <section id="video-2-coverage" class="page-break">
-      <div class="module-header"><div class="module-number">Modulo<strong>22</strong></div><div class="module-copy"><h2>Copertura dal video: Codex come super-app operativa</h2><p>Cosa aggiungere rispetto al video “Stop using Claude. Start using Codex?”</p></div></div>
+      <div class="module-header"><div class="module-number">Modulo<strong>22</strong></div><div class="module-copy"><h2>Concetti operativi: Codex + GPT-5.5</h2><p>Skill, plugin, workflow automatici, multi-threading e vibe coding operativo</p></div></div>
 
       <p>
-        Questo video posiziona Codex non solo come agente di coding, ma come una “super-app”
-        dove convivono sviluppo software, documenti, presentazioni, ricerca, artifact, automazioni e
-        workflow multi-progetto. Il corso finora era forte sulla parte agentica e coding, ma meno sulla
-        parte <strong>workspace produttivo multi-artifact</strong>.
+        Questa sezione estrae solo i concetti operativi utili: come combinare ragionamento, esecuzione,
+        skill, plugin, automazioni, multi-threading e verifiche. Non cita il nome del video o del creator:
+        trasforma il materiale in metodo riutilizzabile dentro il corso.
       </p>
 
+      <div class="info-box"><div class="info-icon">&#8505;</div><div class="info-body"><strong>Idea centrale:</strong> Codex ? il layer di esecuzione agentica, GPT-5.5 ? il layer di ragionamento frontier. Il valore nasce dalla combinazione: GPT-5.5 pianifica, scompone e valuta; Codex legge file, usa tool, modifica, testa, naviga, automatizza e produce artefatti verificabili.</div></div>
+
       <table>
-        <thead><tr><th>Tema del video</th><th>Nel corso precedente</th><th>Da aggiungere</th></tr></thead>
+        <thead><tr><th>Concetto</th><th>Principio da portare nel corso</th><th>Applicazione pratica</th></tr></thead>
         <tbody>
-          <tr><td>Codex vs Claude Code</td><td>Non trattato.</td><td>Confronto pratico senza marketing: terminal-first vs desktop workspace.</td></tr>
-          <tr><td>Super-app</td><td>Debole.</td><td>Codex come ambiente unico per codice, file, artifact, ricerca e automazioni.</td></tr>
-          <tr><td>Docs / decks / research</td><td>Quasi assente.</td><td>Modulo non-code artifacts: documenti, spreadsheet, PDF, deck.</td></tr>
-          <tr><td>Artifact viewer</td><td>Assente.</td><td>Come ispezionare output generati nella sidebar.</td></tr>
-          <tr><td>Voice dictation</td><td>Assente.</td><td>Prompt vocale per task lunghi o brainstorming operativo.</td></tr>
-          <tr><td>Floating pop-out</td><td>Assente.</td><td>Usare thread sempre visibile vicino a browser/editor.</td></tr>
-          <tr><td>Sync con IDE</td><td>Accennato.</td><td>Workflow App + IDE extension con auto context.</td></tr>
-          <tr><td>Windows/WSL setup</td><td>Troppo generico.</td><td>Modulo Windows nativo, PowerShell, WSL2, terminale e GitHub CLI.</td></tr>
+          <tr><td>Codex + GPT-5.5</td><td>Separare ragionamento e execution layer.</td><td>Usa GPT-5.5 per plan mode, architettura e decisioni; usa Codex per operare su repo, browser, test, file e automazioni.</td></tr>
+          <tr><td>Setup iniziale</td><td>Non partire dai prompt: parti da skill, plugin, permessi e tool disponibili.</td><td>Checklist iniziale: account, repo, CLI/App, IDE, browser, filesystem, MCP, API key dove serve, sandbox e approval policy.</td></tr>
+          <tr><td>Skill e plugin</td><td>Le skill sono procedure riutilizzabili, non prompt decorativi.</td><td>Crea skill per review, release readiness, browser QA, design-to-ticket, documenti, spreadsheet e handoff.</td></tr>
+          <tr><td>Workflow automatici</td><td>Passare da prompting manuale a workflow che si eseguono e si verificano.</td><td>Definisci trigger, input, vincoli, tool, output, test, fallback e log. Ogni automazione deve produrre un artefatto revisionabile.</td></tr>
+          <tr><td>Multi-threading</td><td>Parallelizzare solo task indipendenti o ruoli separati.</td><td>Explorer, implementer e reviewer possono lavorare in parallelo; evitare due agenti sulla stessa write-scope.</td></tr>
+          <tr><td>Vibe coding professionale</td><td>Outcome-first, contesto pulito, iterazioni corte, prova finale.</td><td>Prompt con obiettivo, confini, file rilevanti, standard qualit?, comandi di verifica e formato report.</td></tr>
+          <tr><td>Task lunghi</td><td>Codex non deve ricordare tutto: deve produrre checkpoint.</td><td>Usa HANDOFF.md, decision log, test output, diff piccole, commit intermedi e summary di stato.</td></tr>
+          <tr><td>Costo e contesto</td><td>Il modello migliore non ? sempre il pi? efficiente.</td><td>GPT-5.5 per pianificazione e review critica; GPT-5.4-mini/nano per boilerplate, lint, formattazione e task verificabili.</td></tr>
         </tbody>
       </table>
 
-      <div class="warning">
-        <strong>Nota:</strong> questa sezione traduce i temi pubblicamente visibili del video
-        e li integra con funzionalità documentate della Codex Desktop App.
-      </div>
+      <h3>Playbook: da Concetto a Workflow Reale</h3>
+      <ol>
+        <li><strong>Definisci il risultato:</strong> cosa deve esistere alla fine, dove, con quali criteri di accettazione.</li>
+        <li><strong>Configura i tool:</strong> abilita solo skill, plugin, browser, filesystem, GitHub e MCP necessari.</li>
+        <li><strong>Usa GPT-5.5 in plan mode:</strong> chiedi piano, rischi, file probabili e test prima della modifica.</li>
+        <li><strong>Delega a Codex:</strong> esecuzione su repo, browser, file, test e artifact.</li>
+        <li><strong>Parallelizza con disciplina:</strong> subagent separati per ricerca, implementazione e review, con ownership distinta.</li>
+        <li><strong>Verifica:</strong> ogni output deve avere diff, log, screenshot, report o comando ripetibile.</li>
+        <li><strong>Chiudi con handoff:</strong> stato, decisioni, errori, prossimi passi e limiti noti.</li>
+      </ol>
     </section>
 
     <section id="codex-vs-claude" class="page-break">
